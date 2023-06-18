@@ -1,0 +1,109 @@
+{
+  "flutterType": "Scaffold",
+  "body": {
+    "flutterType": "CustomScrollView",
+    "onStateDataUpdate": true,
+    "appBar": {
+      "flutterType": "SliverAppBar",
+      "title": {
+        "flutterType": "Text",
+        "label": "FiveGame",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17
+        }
+      }
+    },
+    "startFill": {
+      "flutterType": "SliverFillRemaining",
+      "child": {
+        "flutterType": "Column",
+        "children": [
+          {
+            "flutterType": "Expanded",
+            "child": {
+              "flutterType": "Container",
+              "margin": "14,25,14,25",
+              "padding": 10,
+              "width": "infinity",
+              "decoration": {
+                "color": "schema:onBackground",
+                "image": {
+                  "flutterType": "DecorationImage",
+                  "fit": "cover",
+                  "image": {
+                    "flutterType": "AssetImage",
+                    "src": "assets/images/f1.jpg"
+                  }
+                },
+                "flutterType": "BoxDecoration",
+                "borderRadius": "10"
+              },
+              "child": {
+                "flutterType": "Column",
+                "mainAxisAlignment": "center",
+                "children": [
+                  {
+                    "ChildrenExtension": "Iterator",
+                    "dataType": "list",
+                    "theme": "ButtonGroup",
+                    "list": [
+                      {
+                        "label": "Создать игру",
+                        "templateWidgetSrc": "ButtonIcon",
+                        "onTap": {
+                          "sysInvoke": "NavigatorPush",
+                          "args": {
+                            "uuid": "GameCreate.json",
+                            "constructor": {
+                              "jsInvoke": "GameCreate.js",
+                              "args": {
+                                "includeStateData": true,
+                                "switch": "constructor"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "label": "Присоединиться к игре",
+                        "templateWidgetSrc": "ButtonIcon"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "flutterType": "Padding",
+            "padding": "23,0,23,0",
+            "child": {
+              "flutterType": "Column",
+              "color": "blue",
+              "height": 100,
+              "width": "infinity",
+              "children": [
+                {
+                  "ChildrenExtension": "Iterator",
+                  "dataType": "list",
+                  "theme": "ButtonGroup",
+                  "list": [
+                    {
+                      "label": "История игр",
+                      "templateWidgetSrc": "ButtonIcon"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "flutterType": "SizedBoxBottomNavigationBar",
+            "extraBottomOffset": 20
+          }
+        ]
+      }
+    }
+  }
+}

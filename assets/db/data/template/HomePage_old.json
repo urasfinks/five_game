@@ -1,0 +1,92 @@
+{
+  "flutterType": "Scaffold",
+  "appBar": {
+    "flutterType": "AppBar",
+    "title": {
+      "flutterType": "Text",
+      "label": "FiveGame",
+      "style": {
+        "flutterType": "TextStyle",
+        "fontSize": 17
+      }
+    }
+  },
+  "body": {
+    "flutterType": "Column",
+    "children": [
+      {
+        "flutterType": "SizedBoxAppBar"
+      },
+      {
+        "flutterType": "Expanded",
+        "child": {
+          "flutterType": "Container",
+          "margin": "14,25,14,25",
+          "padding": 10,
+          "width": "infinity",
+          "decoration": {
+            "color": "schema:onBackground",
+            "image": {
+              "flutterType": "DecorationImage",
+              "fit": "fill",
+              "image": {
+                "flutterType": "AssetImage",
+                "src": "assets/images/f1.jpg"
+              }
+            },
+            "flutterType": "BoxDecoration",
+            "borderRadius": "10"
+          },
+          "child": {
+            "flutterType": "Column",
+            "mainAxisAlignment": "center",
+            "children": [
+              {
+                "ChildrenExtension": "Iterator",
+                "dataType": "list",
+                "theme": "ButtonGroup",
+                "list": [
+                  {
+                    "label": "Создать игру",
+                    "templateWidgetSrc": "ButtonIcon"
+                  },
+                  {
+                    "label": "Присоединиться к игре",
+                    "templateWidgetSrc": "ButtonIcon"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "flutterType": "Padding",
+        "padding": "24,0,24,0",
+        "child": {
+          "flutterType": "Column",
+          "color": "blue",
+          "height": 100,
+          "width": "infinity",
+          "children": [
+            {
+              "ChildrenExtension": "Iterator",
+              "dataType": "list",
+              "theme": "ButtonGroup",
+              "list": [
+                {
+                  "label": "История игр",
+                  "templateWidgetSrc": "ButtonIcon"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "flutterType": "SizedBoxBottomNavigationBar",
+        "extraBottomOffset": 20
+      }
+    ]
+  }
+}

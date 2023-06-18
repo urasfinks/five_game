@@ -1,0 +1,109 @@
+{
+  "flutterType": "Scaffold",
+  "body": {
+    "flutterType": "CustomScrollView",
+    "includeBottomOffset": true,
+    "onStateDataUpdate": true,
+    "appBar": {
+      "flutterType": "SliverAppBar",
+      "title": {
+        "flutterType": "Text",
+        "label": "Создать игру",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17
+        }
+      }
+    },
+    "children": [
+      {
+        "flutterType": "Padding",
+        "padding": 20,
+        "child": {
+          "flutterType": "Text",
+          "textAlign": "center",
+          "label": "Код для подключения к игре для других участников, либо телевизора:"
+        }
+      },
+      {
+        "flutterType": "Container",
+        "alignment": "center",
+        "padding": 20,
+        "child": {
+          "flutterType": "Text",
+          "label": "${state(game_code,Загрузка...)}",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 48,
+            "fontWeight": "bold"
+          }
+        }
+      },
+      {
+        "flutterType": "Padding",
+        "padding": 20,
+        "child": {
+          "flutterType": "Text",
+          "textAlign": "center",
+          "label": "Поделиться ссылкой для подключния к игре"
+        }
+      },
+      {
+        "flutterType": "Padding",
+        "padding": 20,
+        "child": {
+          "flutterType": "Button",
+          "minimumSize": "9999,44",
+          "backgroundColor": "schema:onBackground",
+          "height": 44,
+          "onPressed": {
+            "sysInvoke": "Share",
+            "args": {
+              "data": "http://5gm.ru/JoinGame/${state(game_uuid,undefined)}",
+              "templateArguments": [
+                "data"
+              ]
+            }
+          },
+          "child": {
+            "flutterType": "Text",
+            "label": "Поделиться ссылкой на игру",
+            "style": {
+              "flutterType": "TextStyle",
+              "fontSize": 14,
+              "color": "schema:inversePrimary"
+            }
+          }
+        }
+      },
+      {
+        "flutterType": "Padding",
+        "padding": 20,
+        "child": {
+          "flutterType": "Button",
+          "minimumSize": "9999,44",
+          "backgroundColor": "blue",
+          "height": 44,
+          "onPressed": {
+            "sysInvoke": "Share",
+            "args": {
+              "data": "http://5gm.ru/JoinGame/${state(game_uuid,undefined)}",
+              "templateArguments": [
+                "data"
+              ]
+            }
+          },
+          "child": {
+            "flutterType": "Text",
+            "label": "Начать игру",
+            "style": {
+              "flutterType": "TextStyle",
+              "fontSize": 14,
+              "color": "white"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

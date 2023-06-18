@@ -1,0 +1,31 @@
+{
+  "flutterType": "Container",
+  "margin": "10,17,10,17",
+  "child": {
+    "flutterType": "Row",
+    "newContext": false,
+    "crossAxisAlignment": "start",
+    "children": [
+      {
+        "flutterType": "Expanded",
+        "child": {
+          "flutterType": "Text",
+          "label": "${label}",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 17,
+            "fontWeight": "bold"
+          }
+        }
+      },
+      {
+        "flutterType": "SizedBox",
+        "width": 20
+      },
+      {
+        "flutterType": "Text",
+        "label": "${count}"
+      }
+    ]
+  }
+}

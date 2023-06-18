@@ -1,0 +1,28 @@
+{
+  "name": "user",
+  "tab": {
+    "flutterType": "BottomNavigationBarItem",
+    "icon": {"flutterType": "Icon", "src": "account_circle"},
+    "label": "Home"
+  },
+  "content": {
+    "flutterType": "Notify",
+    "link": {"template": "Account.json"},
+    "linkContainer": "root",
+    "linkDefault": {
+      "template": {
+        "flutterType": "Scaffold",
+        "appBar": {
+          "flutterType": "AppBar",
+          "title": {"flutterType": "Text", "label": "Аккаунт"}
+        }
+      }
+    },
+    "constructor": {
+      "jsInvoke": "Account.js",
+      "args": {
+        "switch": "constructor"
+      }
+    }
+  }
+}

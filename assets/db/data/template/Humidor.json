@@ -1,0 +1,138 @@
+{
+  "flutterType": "Scaffold",
+  "appBar": {
+    "flutterType": "AppBar",
+    "title": {
+      "flutterType": "Text",
+      "label": "${humidor.label}"
+    },
+    "actions": [
+      {
+        "flutterType": "Padding",
+        "padding": "0,0,5,0",
+        "child": {
+          "flutterType": "IconButton",
+          "icon": {
+            "flutterType": "Icon",
+            "src": "settings"
+          }
+        }
+      }
+    ]
+  },
+  "body": {
+    "flutterType": "CustomScrollView",
+    "onStateDataUpdate": true,
+    "children": [
+      {
+        "flutterType": "Container",
+        "margin": "22,17,22,0",
+        "child": {
+          "flutterType": "Row",
+          "newContext": false,
+          "crossAxisAlignment": "start",
+          "children": [
+            {
+              "flutterType": "Expanded",
+              "child": {
+                "flutterType": "Text",
+                "label": "Мои сигары",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 17,
+                  "fontWeight": "bold",
+                  "color": "schema:secondary"
+                }
+              }
+            },
+            {
+              "flutterType": "SizedBox",
+              "width": 20
+            },
+            {
+              "flutterType": "Text",
+              "label": "${state(count)}",
+              "style": {
+                "flutterType": "TextStyle",
+                "color": "schema:secondary"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ChildrenExtension": "Iterator",
+        "dataType": "state",
+        "key": "CigarList",
+        "theme": "ButtonGroup",
+        "ifDataEmpty": {
+          "flutterType": "Column",
+          "children": [
+            {
+              "flutterType": "SizedBox",
+              "height": 15
+            },
+            {
+              "flutterType": "Text",
+              "label": "Нет сигар"
+            }
+          ]
+        }
+      },
+      {
+        "flutterType": "Container",
+        "margin": "22,20,22,20",
+        "child": {
+          "flutterType": "Text",
+          "label": "Дополнительно",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 17,
+            "fontWeight": "bold",
+            "color": "schema:secondary"
+          }
+        }
+      },
+      {
+        "ChildrenExtension": "Iterator",
+        "dataType": "list",
+        "theme": "ButtonGroup",
+        "list": [
+          {
+            "label": "История",
+            "templateWidgetSrc": "ButtonIcon"
+          },
+          {
+            "label": "Рулетка",
+            "templateWidgetSrc": "ButtonIcon"
+          }
+        ]
+      }
+    ]
+  },
+  "floatingActionButton": {
+    "flutterType": "FloatingActionButton",
+    "child": {
+      "flutterType": "Icon",
+      "src": "add"
+    },
+    "onPressed": {
+      "sysInvoke": "NavigatorPush",
+      "args": {
+        "changeContext": "lastPage",
+        "humidor": "${pageArgument(link.humidor)}",
+        "uuid": "HumidorSearch.json",
+        "label": "Добавить в Хьюмидор",
+        "templateArguments": [
+          "humidor"
+        ],
+        "constructor": {
+          "jsInvoke": "HumidorSearch.js",
+          "args": {
+            "switch": "constructor"
+          }
+        }
+      }
+    }
+  }
+}

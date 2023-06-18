@@ -1,0 +1,13 @@
+{
+  "flutterType": "FloatingActionButton",
+  "child": {
+    "flutterType": "Icon",
+    "src": "add"
+  },
+  "onPressed": {
+    "sysInvoke": "Test",
+    "args": {
+      "changeContext": "lastPage"
+    }
+  }
+}
