@@ -31,10 +31,16 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
             }
         });
         bridge.call('DataSourceSet', {
+            "addSocketData": true,
             "uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
-            "value": {},
+            //"uuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
+            "value": {
+                "game_code": bridge.args["httpResponse"]["data"]["data"]["code"],
+                "game_uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"]
+            },
             "parent": null,
             "type": "socket",
+            "debugTransaction": true,
             "key": null,
             "onPersist": {
                 "jsInvoke": "GameCreate.js",
