@@ -103,6 +103,10 @@
             }
           }
         }
+      },
+      {
+        "flutterType": "Text",
+        "label": "${state(socket_test,Загрузка)}"
       }
     ]
   }
