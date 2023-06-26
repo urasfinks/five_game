@@ -1,0 +1,52 @@
+{
+  "flutterType": "Scaffold",
+  "body": {
+    "flutterType": "CustomScrollView",
+    "includeBottomOffset": true,
+    "onStateDataUpdate": true,
+    "appBar": {
+      "flutterType": "SliverAppBar",
+      "title": {
+        "flutterType": "Text",
+        "label": "CODENAMES",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17
+        }
+      }
+    },
+    "children": [
+      {
+        "ChildrenExtension": "StateDataSwitch",
+        "key": "SwitchKey",
+        "children": [
+          {
+            "case": "default",
+            "flutterType": "Template",
+            "src": "GameEnterName"
+          },
+          {
+            "case": "selectCaptain",
+            "flutterType": "Template",
+            "src": "GameSelectCaptain"
+          },
+          {
+            "case": "selectWord",
+            "flutterType": "Template",
+            "src": "GameSelectWord"
+          },
+          {
+            "case": "selectWord",
+            "flutterType": "Template",
+            "src": "GameRun"
+          },
+          {
+            "case": "selectWord",
+            "flutterType": "Template",
+            "src": "GameFinish"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -31,7 +31,7 @@
         "padding": 20,
         "child": {
           "flutterType": "Text",
-          "label": "${state(game_code,Загрузка...)}",
+          "label": "${state(gameCode,Загрузка...)}",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 48,
@@ -59,7 +59,7 @@
           "onPressed": {
             "sysInvoke": "Share",
             "args": {
-              "data": "http://5gm.ru/JoinGame/${state(game_uuid,undefined)}",
+              "data": "http://5gm.ru/JoinGame/${state(gameUuid,undefined)}",
               "templateArguments": [
                 "data"
               ]
@@ -85,12 +85,27 @@
           "backgroundColor": "blue",
           "height": 44,
           "onPressed": {
-            "sysInvoke": "Share",
+            "sysInvoke": "NavigatorPush",
             "args": {
-              "data": "http://5gm.ru/JoinGame/${state(game_uuid,undefined)}",
-              "templateArguments": [
-                "data"
-              ]
+              "uuid": "Game.json",
+              "socket": true,
+              "subscribeOnChangeUuid": {
+                "list": ["bdc67a1c-ec5e-4709-b96c-5b94a96e8c19"],
+                "onChange": {
+                  "jsInvoke": "Game.js",
+                  "args": {
+                    "includeStateData": true,
+                    "switch": "onChange"
+                  }
+                }
+              },
+              "constructor": {
+                "jsInvoke": "Game.js",
+                "args": {
+                  "includeStateData": true,
+                  "switch": "constructor"
+                }
+              }
             }
           },
           "child": {
@@ -103,10 +118,6 @@
             }
           }
         }
-      },
-      {
-        "flutterType": "Text",
-        "label": "${state(socket_test,Загрузка)}"
       }
     ]
   }
