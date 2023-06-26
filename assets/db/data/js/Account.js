@@ -4,7 +4,7 @@ if (bridge.args["switch"] == "constructor") {
         "default": "false"
     })["isAuth"];
 
-    console.log("Hello constructor: " + isAuth);
+    bridge.log("Hello constructor: " + isAuth);
 
     bridge.call('SetStateData', {
         "key": "SwitchKey",
@@ -53,7 +53,7 @@ if (bridge.args["switch"] == "GetCode") {
 
 if (bridge.args["switch"] == "GetCodeResponse") {
     bridge.call("CustomLoaderClose", {});
-    console.log(bridge.args);
+    bridge.log(bridge.args);
     if (bridge.args["body"]["status"] == false) {
         bridge.call("Alert", {
             "duration": 7000,
@@ -72,7 +72,7 @@ if (bridge.args["switch"] == "GetCodeResponse") {
 }
 
 if (bridge.args["switch"] == "ConfirmCode") {
-    //console.log(bridge.state);
+    //bridge.log(bridge.state);
     bridge.call('Http', {
         "uri": "/SignIn",
         "body": {
@@ -90,7 +90,7 @@ if (bridge.args["switch"] == "ConfirmCode") {
 }
 
 if (bridge.args["switch"] == "ConfirmCodeResponse") {
-    console.log(bridge.args);
+    bridge.log(bridge.args);
     if (bridge.args["body"]["status"] == false) {
         bridge.call("Alert", {
             "duration": 7000,

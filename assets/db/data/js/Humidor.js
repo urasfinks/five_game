@@ -15,7 +15,7 @@ if (bridge.args["switch"] == "constructor") {
 }
 
 if (bridge.args["switch"] == "onRemove") {
-    //console.log();
+    //bridge.log();
     bridge.call('DbQuery', {
         "sql": "delete from data where key_data = ? and uuid_data = ?",
         "args": ["cigar", bridge.args["uuid_cigar"]],
@@ -66,7 +66,7 @@ if (bridge.args["switch"] == "checkCountData") {
         }
     }
 
-    //console.log(brand);
+    //bridge.log(brand);
     bridge.call('SetStateData', {
         "key": "CigarList",
         "value": result

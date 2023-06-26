@@ -1,6 +1,6 @@
 if (bridge.args["switch"] == "constructor") {
     try {
-        console.log("constructor");
+        //bridge.log("constructor");
         if (bridge.state["game_code"] == undefined) {
             bridge.call('Http', {
                 "uri": "/GenCodeUuid",
@@ -16,7 +16,7 @@ if (bridge.args["switch"] == "constructor") {
             });
         }
     } catch (e) {
-        console.log(e.toString());
+        bridge.log(e.toString());
     }
 }
 
@@ -26,18 +26,32 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
     } else {
         bridge.call('SetStateData', {
             "map": {
-                "game_code": bridge.args["httpResponse"]["data"]["data"]["code"],
-                "game_uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"]
+                "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
+                "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"]
             }
         });
-        /*bridge.call('DataSourceSet', {
+        const value = {
+            "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
+            "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
+            "owner": bridge.unique,
+            "gameState": "selectCaptain", //selectCaptain/selectWord/run/finish
+            "card0": {
+                "label": "Hello world",
+                "team": "red", //red/blue/neutral/die
+                "isSelectedTeam": null, //blue/red/null
+                "select": "red" //Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
+            }
+        };
+        value["user" + bridge.unique] = {
+            "name": "Ivan",
+            "team": "red",
+            "isCaptain": true
+        };
+        bridge.call('DataSourceSet', {
             "addNewSocketData": true,
-            "uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
-            //"uuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
-            "value": {
-                "game_code": bridge.args["httpResponse"]["data"]["data"]["code"],
-                "game_uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"]
-            },
+            //"uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
+            "uuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
+            "value": value,
             "parent": null,
             "type": "socket",
             "debugTransaction": true,
@@ -48,20 +62,11 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
                     "switch": "SocketDataAdd"
                 }
             }
-        });*/
+        });
         //bridge.alert(JSON.stringify());
     }
 }
 
 if (bridge.args["switch"] == "SocketDataAdd") {
-    console.log("SocketDataAdd!");
-}
-
-if (bridge.args["switch"] == "onChange") {
-    //console.log(bridge.args);
-    bridge.call('SetStateData', {
-        "map": {
-            "socket_test": bridge.args["subscribe"]["data"]["test"]
-        }
-    });
+    bridge.log("SocketDataAdd!");
 }
