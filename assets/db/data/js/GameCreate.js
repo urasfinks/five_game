@@ -48,7 +48,7 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
             "isCaptain": true
         };
         bridge.call('DataSourceSet', {
-            "addNewSocketData": true,
+            "beforeSync": true,
             //"uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
             "uuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
             "value": value,
