@@ -1,5 +1,13 @@
 if (typeof Bridge == 'undefined') {
     class Bridge {
+        scriptUuid;
+        unique;
+        pageUuid;
+        args;
+        container;
+        context;
+        state;
+        pageArgs;
 
         constructor() {
             this.clearAll();
@@ -23,7 +31,7 @@ if (typeof Bridge == 'undefined') {
             try {
                 return JSON.parse(result);
             } catch (e) {
-                console.log("Exception Bridge.call(" + invoke + ", " + JSON.stringify(args) + "): " + e.toString() + " => " + result);
+                bridge.log("Exception Bridge.call(" + invoke + ", " + JSON.stringify(args) + "): " + e.toString() + " => " + result);
             }
             return result;
         }
@@ -33,6 +41,10 @@ if (typeof Bridge == 'undefined') {
                 "duration": 7000,
                 "label": data
             });
+        }
+
+        log(data) {
+            console.log("scriptUuid: " + bridge.scriptUuid + " ; switch: " + bridge.args["switch"] + "; data: " + JSON.stringify(data));
         }
     }
 
