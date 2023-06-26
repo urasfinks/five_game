@@ -55,17 +55,6 @@
                           "sysInvoke": "NavigatorPush",
                           "args": {
                             "uuid": "GameCreate.json",
-                            "socket": true,
-                            "subscribeOnChangeUuid": {
-                              "list": ["16018896-fa8d-49e6-bd47-15d0fc0706a2"],
-                              "onChange": {
-                                "jsInvoke": "GameCreate.js",
-                                "args": {
-                                  "includeStateData": true,
-                                  "switch": "onChange"
-                                }
-                              }
-                            },
                             "constructor": {
                               "jsInvoke": "GameCreate.js",
                               "args": {
