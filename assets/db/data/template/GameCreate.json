@@ -41,7 +41,7 @@
       },
       {
         "flutterType": "Padding",
-        "padding": 20,
+        "padding": "20,20,20,10",
         "child": {
           "flutterType": "Text",
           "textAlign": "center",
@@ -78,7 +78,7 @@
       },
       {
         "flutterType": "Padding",
-        "padding": 20,
+        "padding": "20,0,20,0",
         "child": {
           "flutterType": "Button",
           "minimumSize": "9999,44",

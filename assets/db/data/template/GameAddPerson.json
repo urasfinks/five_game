@@ -2,12 +2,13 @@
   "flutterType": "Padding",
   "padding": 20,
   "child": {
-    "flutterType": "Column",
-    "crossAxisAlignment": "start",
+    "flutterType": "CustomScrollView",
+    "includeBottomOffset": true,
+    "onStateDataUpdate": true,
     "children": [
       {
         "flutterType": "Text",
-        "label": "Моё имя в игре: "
+        "label": "Новый участник:"
       },
       {
         "flutterType": "SizedBox",
@@ -16,7 +17,6 @@
       {
         "flutterType": "TextField",
         "keyboardType": "text",
-        "data": "${state(deviceName)}",
         "onChangedNotify": false,
         "style": {
           "flutterType": "TextStyle",
@@ -87,36 +87,18 @@
           "args": {
             "includeStateData": true,
             "includePageArgument": true,
-            "switch": "setName"
+            "switch": "addPerson"
           }
         },
         "child": {
           "flutterType": "Text",
-          "label": "Сохранить",
+          "label": "Добавить",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,
             "color": "white"
           }
         }
-      },
-      {
-        "flutterType": "SizedBox",
-        "height": 20
-      },
-      {
-        "flutterType": "Text",
-        "label": "Другие участники игры: "
-      },
-      {
-        "flutterType": "SizedBox",
-        "height": 20
-      },
-      {
-        "ChildrenExtension": "Iterator",
-        "dataType": "state",
-        "key": "listPerson",
-        "theme": "ButtonGroup"
       }
     ]
   }

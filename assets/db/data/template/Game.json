@@ -26,9 +26,9 @@
             "src": "GameEnterName"
           },
           {
-            "case": "selectCaptain",
+            "case": "selectRole",
             "flutterType": "Template",
-            "src": "GameSelectCaptain"
+            "src": "GameSelectRole"
           },
           {
             "case": "selectWord",
@@ -36,17 +36,30 @@
             "src": "GameSelectWord"
           },
           {
-            "case": "selectWord",
+            "case": "addPerson",
+            "flutterType": "Template",
+            "src": "GameAddPerson"
+          },
+          {
+            "case": "run",
             "flutterType": "Template",
             "src": "GameRun"
           },
           {
-            "case": "selectWord",
+            "case": "finish",
             "flutterType": "Template",
             "src": "GameFinish"
           }
         ]
       }
     ]
+  },
+  "onRenderFloatingActionButton": {
+    "jsInvoke": "Game.js",
+    "args": {
+      "includeStateData": true,
+      "includePageArgument": true,
+      "switch": "onRenderFloatingActionButton"
+    }
   }
 }
