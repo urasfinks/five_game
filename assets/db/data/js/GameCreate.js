@@ -38,8 +38,8 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
             "card0": {
                 "label": "Hello world",
                 "team": "red", //red/blue/neutral/die
-                "isSelectedTeam": null, //blue/red/null
-                "select": "red" //Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
+                "selected": null, //blue/red/null
+                "selecting": "red" //Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
             }
         };
         value["user" + bridge.unique] = {

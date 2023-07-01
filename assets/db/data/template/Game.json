@@ -26,19 +26,9 @@
             "src": "GameEnterName"
           },
           {
-            "case": "selectRole",
-            "flutterType": "Template",
-            "src": "GameSelectRole"
-          },
-          {
-            "case": "selectWord",
+            "case": "word",
             "flutterType": "Template",
             "src": "GameSelectWord"
-          },
-          {
-            "case": "addPerson",
-            "flutterType": "Template",
-            "src": "GamePersonAdd"
           },
           {
             "case": "run",

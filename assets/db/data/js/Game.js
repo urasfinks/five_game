@@ -7,9 +7,9 @@ if (bridge.args["switch"] == "onChange") {
     bridge.log(socketData);
     var newStateData = {};
 
-    if (socketData["user" + bridge.unique] == undefined || socketData["user" + bridge.unique]["name"] == "") {
-        newStateData["SwitchKey"] = "default";
-    }
+    //if (socketData["user" + bridge.unique] == undefined || socketData["user" + bridge.unique]["name"] == "") {
+    newStateData["SwitchKey"] = socketData["gameState"];
+    //}
     if (socketData["user" + bridge.unique] != undefined) {
         newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
     }
@@ -21,6 +21,10 @@ if (bridge.args["switch"] == "onChange") {
 
     if (socketData["gameState"] == "team") {
         newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
+    }
+
+    if (socketData["gameState"] == "word" && isOwner(socketData)) {
+        newStateData["visibleGenerateWord"] = "true";
     }
 
     bridge.call('SetStateData', {
@@ -130,7 +134,7 @@ function getListPerson(socketData, team) {
 }
 
 if (bridge.args["switch"] == "onRenderFloatingActionButton") {
-    if (isOwner(bridge.state["originSocketData"])) {
+    if (isOwner(bridge.state["originSocketData"]) && bridge.state["originSocketData"]["gameState"] == "team") {
         bridge.call("DataSourceSet", {
             "uuid": "FloatingActionButton.json",
             "type": "virtual",
@@ -214,9 +218,16 @@ function getRandomInt(min, max) {
 
 if (bridge.args["switch"] == "changeGameState") {
     bridge.log("changeGameState");
+    socketSave({
+        "gameState": bridge.args["gameState"]
+    });
 }
 
 function getFlagToWordGameState(socketData) {
+    if (!isOwner(socketData)) {
+        return "false";
+    }
+
     var listPerson = getPersonList(socketData);
     var countCaptain = 0;
     var countRed = 0;
