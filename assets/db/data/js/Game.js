@@ -19,6 +19,10 @@ if (bridge.args["switch"] == "onChange") {
     newStateData["listPersonRed"] = getListPerson(socketData, "red");
     newStateData["listPersonBlue"] = getListPerson(socketData, "blue");
 
+    if (socketData["gameState"] == "team") {
+        newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
+    }
+
     bridge.call('SetStateData', {
         "map": newStateData
     });
@@ -52,7 +56,7 @@ if (bridge.args["switch"] == "setName") {
 }
 
 function socketSave(data) {
-    var socketUuid = bridge.pageArgs["subscribeOnChangeUuid"]["list"][0];
+    var socketUuid = bridge.pageArgs["socketUuid"];
     bridge.call('DataSourceSet', {
         "debugTransaction": true,
         "type": "socket",
@@ -65,9 +69,7 @@ function isOwner(socketData) {
     return socketData != undefined && socketData["owner"] == bridge.unique;
 }
 
-function getListPerson(socketData, team) {
-    var result = [];
-    var isOwn = isOwner(socketData);
+function getPersonList(socketData) {
     var listPerson = [];
     for (var key in socketData) {
         if (key.startsWith("user")) {
@@ -75,8 +77,16 @@ function getListPerson(socketData, team) {
             listPerson.push(socketData[key]);
         }
     }
-    listPerson.sort(function(a, b) {
-        return a["role"] == "captain" ? -1: 1;
+
+    return listPerson;
+}
+
+function getListPerson(socketData, team) {
+    var result = [];
+    var isOwn = isOwner(socketData);
+    var listPerson = getPersonList(socketData);
+    listPerson.sort(function (a, b) {
+        return a["role"] == "captain" ? -1 : 1;
     });
     for (var i = 0; i < listPerson.length; i++) {
         if (listPerson[i]["team"] == team
@@ -96,7 +106,7 @@ function getListPerson(socketData, team) {
             var onTap = isOwn ? {
                 "sysInvoke": "NavigatorPush",
                 "args": {
-                    "subscribeOnChangeUuid": bridge.pageArgs["subscribeOnChangeUuid"],
+                    "socketUuid": bridge.pageArgs["socketUuid"],
                     "personKey": listPerson[i]["id"],
                     "personValue": listPerson[i],
                     "type": "BottomSheet",
@@ -133,7 +143,7 @@ if (bridge.args["switch"] == "onRenderFloatingActionButton") {
                 "onPressed": {
                     "sysInvoke": "NavigatorPush",
                     "args": {
-                        "subscribeOnChangeUuid": bridge.pageArgs["subscribeOnChangeUuid"],
+                        "socketUuid": bridge.pageArgs["socketUuid"],
                         "type": "BottomSheet",
                         "link": {
                             "template": "GamePersonAdd.json",
@@ -170,13 +180,7 @@ if (bridge.args["switch"] == "removePerson") {
 
 if (bridge.args["switch"] == "randomize") {
     var socketData = bridge.state["originSocketData"];
-    var listPerson = [];
-    for (var key in socketData) {
-        if (key.startsWith("user")) {
-            socketData[key]["id"] = key;
-            listPerson.push(socketData[key]);
-        }
-    }
+    var listPerson = getPersonList(socketData);
     listPerson = shuffle(listPerson);
     var data = {};
     for (var i = 0; i < listPerson.length; i++) {
@@ -206,4 +210,48 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+if (bridge.args["switch"] == "changeGameState") {
+    bridge.log("changeGameState");
+}
+
+function getFlagToWordGameState(socketData) {
+    var listPerson = getPersonList(socketData);
+    var countCaptain = 0;
+    var countRed = 0;
+    var countBlue = 0;
+    var countUndefined = 0;
+
+    for (var i = 0; i < listPerson.length; i++) {
+        if (listPerson[i]["role"] == "captain") {
+            countCaptain++;
+            if (listPerson[i]["team"] == "red") {
+                countRed++;
+            }
+            if (listPerson[i]["team"] == "blue") {
+                countBlue++;
+            }
+        }
+
+        if (listPerson[i]["team"] == undefined || listPerson[i]["team"] == "undefined") {
+            countUndefined++;
+        }
+    }
+
+    if (countCaptain != 2) {
+        if (listPerson.length > 1) {
+            bridge.alert("Надо выбрать капитанов для двух команд");
+        }
+        return "false";
+    }
+    if (countUndefined > 0) {
+        bridge.alert("Надо распределить " + countUndefined + " человек по командам");
+        return "false";
+    }
+    if (countRed > 1 || countBlue > 1) {
+        bridge.alert("У команды должен быть 1 капитан");
+        return "false";
+    }
+    return "true";
 }

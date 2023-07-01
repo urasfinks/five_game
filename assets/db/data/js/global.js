@@ -38,7 +38,7 @@ if (typeof Bridge == 'undefined') {
 
         alert(data) {
             this.call("Alert", {
-                "duration": 7000,
+                "duration": 2000,
                 "label": data
             });
         }

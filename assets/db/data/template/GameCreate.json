@@ -89,6 +89,7 @@
             "args": {
               "uuid": "Game.json",
               "socket": true,
+              "socketUuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
               "subscribeOnChangeUuid": {
                 "list": ["bdc67a1c-ec5e-4709-b96c-5b94a96e8c19"],
                 "onChange": {

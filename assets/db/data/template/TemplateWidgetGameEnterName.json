@@ -16,7 +16,7 @@
       {
         "flutterType": "TextField",
         "keyboardType": "text",
-        "data": "${state(deviceName)}",
+        "data": "${state(deviceName,)}",
         "onChangedNotify": false,
         "style": {
           "flutterType": "TextStyle",
@@ -152,6 +152,38 @@
             "flutterType": "TextStyle",
             "fontSize": 14,
             "color": "white"
+          }
+        }
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "Visibility",
+        "visible": "${state(toWordGameState, false)}",
+        "child": {
+          "flutterType": "Button",
+          "minimumSize": "9999,44",
+          "backgroundColor": "blue",
+          "height": 44,
+          "onPressed": {
+            "jsInvoke": "Game.js",
+            "args": {
+              "includeStateData": true,
+              "includePageArgument": true,
+              "switch": "changeGameState",
+              "gameState": "word"
+            }
+          },
+          "child": {
+            "flutterType": "Text",
+            "label": "Продолжить...",
+            "style": {
+              "flutterType": "TextStyle",
+              "fontSize": 14,
+              "color": "white"
+            }
           }
         }
       }
