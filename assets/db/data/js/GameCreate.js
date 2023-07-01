@@ -34,7 +34,7 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
             "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
             "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
             "owner": bridge.unique,
-            "gameState": "selectCaptain", //selectCaptain/selectWord/run/finish
+            "gameState": "team", //team/word/run/finish
             "card0": {
                 "label": "Hello world",
                 "team": "red", //red/blue/neutral/die
