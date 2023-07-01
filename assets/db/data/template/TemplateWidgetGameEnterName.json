@@ -71,32 +71,13 @@
               "width": 0
             }
           }
-        }
-      },
-      {
-        "flutterType": "SizedBox",
-        "height": 20
-      },
-      {
-        "flutterType": "Button",
-        "minimumSize": "9999,44",
-        "backgroundColor": "blue",
-        "height": 44,
-        "onPressed": {
+        },
+        "onEditingComplete": {
           "jsInvoke": "Game.js",
           "args": {
             "includeStateData": true,
             "includePageArgument": true,
             "switch": "setName"
-          }
-        },
-        "child": {
-          "flutterType": "Text",
-          "label": "Сохранить",
-          "style": {
-            "flutterType": "TextStyle",
-            "fontSize": 14,
-            "color": "white"
           }
         }
       },
@@ -106,7 +87,7 @@
       },
       {
         "flutterType": "Text",
-        "label": "Другие участники игры: "
+        "label": "Участники игры: "
       },
       {
         "flutterType": "SizedBox",
@@ -115,8 +96,64 @@
       {
         "ChildrenExtension": "Iterator",
         "dataType": "state",
-        "key": "listPerson",
+        "key": "listPersonUndefined",
         "theme": "ButtonGroup"
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "ChildrenExtension": "Iterator",
+        "dataType": "state",
+        "key": "listPersonRed",
+        "theme": "ButtonGroup"
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "ChildrenExtension": "Iterator",
+        "dataType": "state",
+        "key": "listPersonBlue",
+        "theme": "ButtonGroup"
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "Button",
+        "minimumSize": "9999,44",
+        "backgroundColor": "schema:onBackground",
+        "height": 44,
+        "onPressed": {
+          "sysInvoke": "Alert",
+          "args": {
+            "confirm": true,
+            "actionLabel": "Перемешать",
+            "backgroundColor": "schema:onBackground",
+            "actionBackgroundColor": "blue",
+            "onPressed": {
+              "jsInvoke": "Game.js",
+              "args": {
+                "includeStateData": true,
+                "includePageArgument": true,
+                "switch": "randomize"
+              }
+            }
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Случайно перемешать",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
+        }
       }
     ]
   }

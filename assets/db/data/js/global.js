@@ -46,6 +46,12 @@ if (typeof Bridge == 'undefined') {
         log(data) {
             console.log("scriptUuid: " + bridge.scriptUuid + " ; switch: " + bridge.args["switch"] + "; data: " + JSON.stringify(data));
         }
+
+        overlay(refObject, newValue) {
+            for(var key in newValue){
+                refObject[key] = newValue[key];
+            }
+        }
     }
 
     var bridge = new Bridge();

@@ -8,7 +8,7 @@
   },
   "template_middle": {
     "flutterType": "Material",
-    "color": "schema:onBackground",
+    "color": "${background,schema:onBackground}",
     "child": {
       "flutterType": "InkWell",
       "onTap": "${onTap|jsonEncode()}",
@@ -26,7 +26,7 @@
   },
   "template_last": {
     "flutterType": "Material",
-    "color": "schema:onBackground",
+    "color": "${background,schema:onBackground}",
     "shape": {
       "flutterType": "RoundedRectangleBorder",
       "borderRadius": "0,0,10,10"
@@ -52,7 +52,7 @@
   },
   "template_first": {
     "flutterType": "Material",
-    "color": "schema:onBackground",
+    "color": "${background,schema:onBackground}",
     "shape": {
       "flutterType": "RoundedRectangleBorder",
       "borderRadius": "10,10,0,0"
@@ -78,7 +78,7 @@
   },
   "template_single": {
     "flutterType": "Material",
-    "color": "schema:onBackground",
+    "color": "${background,schema:onBackground}",
     "shape": {
       "flutterType": "RoundedRectangleBorder",
       "borderRadius": "10,10,10,10"

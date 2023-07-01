@@ -95,6 +95,7 @@
                   "jsInvoke": "Game.js",
                   "args": {
                     "includeStateData": true,
+                    "includePageArgument": true,
                     "switch": "onChange"
                   }
                 }

@@ -38,7 +38,7 @@
           {
             "case": "addPerson",
             "flutterType": "Template",
-            "src": "GameAddPerson"
+            "src": "GamePersonAdd"
           },
           {
             "case": "run",
