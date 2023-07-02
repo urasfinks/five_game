@@ -1,0 +1,28 @@
+{
+  "name": "main",
+  "tab": {
+    "flutterType": "BottomNavigationBarItem",
+    "icon": {"flutterType": "Icon", "src": "crop_5_4"},
+    "label": "Home"
+  },
+  "content": {
+    "flutterType": "Notify",
+    "link": {"template": "HomePage.json"},
+    "linkContainer": "root",
+    "linkDefault": {
+      "template": {
+        "flutterType": "Scaffold",
+        "appBar": {
+          "flutterType": "AppBar",
+          "title": {"flutterType": "Text", "label": "FiveGame"}
+        }
+      }
+    },
+    "constructor": {
+      "jsInvoke": "HomePage.js",
+      "args": {
+        "switch": "constructor"
+      }
+    }
+  }
+}

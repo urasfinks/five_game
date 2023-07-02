@@ -8,6 +8,7 @@ if (typeof Bridge == 'undefined') {
         context;
         state;
         pageArgs;
+        orientation;
 
         constructor() {
             this.clearAll();

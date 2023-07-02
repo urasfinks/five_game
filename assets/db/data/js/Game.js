@@ -4,7 +4,7 @@ if (bridge.args["switch"] == "constructor") {
 
 if (bridge.args["switch"] == "onChange") {
     var socketData = bridge.args["subscribe"]["data"];
-    bridge.log(socketData);
+    //bridge.log(socketData);
     var newStateData = {};
 
     //if (socketData["user" + bridge.unique] == undefined || socketData["user" + bridge.unique]["name"] == "") {
@@ -23,9 +23,13 @@ if (bridge.args["switch"] == "onChange") {
         newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
     }
 
-    if (socketData["gameState"] == "word" && isOwner(socketData)) {
-        newStateData["visibleGenerateWord"] = "true";
+    if (socketData["gameState"] == "word") {
+        if (isOwner(socketData)) {
+            newStateData["visibleGenerateWord"] = "true";
+        }
+        newStateData["gridWord"] = getGridWord(socketData);
     }
+
 
     bridge.call('SetStateData', {
         "map": newStateData
@@ -214,6 +218,32 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+if (bridge.args["switch"] == "onChangeOrientation") {
+    var socketData = bridge.state["originSocketData"];
+    if (socketData != undefined && socketData["gameState"] == "word") {
+        bridge.call('SetStateData', {
+            "map": {
+                "gridWord": getGridWord(socketData)
+            }
+        });
+    }
+}
+
+function getGridWord(socketData) {
+    //bridge.orientation
+    var result = [];
+    for (var key in socketData) {
+        if (key.startsWith("card")) {
+            socketData[key]["index"] = key.split("card")[1];
+            result.push(socketData[key]);
+        }
+    }
+    result.sort(function (a, b) {
+        return a["index"] - b["index"];
+    });
+    return result;
 }
 
 if (bridge.args["switch"] == "changeGameState") {
