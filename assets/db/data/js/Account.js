@@ -34,8 +34,8 @@ if (bridge.args["switch"] == "onFetchCountAllData") {
 }
 
 if (bridge.args["switch"] == "GetCode") {
-    bridge.call("HideKeyboard", {});
-    bridge.call("CustomLoaderOpen", {});
+    bridge.call("Hide", {"case": "keyboard"});
+    bridge.call("Show", {"case": "customLoader"});
     bridge.call('Http', {
         "uri": "/GetCode",
         "body": {
@@ -52,7 +52,7 @@ if (bridge.args["switch"] == "GetCode") {
 }
 
 if (bridge.args["switch"] == "GetCodeResponse") {
-    bridge.call("CustomLoaderClose", {});
+    bridge.call("Hide", {"case": "customLoader"});
     bridge.log(bridge.args);
     if (bridge.args["body"]["status"] == false) {
         bridge.call("Alert", {

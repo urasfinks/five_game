@@ -229,10 +229,11 @@ if (bridge.args["switch"] == "onChangeOrientation") {
             }
         });
         if (bridge.pageActive) {
-            bridge.call('SystemNotify', {
-                "SystemNotifyEnum": "changeBottomNavigationTab",
-                "state": bridge.orientation == "portrait" ? "true" : "false"
-            });
+            if (bridge.orientation == "portrait") {
+                bridge.call('Show', {"case": "bottomNavigationBar"});
+            } else {
+                bridge.call('Hide', {"case": "bottomNavigationBar"});
+            }
         }
     }
 }
