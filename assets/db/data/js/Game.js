@@ -3,7 +3,7 @@ if (bridge.args["switch"] == "constructor") {
 }
 
 if (bridge.args["switch"] == "onChange") {
-    var socketData = bridge.args["subscribe"]["data"];
+    var socketData = bridge.args["data"];
     //bridge.log(socketData);
     var newStateData = {};
 
@@ -268,20 +268,31 @@ function getGridWord(socketData) {
                     "flutterType": "Expanded",
                     "child": {
                         "flutterType": "Container",
-                        "color": "#efd9b9",
                         "height": 50,
                         "margin": 5,
                         "child": {
-                            "flutterType": "Center",
+                            "flutterType": "Material",
+                            "color": "#efd9b9",
+                            "borderRadius": 4,
                             "child": {
-                                "flutterType": "Text",
-                                "textAlign": "center",
-                                "label": itemData["label"].toUpperCase(),
-                                "style": {
-                                    "flutterType": "TextStyle",
-                                    "fontSize": 12,
-                                    "fontWeight": "bold",
-                                    "color": "black"
+                                "flutterType": "InkWell",
+                                "onTap": "${onTap|jsonEncode()}",
+                                "templateArguments": [
+                                    "onTap"
+                                ],
+                                "child": {
+                                    "flutterType": "Center",
+                                    "child": {
+                                        "flutterType": "Text",
+                                        "textAlign": "center",
+                                        "label": itemData["label"].toUpperCase(),
+                                        "style": {
+                                            "flutterType": "TextStyle",
+                                            "fontSize": 12,
+                                            "fontWeight": "bold",
+                                            "color": "black"
+                                        }
+                                    }
                                 }
                             }
                         }
