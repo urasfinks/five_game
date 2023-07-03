@@ -228,22 +228,71 @@ if (bridge.args["switch"] == "onChangeOrientation") {
                 "gridWord": getGridWord(socketData)
             }
         });
+        if (bridge.pageActive) {
+            bridge.call('SystemNotify', {
+                "SystemNotifyEnum": "changeBottomNavigationTab",
+                "state": bridge.orientation == "portrait" ? "true" : "false"
+            });
+        }
     }
 }
 
 function getGridWord(socketData) {
     //bridge.orientation
-    var result = [];
+    var listCard = [];
     for (var key in socketData) {
         if (key.startsWith("card")) {
             socketData[key]["index"] = key.split("card")[1];
-            result.push(socketData[key]);
+            listCard.push(socketData[key]);
         }
     }
-    result.sort(function (a, b) {
+    listCard.sort(function (a, b) {
         return a["index"] - b["index"];
     });
-    return result;
+    var counter = 0;
+    var column = {
+        "flutterType": "Column",
+        "children": []
+    };
+    var countRow = bridge.orientation == "portrait" ? 9 : 4;
+    var countCol = bridge.orientation == "portrait" ? 3 : 8;
+    for (var c = 0; c < countRow; c++) {
+        var row = {
+            "flutterType": "Row",
+            "children": []
+        };
+        for (var i = 0; i < countCol; i++) {
+            var itemData = listCard[counter++];
+            if (itemData != undefined) {
+                row["children"].push({
+                    "flutterType": "Expanded",
+                    "child": {
+                        "flutterType": "Container",
+                        "color": "#efd9b9",
+                        "height": 50,
+                        "margin": 5,
+                        "child": {
+                            "flutterType": "Center",
+                            "child": {
+                                "flutterType": "Text",
+                                "textAlign": "center",
+                                "label": itemData["label"].toUpperCase(),
+                                "style": {
+                                    "flutterType": "TextStyle",
+                                    "fontSize": 12,
+                                    "fontWeight": "bold",
+                                    "color": "black"
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        column["children"].push(row);
+    }
+
+    return column;
 }
 
 if (bridge.args["switch"] == "changeGameState") {

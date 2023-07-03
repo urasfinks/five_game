@@ -6,6 +6,14 @@
     "crossAxisAlignment": "start",
     "children": [
       {
+        "flutterType": "State",
+        "key": "gridWord"
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 5
+      },
+      {
         "flutterType": "Visibility",
         "visible": "${state(visibleGenerateWord, false)}",
         "child": {

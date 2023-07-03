@@ -9,6 +9,7 @@ if (typeof Bridge == 'undefined') {
         state;
         pageArgs;
         orientation;
+        pageActive;
 
         constructor() {
             this.clearAll();
