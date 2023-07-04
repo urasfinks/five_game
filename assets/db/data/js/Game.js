@@ -3,7 +3,10 @@ if (bridge.args["switch"] == "constructor") {
 }
 
 if (bridge.args["switch"] == "onChange") {
+    var lastState = bridge.state["originSocketData"] != undefined ? bridge.state["originSocketData"]["gameState"] : "";
+
     var socketData = bridge.args["data"];
+
     //bridge.log(socketData);
     var newStateData = {};
 
@@ -14,7 +17,7 @@ if (bridge.args["switch"] == "onChange") {
         newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
     }
 
-    newStateData["originSocketData"] = socketData;
+    bridge.state["originSocketData"] = newStateData["originSocketData"] = socketData;
     newStateData["listPersonUndefined"] = getListPerson(socketData, "undefined");
     newStateData["listPersonRed"] = getListPerson(socketData, "red");
     newStateData["listPersonBlue"] = getListPerson(socketData, "blue");
@@ -30,10 +33,13 @@ if (bridge.args["switch"] == "onChange") {
         newStateData["gridWord"] = getGridWord(socketData);
     }
 
-
     bridge.call('SetStateData', {
         "map": newStateData
     });
+
+    if (lastState != socketData["gameState"]) {
+        onRenderFloatingActionButton();
+    }
 }
 
 if (bridge.args["switch"] == "addPerson") {
@@ -138,11 +144,14 @@ function getListPerson(socketData, team) {
 }
 
 if (bridge.args["switch"] == "onRenderFloatingActionButton") {
+    onRenderFloatingActionButton();
+}
+
+function onRenderFloatingActionButton() {
     if (isOwner(bridge.state["originSocketData"]) && bridge.state["originSocketData"]["gameState"] == "team") {
-        bridge.call("DataSourceSet", {
-            "uuid": "FloatingActionButton.json",
-            "type": "virtual",
-            "value": {
+        bridge.call("Show", {
+            "case": "actionButton",
+            "template": {
                 "flutterType": "FloatingActionButton",
                 "child": {
                     "flutterType": "Icon",
@@ -159,6 +168,10 @@ if (bridge.args["switch"] == "onRenderFloatingActionButton") {
                     }
                 }
             }
+        });
+    } else {
+        bridge.call("Hide", {
+            "case": "actionButton"
         });
     }
 }
