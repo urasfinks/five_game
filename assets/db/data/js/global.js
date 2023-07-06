@@ -25,13 +25,10 @@ if (typeof Bridge == 'undefined') {
         }
 
         call(invoke, args) {
-            var result;
+            var result = undefined;
             try {
                 args["_rjduPageUuid"] = this.pageUuid; //Зарезервированное системное имя, что бы связать контекст исполнения
-                console.log(invoke);
-                console.log(args);
                 result = sendMessage(invoke, JSON.stringify(args));
-                console.log("res: " + result);
                 if (result == undefined || result == null) {
                     return;
                 }
