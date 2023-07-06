@@ -1,5 +1,11 @@
+if (bridge.args["switch"] == "destructor") {
+    bridge.call('Show', {"case": "bottomNavigationBar"});
+    bridge.log("Bottom SHOW 2!!!");
+}
+
 if (bridge.args["switch"] == "constructor") {
     bridge.log("GAME constructor");
+    controlBottomNavigationBar();
 }
 
 if (bridge.args["switch"] == "onChange") {
@@ -81,6 +87,10 @@ function socketSave(data) {
 
 function isOwner(socketData) {
     return socketData != undefined && socketData["owner"] == bridge.unique;
+}
+
+function isCaptain(socketData) {
+    return socketData != undefined && socketData["user" + bridge.unique] != undefined && socketData["user" + bridge.unique]["role"] == "captain";
 }
 
 function getPersonList(socketData) {
@@ -241,12 +251,16 @@ if (bridge.args["switch"] == "onChangeOrientation") {
                 "gridWord": getGridWord(socketData)
             }
         });
-        if (bridge.pageActive) {
-            if (bridge.orientation == "portrait") {
-                bridge.call('Show', {"case": "bottomNavigationBar"});
-            } else {
-                bridge.call('Hide', {"case": "bottomNavigationBar"});
-            }
+        controlBottomNavigationBar();
+    }
+}
+
+function controlBottomNavigationBar(){
+    if (bridge.pageActive) {
+        if (bridge.orientation == "portrait") {
+            bridge.call('Show', {"case": "bottomNavigationBar"});
+        } else {
+            bridge.call('Hide', {"case": "bottomNavigationBar"});
         }
     }
 }
@@ -260,6 +274,7 @@ function getGridWord(socketData) {
             listCard.push(socketData[key]);
         }
     }
+    var isCapt = isCaptain(socketData);
     listCard.sort(function (a, b) {
         return a["index"] - b["index"];
     });
@@ -269,7 +284,19 @@ function getGridWord(socketData) {
         "children": []
     };
     var countRow = bridge.orientation == "portrait" ? 9 : 4;
-    var countCol = bridge.orientation == "portrait" ? 3 : 8;
+    var countCol = bridge.orientation == "portrait" ? 3 : 7;
+    var colorCard = {
+        "red": "red",
+        "blue": "blue",
+        "neutral": "#efd9b9",
+        "die": "black"
+    };
+    var colorText = {
+        "red": "white",
+        "blue": "white",
+        "neutral": "black",
+        "die": "white"
+    };
     for (var c = 0; c < countRow; c++) {
         var row = {
             "flutterType": "Row",
@@ -286,7 +313,7 @@ function getGridWord(socketData) {
                         "margin": 5,
                         "child": {
                             "flutterType": "Material",
-                            "color": "#efd9b9",
+                            "color": isCapt ? colorCard[itemData["team"]] : "#efd9b9",
                             "borderRadius": 4,
                             "child": {
                                 "flutterType": "InkWell",
@@ -304,7 +331,7 @@ function getGridWord(socketData) {
                                             "flutterType": "TextStyle",
                                             "fontSize": 12,
                                             "fontWeight": "bold",
-                                            "color": "black"
+                                            "color": isCapt ? colorText[itemData["team"]] : "#efd9b9"
                                         }
                                     }
                                 }

@@ -25,12 +25,16 @@ if (typeof Bridge == 'undefined') {
         }
 
         call(invoke, args) {
-            args["_rjduPageUuid"] = this.pageUuid; //Зарезервированное системное имя, что бы связать контекст исполнения
-            var result = sendMessage(invoke, JSON.stringify(args));
-            if (result == undefined || result == null) {
-                return;
-            }
+            var result;
             try {
+                args["_rjduPageUuid"] = this.pageUuid; //Зарезервированное системное имя, что бы связать контекст исполнения
+                console.log(invoke);
+                console.log(args);
+                result = sendMessage(invoke, JSON.stringify(args));
+                console.log("res: " + result);
+                if (result == undefined || result == null) {
+                    return;
+                }
                 return JSON.parse(result);
             } catch (e) {
                 bridge.log("Exception Bridge.call(" + invoke + ", " + JSON.stringify(args) + "): " + e.toString() + " => " + result);
@@ -50,7 +54,7 @@ if (typeof Bridge == 'undefined') {
         }
 
         overlay(refObject, newValue) {
-            for(var key in newValue){
+            for (var key in newValue) {
                 refObject[key] = newValue[key];
             }
         }

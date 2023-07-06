@@ -99,6 +99,28 @@
                   "switch": "onChange"
                 }
               },
+              "onChangeOrientation": {
+                "jsInvoke": "Game.js",
+                "args": {
+                  "includeStateData": true,
+                  "includePageArgument": true,
+                  "switch": "onChangeOrientation"
+                }
+              },
+              "destructor": {
+                "jsInvoke": "Game.js",
+                "args": {
+                  "switch": "destructor"
+                }
+              },
+              "onActive": {
+                "jsInvoke": "Game.js",
+                "args": {
+                  "includeStateData": true,
+                  "includePageArgument": true,
+                  "switch": "onChangeOrientation"
+                }
+              },
               "constructor": {
                 "jsInvoke": "Game.js",
                 "args": {
