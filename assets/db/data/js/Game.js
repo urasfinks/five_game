@@ -32,7 +32,7 @@ if (bridge.args["switch"] == "onChange") {
         newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
     }
 
-    if (socketData["gameState"] == "word") {
+    if (["word", "run"].includes(socketData["gameState"])) {
         if (isOwner(socketData)) {
             newStateData["visibleGenerateWord"] = "true";
         }
@@ -255,7 +255,7 @@ if (bridge.args["switch"] == "onChangeOrientation") {
     }
 }
 
-function controlBottomNavigationBar(){
+function controlBottomNavigationBar() {
     if (bridge.pageActive) {
         if (bridge.orientation == "portrait") {
             bridge.call('Show', {"case": "bottomNavigationBar"});
@@ -283,8 +283,7 @@ function getGridWord(socketData) {
         "flutterType": "Column",
         "children": []
     };
-    var countRow = bridge.orientation == "portrait" ? 9 : 4;
-    var countCol = bridge.orientation == "portrait" ? 3 : 7;
+    var matrix = bridge.orientation == "portrait" ? {col: 4, row: 7} : {col: 7, row: 4};
     var colorCard = {
         "red": "red",
         "blue": "blue",
@@ -297,12 +296,12 @@ function getGridWord(socketData) {
         "neutral": "black",
         "die": "white"
     };
-    for (var c = 0; c < countRow; c++) {
+    for (var c = 0; c < matrix.row; c++) {
         var row = {
             "flutterType": "Row",
             "children": []
         };
-        for (var i = 0; i < countCol; i++) {
+        for (var i = 0; i < matrix.col; i++) {
             var itemData = listCard[counter++];
             if (itemData != undefined) {
                 row["children"].push({
@@ -314,7 +313,7 @@ function getGridWord(socketData) {
                         "child": {
                             "flutterType": "Material",
                             "color": isCapt ? colorCard[itemData["team"]] : "#efd9b9",
-                            "borderRadius": 4,
+                            "borderRadius": 5,
                             "child": {
                                 "flutterType": "InkWell",
                                 "onTap": "${onTap|jsonEncode()}",
@@ -322,18 +321,47 @@ function getGridWord(socketData) {
                                     "onTap"
                                 ],
                                 "child": {
-                                    "flutterType": "Center",
-                                    "child": {
-                                        "flutterType": "Text",
-                                        "textAlign": "center",
-                                        "label": itemData["label"].toUpperCase(),
-                                        "style": {
-                                            "flutterType": "TextStyle",
-                                            "fontSize": 12,
-                                            "fontWeight": "bold",
-                                            "color": isCapt ? colorText[itemData["team"]] : "#efd9b9"
+                                    "flutterType": "Stack",
+                                    "alignment": "topEnd",
+                                    "children": [
+                                        {
+                                            "flutterType": "Center",
+                                            "child": {
+                                                "flutterType": "Text",
+                                                "textAlign": "center",
+                                                "label": itemData["label"].toUpperCase(),
+                                                "style": {
+                                                    "flutterType": "TextStyle",
+                                                    "fontSize": 12,
+                                                    "fontWeight": "bold",
+                                                    "color": isCapt ? colorText[itemData["team"]] : "#efd9b9"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "flutterType": "Container",
+                                            "decoration": {
+                                                "flutterType": "BoxDecoration",
+                                                "color": "rgba:0,0,0,0.75",
+                                                "borderRadius": 9,
+                                                "border": {
+                                                    "flutterType": "Border",
+                                                    "color": "white",
+                                                    "width": 1.3
+                                                }
+                                            },
+                                            "padding": "4",
+                                            "child": {
+                                                "flutterType": "Text",
+                                                "label": "Ю",
+                                                "style": {
+                                                    "flutterType": "TextStyle",
+                                                    "fontSize": 10,
+                                                    "color": "white"
+                                                }
+                                            }
                                         }
-                                    }
+                                    ]
                                 }
                             }
                         }

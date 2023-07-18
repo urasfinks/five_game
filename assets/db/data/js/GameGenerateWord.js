@@ -77,26 +77,28 @@ if (bridge.args["switch"] == "generateWord") {
     ];
     shuffle(list);
     var list2 = [];
-    for (var i = 0; i < 27; i++) {
-        var forTeam = "";
-        if (i <= 8) {
-            forTeam = "red";
-        } else if (i <= 18) {
-            forTeam = "blue";
-        } else {
-            forTeam = "neutral";
+    var all = 28;
+    var med = Math.floor((all - 1) / 3);
+    var mark = {
+        red: med,
+        blue: med + 1,
+        die: 1,
+        neutral: all - 2 - (med * 2)
+    };
+    var counter = 0;
+    for (var key in mark) {
+        for (var i = 0; i < mark[key]; i++) {
+            list2.push({
+                "label": list[counter++],
+                "team": key, //red/blue/neutral/die
+                "selected": null, //blue/red/null
+                "selecting": null //red/blue Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
+            });
         }
-        list2.push({
-            "label": list[i],
-            "team": forTeam, //red/blue/neutral/die
-            "selected": null, //blue/red/null
-            "selecting": null //red/blue Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
-        });
     }
-    list2[26]["team"] = "die";
     shuffle(list2);
     var data = {};
-    for (var i = 0; i < 27; i++) {
+    for (var i = 0; i < all; i++) {
         data["card" + i] = list2[i];
     }
     socketSave(data);
