@@ -55,6 +55,24 @@ if (typeof Bridge == 'undefined') {
                 refObject[key] = newValue[key];
             }
         }
+
+        socketInsert(uuid, method, args, onResponse) {
+            var args = {
+                "uri": "/SocketInsert",
+                "method": "POST",
+                "body": {
+                    "uuid_data": uuid,
+                    "actions": [{
+                        "action": method,
+                        "arguments": args
+                    }]
+                }
+            };
+            if (onResponse != undefined) {
+                args["onResponse"] = onResponse;
+            }
+            bridge.call('Http', args);
+        }
     }
 
     var bridge = new Bridge();

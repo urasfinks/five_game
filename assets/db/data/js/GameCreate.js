@@ -30,17 +30,19 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
                 "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"]
             }
         });
-        const value = {
-            "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
-            "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
-            "owner": bridge.unique,
-            "gameState": "team", //team/word/run/finish
-            "card0": {
+        /*"card0": {
                 "label": "Hello world",
                 "team": "red", //red/blue/neutral/die
                 "selected": null, //blue/red/null
                 "selecting": "red" //Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
-            }
+            }*/
+        const value = {
+            "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
+            "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
+            "owner": bridge.unique,
+            "runTeam": "red",
+            "gameState": "team", //team/word/run/finish
+
         };
         value["user" + bridge.unique] = {
             "name": "Ivan",

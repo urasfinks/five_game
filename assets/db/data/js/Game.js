@@ -32,6 +32,8 @@ if (bridge.args["switch"] == "onChange") {
         newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
     }
 
+    newStateData["isMyGame"] = isMyGame(socketData) ? "true" : "false";
+
     if (["word", "run"].includes(socketData["gameState"])) {
         if (isOwner(socketData)) {
             newStateData["visibleGenerateWord"] = "true";
@@ -91,6 +93,10 @@ function isOwner(socketData) {
 
 function isCaptain(socketData) {
     return socketData != undefined && socketData["user" + bridge.unique] != undefined && socketData["user" + bridge.unique]["role"] == "captain";
+}
+
+function getMyTeam(socketData) {
+    return socketData["user" + bridge.unique]["team"];
 }
 
 function getPersonList(socketData) {
@@ -245,7 +251,7 @@ function getRandomInt(min, max) {
 
 if (bridge.args["switch"] == "onChangeOrientation") {
     var socketData = bridge.state["originSocketData"];
-    if (socketData != undefined && socketData["gameState"] == "word") {
+    if (socketData != undefined &&  ["word", "run"].includes(socketData["gameState"])) {
         bridge.call('SetStateData', {
             "map": {
                 "gridWord": getGridWord(socketData)
@@ -253,6 +259,9 @@ if (bridge.args["switch"] == "onChangeOrientation") {
         });
         controlBottomNavigationBar();
     }
+    /*bridge.socketInsert("test", "timestamp", {
+        "field": "finish"
+    })*/
 }
 
 function controlBottomNavigationBar() {
@@ -265,6 +274,10 @@ function controlBottomNavigationBar() {
     }
 }
 
+function isMyGame(socketData){
+    return (socketData["gameState"] == "run" && socketData["runTeam"] == getMyTeam(socketData));
+}
+
 function getGridWord(socketData) {
     //bridge.orientation
     var listCard = [];
@@ -274,7 +287,9 @@ function getGridWord(socketData) {
             listCard.push(socketData[key]);
         }
     }
+    var canBePressed = isMyGame(socketData);
     var isCapt = isCaptain(socketData);
+
     listCard.sort(function (a, b) {
         return a["index"] - b["index"];
     });
@@ -303,6 +318,9 @@ function getGridWord(socketData) {
         };
         for (var i = 0; i < matrix.col; i++) {
             var itemData = listCard[counter++];
+            var onTap = canBePressed ? {
+                "sysInvoke": "Alert"
+            } : null;
             if (itemData != undefined) {
                 row["children"].push({
                     "flutterType": "Expanded",
@@ -316,7 +334,7 @@ function getGridWord(socketData) {
                             "borderRadius": 5,
                             "child": {
                                 "flutterType": "InkWell",
-                                "onTap": "${onTap|jsonEncode()}",
+                                "onTap": onTap,
                                 "templateArguments": [
                                     "onTap"
                                 ],

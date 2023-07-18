@@ -198,7 +198,8 @@
         "onPressed": {
           "sysInvoke": "Alert",
           "args": {
-            "confirm": true,
+            "confirmRemove": true,
+            "backgroundColor": "schema:onBackground",
             "onPressed": {
               "jsInvoke": "Game.js",
               "args": {
