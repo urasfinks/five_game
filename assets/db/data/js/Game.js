@@ -32,7 +32,7 @@ if (bridge.args["switch"] == "onChange") {
         newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
     }
 
-    newStateData["isMyGame"] = isMyGame(socketData) ? "true" : "false";
+    newStateData["toNextTeam"] = (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false";
 
     if (["word", "run"].includes(socketData["gameState"])) {
         if (isOwner(socketData)) {
@@ -208,6 +208,14 @@ if (bridge.args["switch"] == "savePerson") {
     }
 }
 
+if (bridge.args["switch"] == "onCardTap") {
+    bridge.log(bridge.args["index"]);
+    var data = {};
+    var key = "tapCard_" + bridge.args["index"] + "_" + bridge.unique;
+    data[key] = bridge.state["originSocketData"][key] == undefined ? true : null;
+    socketSave(data);
+}
+
 if (bridge.args["switch"] == "removePerson") {
     var data = {};
     data[bridge.pageArgs["personKey"]] = null;
@@ -251,7 +259,7 @@ function getRandomInt(min, max) {
 
 if (bridge.args["switch"] == "onChangeOrientation") {
     var socketData = bridge.state["originSocketData"];
-    if (socketData != undefined &&  ["word", "run"].includes(socketData["gameState"])) {
+    if (socketData != undefined && ["word", "run"].includes(socketData["gameState"])) {
         bridge.call('SetStateData', {
             "map": {
                 "gridWord": getGridWord(socketData)
@@ -274,7 +282,7 @@ function controlBottomNavigationBar() {
     }
 }
 
-function isMyGame(socketData){
+function isMyGame(socketData) {
     return (socketData["gameState"] == "run" && socketData["runTeam"] == getMyTeam(socketData));
 }
 
@@ -311,17 +319,69 @@ function getGridWord(socketData) {
         "neutral": "black",
         "die": "white"
     };
+    var mapCount = {};
+    var mapCountMy = {};
+    for (var key in socketData) {
+        if (key.startsWith("tapCard_")) {
+            var curKey = "i" + key.split("tapCard_")[1].split("_")[0];
+            var amI = key.split("tapCard_")[1].split("_")[1];
+            if (mapCount[curKey] == undefined) {
+                mapCount[curKey] = 1;
+            } else {
+                mapCount[curKey]++;
+            }
+            if (amI == bridge.unique) {
+                mapCountMy[curKey] = true;
+            }
+        }
+    }
     for (var c = 0; c < matrix.row; c++) {
         var row = {
             "flutterType": "Row",
             "children": []
         };
         for (var i = 0; i < matrix.col; i++) {
-            var itemData = listCard[counter++];
+            var curIndex = counter++;
+            var itemData = listCard[curIndex];
             var onTap = canBePressed ? {
-                "sysInvoke": "Alert"
+                "jsInvoke": "Game.js",
+                "args": {
+                    "includeStateData": true,
+                    "includePageArgument": true,
+                    "switch": "onCardTap",
+                    "index": counter - 1
+                }
             } : null;
             if (itemData != undefined) {
+                var tapCount = mapCount["i" + curIndex] != undefined ? {
+                    "flutterType": "Container",
+                    "width": 20,
+                    "height": 20,
+                    "decoration": {
+                        "flutterType": "BoxDecoration",
+                        "color": mapCountMy["i" + curIndex] == undefined ? "rgba:0,0,0,0.75" : "rgba:50,205,50,0.75",
+                        "borderRadius": 9,
+                        "border": {
+                            "flutterType": "Border",
+                            "color": "white",
+                            "width": 1.3
+                        }
+                    },
+                    "child": {
+                        "flutterType": "Center",
+                        "child": {
+                            "flutterType": "Text",
+                            "label": "" + mapCount["i" + curIndex],
+                            "style": {
+                                "flutterType": "TextStyle",
+                                "fontSize": 10,
+                                "color": "white"
+                            }
+                        }
+                    }
+                } : {
+                    "flutterType": "SizedBox"
+                };
                 row["children"].push({
                     "flutterType": "Expanded",
                     "child": {
@@ -335,9 +395,6 @@ function getGridWord(socketData) {
                             "child": {
                                 "flutterType": "InkWell",
                                 "onTap": onTap,
-                                "templateArguments": [
-                                    "onTap"
-                                ],
                                 "child": {
                                     "flutterType": "Stack",
                                     "alignment": "topEnd",
@@ -356,29 +413,7 @@ function getGridWord(socketData) {
                                                 }
                                             }
                                         },
-                                        {
-                                            "flutterType": "Container",
-                                            "decoration": {
-                                                "flutterType": "BoxDecoration",
-                                                "color": "rgba:0,0,0,0.75",
-                                                "borderRadius": 9,
-                                                "border": {
-                                                    "flutterType": "Border",
-                                                    "color": "white",
-                                                    "width": 1.3
-                                                }
-                                            },
-                                            "padding": "4",
-                                            "child": {
-                                                "flutterType": "Text",
-                                                "label": "Ю",
-                                                "style": {
-                                                    "flutterType": "TextStyle",
-                                                    "fontSize": 10,
-                                                    "color": "white"
-                                                }
-                                            }
-                                        }
+                                        tapCount
                                     ]
                                 }
                             }

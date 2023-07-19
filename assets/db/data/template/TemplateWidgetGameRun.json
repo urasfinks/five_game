@@ -15,7 +15,7 @@
       },
       {
         "flutterType": "Visibility",
-        "visible": "${state(isMyGame, false)}",
+        "visible": "${state(toNextTeam, false)}",
         "child": {
           "flutterType": "Button",
           "minimumSize": "9999,44",
