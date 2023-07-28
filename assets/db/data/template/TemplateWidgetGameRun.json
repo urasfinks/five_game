@@ -37,7 +37,7 @@
           },
           "child": {
             "flutterType": "Text",
-            "label": "Следующий ход",
+            "label": "Готово",
             "style": {
               "flutterType": "TextStyle",
               "fontSize": 14,
