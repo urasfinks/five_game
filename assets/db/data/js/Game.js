@@ -41,6 +41,11 @@ if (bridge.args["switch"] == "onChange") {
         newStateData["gridWord"] = getGridWord(socketData);
     }
 
+    if (["run", "finish"].includes(socketData["gameState"])) {
+        calculateScore(socketData, newStateData);
+        newStateData["users"] = getUsers(socketData);
+    }
+
     bridge.call('SetStateData', {
         "map": newStateData
     });
@@ -48,6 +53,61 @@ if (bridge.args["switch"] == "onChange") {
     if (lastState != socketData["gameState"]) {
         onRenderFloatingActionButton();
     }
+}
+
+function getUsers(socketData) {
+    var reds = [], blues = [];
+    for (var key in socketData) {
+        if (key.startsWith("user") && socketData[key]["role"] == "captain") {
+            if (socketData[key]["team"] == "red") {
+                reds.push(socketData[key]["name"] + " (Капитан)");
+            } else if (socketData[key]["team"] == "blue") {
+                blues.push(socketData[key]["name"] + " (Капитан)");
+            }
+        }
+    }
+    for (var key in socketData) {
+        if (key.startsWith("user") && socketData[key]["role"] != "captain") {
+            if (socketData[key]["team"] == "red") {
+                reds.push(socketData[key]["name"]);
+            } else if (socketData[key]["team"] == "blue") {
+                blues.push(socketData[key]["name"]);
+            }
+        }
+    }
+    return {
+        "red": reds.join(", "),
+        "blue": blues.join(", "),
+    }
+}
+
+function calculateScore(socketData, newStateData) {
+    var blue = 0, red = 0, all = 0;
+    for (var key in socketData) {
+        if (key.startsWith("card")) {
+            if (["red", "blue"].includes(socketData[key]["team"])) {
+                all++;
+            }
+            if (socketData[key]["selected"] != undefined) {
+                if (socketData[key]["team"] == "blue") {
+                    blue++;
+                } else if (socketData[key]["team"] == "red") {
+                    red++;
+                }
+            }
+        }
+    }
+    if (socketData["description"] == undefined) {
+        if (blue + red == all) {
+            socketSave({
+                description: "Победила команда " + (blue > red ? "синих" : "красных"),
+                gameState: "finish"
+            })
+        }
+    }
+    newStateData["scoreRed"] = red;
+    newStateData["scoreBlue"] = blue;
+    newStateData["scoreAll"] = all;
 }
 
 if (bridge.args["switch"] == "addPerson") {
@@ -84,6 +144,20 @@ function socketSave(data) {
         "type": "socket",
         "uuid": socketUuid,
         "value": data
+    });
+}
+
+function socketExtend(action) {
+    var socketUuid = bridge.pageArgs["socketUuid"];
+    bridge.call('Http', {
+        "uri": "/SocketExtend",
+        "method": "POST",
+        "body": {
+            "uuid_data": socketUuid,
+            "actions": [
+                action
+            ]
+        }
     });
 }
 
@@ -342,8 +416,8 @@ function getGridWord(socketData) {
         };
         for (var i = 0; i < matrix.col; i++) {
             var curIndex = counter++;
-            var itemData = listCard[curIndex];
-            var onTap = canBePressed ? {
+            var cardData = listCard[curIndex];
+            var onTap = (canBePressed && cardData["selected"] == null) ? {
                 "jsInvoke": "Game.js",
                 "args": {
                     "includeStateData": true,
@@ -352,7 +426,7 @@ function getGridWord(socketData) {
                     "index": counter - 1
                 }
             } : null;
-            if (itemData != undefined) {
+            if (cardData != undefined) {
                 var tapCount = mapCount["i" + curIndex] != undefined ? {
                     "flutterType": "Container",
                     "width": 20,
@@ -382,43 +456,68 @@ function getGridWord(socketData) {
                 } : {
                     "flutterType": "SizedBox"
                 };
-                row["children"].push({
-                    "flutterType": "Expanded",
-                    "child": {
+                if (cardData["selected"] != null) {
+                    tapCount = {
                         "flutterType": "Container",
-                        "height": 50,
-                        "margin": 5,
+                        "width": 10,
+                        "height": 10,
+                        "decoration": {
+                            "flutterType": "BoxDecoration",
+                            "color": cardData["selected"],
+                            "borderRadius": 9
+                        },
                         "child": {
-                            "flutterType": "Material",
-                            "color": isCapt ? colorCard[itemData["team"]] : "#efd9b9",
-                            "borderRadius": 5,
+                            "flutterType": "SizedBox"
+                        }
+                    };
+                }
+                //Если карточка выбрана - показываем её реальный цвет
+                var curColorCard = (isCapt || cardData["selected"] != null) ? colorCard[cardData["team"]] : "#efd9b9";
+                var block = {
+                    "flutterType": "Container",
+                    "height": 50,
+                    "margin": 5,
+                    "child": {
+                        "flutterType": "Material",
+                        "color": curColorCard,
+                        "borderRadius": 5,
+                        "child": {
+                            "flutterType": "InkWell",
+                            "onTap": onTap,
                             "child": {
-                                "flutterType": "InkWell",
-                                "onTap": onTap,
-                                "child": {
-                                    "flutterType": "Stack",
-                                    "alignment": "topEnd",
-                                    "children": [
-                                        {
-                                            "flutterType": "Center",
-                                            "child": {
-                                                "flutterType": "Text",
-                                                "textAlign": "center",
-                                                "label": itemData["label"].toUpperCase(),
-                                                "style": {
-                                                    "flutterType": "TextStyle",
-                                                    "fontSize": 12,
-                                                    "fontWeight": "bold",
-                                                    "color": isCapt ? colorText[itemData["team"]] : "#efd9b9"
-                                                }
+                                "flutterType": "Stack",
+                                "alignment": "topEnd",
+                                "children": [
+                                    {
+                                        "flutterType": "Center",
+                                        "child": {
+                                            "flutterType": "Text",
+                                            "textAlign": "center",
+                                            "label": cardData["selected"] == null ? cardData["label"].toUpperCase() : "",
+                                            "style": {
+                                                "flutterType": "TextStyle",
+                                                "fontSize": 12,
+                                                "fontWeight": "bold",
+                                                "color": isCapt ? colorText[cardData["team"]] : "#efd9b9"
                                             }
-                                        },
-                                        tapCount
-                                    ]
-                                }
+                                        }
+                                    },
+                                    tapCount
+                                ]
                             }
                         }
                     }
+                };
+                /*if (cardData["selected"] != null) {
+                    block = {
+                        "flutterType": "Opacity",
+                        "opacity": 0.5,
+                        "child": block
+                    }
+                }*/
+                row["children"].push({
+                    "flutterType": "Expanded",
+                    "child": block
                 });
             }
         }
@@ -428,11 +527,20 @@ function getGridWord(socketData) {
     return column;
 }
 
-if (bridge.args["switch"] == "changeGameState") {
+if (bridge.args["switch"] == "changeGameState") { //team/word/run/finish
     bridge.log("changeGameState");
-    socketSave({
+    var data = {
         "gameState": bridge.args["gameState"]
-    });
+    };
+    socketSave(data);
+    if (data["gameState"] == "run") {
+        socketExtend({
+            "action": "timestamp",
+            "arguments": {
+                "field": "startTimestamp"
+            }
+        });
+    }
 }
 
 function getFlagToWordGameState(socketData) {
@@ -477,4 +585,32 @@ function getFlagToWordGameState(socketData) {
         return "false";
     }
     return "true";
+}
+
+if (bridge.args["switch"] == "toNextTeam") {
+    var socketData = bridge.state["originSocketData"];
+    var newSocketUpdate = {};
+    for (var key in socketData) {
+        if (key.startsWith("tapCard_")) {
+            //tapCard_3_0b12f03e-7b9d-4175-a6fc-a0a368917005
+            var curIndexCard = key.split("tapCard_")[1].split("_")[0];
+            newSocketUpdate[key] = null;
+            var card = newSocketUpdate["card" + curIndexCard] || socketData["card" + curIndexCard];
+            if (card["userPress"] == undefined) {
+                card["userPress"] = [];
+            }
+            if (card["team"] == "black") {
+                newSocketUpdate["gameState"] = "finish";
+                newSocketUpdate["description"] = "Выбрана чёрная карта." +
+                    ". Выиграла " + (socketData["runTeam"] == "blue" ? "красная" : "синяя") +
+                    " команда";
+            }
+            card["userPress"].push(key.split("_").pop());
+            card["selected"] = socketData["runTeam"];
+            newSocketUpdate["card" + curIndexCard] = card;
+        }
+    }
+    newSocketUpdate["runTeam"] = socketData["runTeam"] == "blue" ? "red" : "blue";
+    bridge.log(newSocketUpdate);
+    socketSave(newSocketUpdate);
 }

@@ -6,6 +6,99 @@
     "crossAxisAlignment": "start",
     "children": [
       {
+        "flutterType": "Padding",
+        "padding": "5,0,5,0",
+        "child": {
+          "flutterType": "Row",
+          "children": [
+            {
+              "flutterType": "Text",
+              "label": "Сейчас ход:"
+            },
+            {
+              "flutterType": "SizedBox",
+              "width": 10
+            },
+            {
+              "flutterType": "Container",
+              "padding": "10,5,10,5",
+              "decoration": {
+                "flutterType": "BoxDecoration",
+                "color": "${state(originSocketData.runTeam)}",
+                "borderRadius": 9
+              },
+              "child": {
+                "flutterType": "Text",
+                "label": "${state(originSocketData.runTeam)|map(blue,СИНИХ,red,КРАСНЫХ)}",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "color": "white"
+                }
+              }
+            },
+            {
+              "flutterType": "Expanded"
+            },
+            {
+              "flutterType": "Text",
+              "label": "Счёт:"
+            },
+            {
+              "flutterType": "SizedBox",
+              "width": 10
+            },
+            {
+              "flutterType": "Container",
+              "padding": "10,5,10,5",
+              "decoration": {
+                "flutterType": "BoxDecoration",
+                "color": "red",
+                "borderRadius": 9
+              },
+              "child": {
+                "flutterType": "Text",
+                "label": "${state(scoreRed)}",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "color": "white"
+                }
+              }
+            },
+            {
+              "flutterType": "SizedBox",
+              "width": 10
+            },
+            {
+              "flutterType": "Container",
+              "padding": "10,5,10,5",
+              "decoration": {
+                "flutterType": "BoxDecoration",
+                "color": "blue",
+                "borderRadius": 9
+              },
+              "child": {
+                "flutterType": "Text",
+                "label": "${state(scoreBlue)} / ${state(scoreAll)}",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "color": "white"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
         "flutterType": "State",
         "key": "gridWord"
       },
@@ -44,6 +137,64 @@
               "color": "white"
             }
           }
+        }
+      },
+      {
+        "flutterType": "Padding",
+        "padding": "5,0,5,0",
+        "child": {
+          "flutterType": "Row",
+          "crossAxisAlignment": "start",
+          "children": [
+            {
+              "flutterType": "Expanded",
+              "child": {
+                "flutterType": "Container",
+                "padding": "10,5,10,5",
+                "decoration": {
+                  "flutterType": "BoxDecoration",
+                  "color": "red",
+                  "borderRadius": 9
+                },
+                "child": {
+                  "flutterType": "Text",
+                  "label": "${state(users.red)}",
+                  "style": {
+                    "flutterType": "TextStyle",
+                    "fontSize": 12,
+                    "fontWeight": "bold",
+                    "color": "white"
+                  }
+                }
+              }
+            },
+            {
+              "flutterType": "SizedBox",
+              "width": 20
+            },
+            {
+              "flutterType": "Expanded",
+              "child": {
+                "flutterType": "Container",
+                "padding": "10,5,10,5",
+                "decoration": {
+                  "flutterType": "BoxDecoration",
+                  "color": "blue",
+                  "borderRadius": 9
+                },
+                "child": {
+                  "flutterType": "Text",
+                  "label": "${state(users.blue)}",
+                  "style": {
+                    "flutterType": "TextStyle",
+                    "fontSize": 12,
+                    "fontWeight": "bold",
+                    "color": "white"
+                  }
+                }
+              }
+            }
+          ]
         }
       }
     ]
