@@ -1,11 +1,17 @@
 if (bridge.args["switch"] == "destructor") {
     bridge.call('Show', {"case": "bottomNavigationBar"});
     bridge.log("Bottom SHOW 2!!!");
+    bridge.call("WakeLock", {
+        "lock": false
+    });
 }
 
 if (bridge.args["switch"] == "constructor") {
     bridge.log("GAME constructor");
     controlBottomNavigationBar();
+    bridge.call("WakeLock", {
+        "lock": true
+    });
 }
 
 if (bridge.args["switch"] == "onChange") {
