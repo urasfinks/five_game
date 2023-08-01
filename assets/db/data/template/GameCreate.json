@@ -59,7 +59,7 @@
           "onPressed": {
             "sysInvoke": "Share",
             "args": {
-              "data": "http://5gm.ru/JoinGame/${state(gameUuid,undefined)}",
+              "data": "${globalSettings(host,)}/link/ConnectCodeNames/code/${state(gameCode,undefined)}",
               "templateArguments": [
                 "data"
               ]

@@ -1,6 +1,6 @@
 if (bridge.args["switch"] == "constructor") {
+    //bridge.log("constructor");
     try {
-        //bridge.log("constructor");
         if (bridge.state["game_code"] == undefined) {
             bridge.call('Http', {
                 "uri": "/GenCodeUuid",
@@ -30,13 +30,7 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
                 "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"]
             }
         });
-        /*"card0": {
-                "label": "Hello world",
-                "team": "red", //red/blue/neutral/die
-                "selected": null, //blue/red/null
-                "selecting": "red" //Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
-            }*/
-        const value = {
+        var value = {
             "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
             "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],
             "owner": bridge.unique,
@@ -45,9 +39,9 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
 
         };
         value["user" + bridge.unique] = {
-            "name": "Ivan",
-            "team": "red",
-            "isCaptain": true
+            "name": "",
+            "team": "",
+            "role":"player"
         };
         bridge.call('DataSourceSet', {
             "beforeSync": true,

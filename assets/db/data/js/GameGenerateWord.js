@@ -91,8 +91,7 @@ if (bridge.args["switch"] == "generateWord") {
             list2.push({
                 "label": list[counter++],
                 "team": key, //red/blue/neutral/die
-                "selected": null, //blue/red/null
-                "selecting": null //red/blue Командные преднамеренья. Никак не будет влиять если isSelectedTeam уже выбран
+                "selected": null //blue/red/null
             });
         }
     }

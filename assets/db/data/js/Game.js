@@ -15,50 +15,54 @@ if (bridge.args["switch"] == "constructor") {
 }
 
 if (bridge.args["switch"] == "onChange") {
-    var lastState = bridge.state["originSocketData"] != undefined ? bridge.state["originSocketData"]["gameState"] : "";
-
-    var socketData = bridge.args["data"];
-
-    //bridge.log(socketData);
     var newStateData = {};
+    if (bridge.args["data"] == undefined || bridge.args["data"] == null) {
+        newStateData["SwitchKey"] = "error";
+    } else {
+        var lastState = bridge.state["originSocketData"] != undefined ? bridge.state["originSocketData"]["gameState"] : "";
 
-    //if (socketData["user" + bridge.unique] == undefined || socketData["user" + bridge.unique]["name"] == "") {
-    newStateData["SwitchKey"] = socketData["gameState"];
-    //}
-    if (socketData["user" + bridge.unique] != undefined) {
-        newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
-    }
+        var socketData = bridge.args["data"];
 
-    bridge.state["originSocketData"] = newStateData["originSocketData"] = socketData;
-    newStateData["listPersonUndefined"] = getListPerson(socketData, "undefined");
-    newStateData["listPersonRed"] = getListPerson(socketData, "red");
-    newStateData["listPersonBlue"] = getListPerson(socketData, "blue");
+        //bridge.log(socketData);
 
-    if (socketData["gameState"] == "team") {
-        newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
-    }
 
-    newStateData["toNextTeam"] = (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false";
-
-    if (["word", "run"].includes(socketData["gameState"])) {
-        if (isOwner(socketData)) {
-            newStateData["visibleGenerateWord"] = "true";
+        //if (socketData["user" + bridge.unique] == undefined || socketData["user" + bridge.unique]["name"] == "") {
+        newStateData["SwitchKey"] = socketData["gameState"];
+        //}
+        if (socketData["user" + bridge.unique] != undefined) {
+            newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
         }
-        newStateData["gridWord"] = getGridWord(socketData);
-    }
 
-    if (["run", "finish"].includes(socketData["gameState"])) {
-        calculateScore(socketData, newStateData);
-        newStateData["users"] = getUsers(socketData);
-    }
+        bridge.state["originSocketData"] = newStateData["originSocketData"] = socketData;
+        newStateData["listPersonUndefined"] = getListPerson(socketData, "undefined");
+        newStateData["listPersonRed"] = getListPerson(socketData, "red");
+        newStateData["listPersonBlue"] = getListPerson(socketData, "blue");
 
+        if (socketData["gameState"] == "team") {
+            newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
+        }
+
+        newStateData["toNextTeam"] = (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false";
+
+        if (["word", "run"].includes(socketData["gameState"])) {
+            if (isOwner(socketData)) {
+                newStateData["visibleGenerateWord"] = "true";
+            }
+            newStateData["gridWord"] = getGridWord(socketData);
+        }
+
+        if (["run", "finish"].includes(socketData["gameState"])) {
+            calculateScore(socketData, newStateData);
+            newStateData["users"] = getUsers(socketData);
+        }
+
+        if (lastState != socketData["gameState"]) {
+            onRenderFloatingActionButton();
+        }
+    }
     bridge.call('SetStateData', {
         "map": newStateData
     });
-
-    if (lastState != socketData["gameState"]) {
-        onRenderFloatingActionButton();
-    }
 }
 
 function getUsers(socketData) {

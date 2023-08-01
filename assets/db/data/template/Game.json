@@ -39,6 +39,11 @@
             "case": "finish",
             "flutterType": "Template",
             "src": "GameFinish"
+          },
+          {
+            "case": "error",
+            "flutterType": "Template",
+            "src": "GameError"
           }
         ]
       }
