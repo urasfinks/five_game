@@ -7,6 +7,11 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - image_cropper (0.0.4):
+    - Flutter
+    - TOCropViewController (~> 2.6.1)
+  - image_picker_ios (0.0.1):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -16,6 +21,7 @@ PODS:
   - sqflite (0.0.3):
     - Flutter
     - FMDB (>= 2.7.5)
+  - TOCropViewController (2.6.1)
   - uni_links (0.0.1):
     - Flutter
   - url_launcher_ios (0.0.1):
@@ -27,6 +33,8 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_js (from `.symlinks/plugins/flutter_js/ios`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
+  - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -37,6 +45,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FMDB
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   Flutter:
@@ -45,6 +54,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_js/ios"
   flutter_share:
     :path: ".symlinks/plugins/flutter_share/ios"
+  image_cropper:
+    :path: ".symlinks/plugins/image_cropper/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
@@ -63,9 +76,12 @@ SPEC CHECKSUMS:
   flutter_js: 95929d4e146e8ceb1c8e1889d8c2065c5d840076
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  image_cropper: a3291c624a953049bc6a02e1f8c8ceb162a24b25
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
