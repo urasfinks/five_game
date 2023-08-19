@@ -23,6 +23,11 @@
           {
             "case": "default",
             "flutterType": "Template",
+            "src": "GameDef"
+          },
+          {
+            "case": "team",
+            "flutterType": "Template",
             "src": "GameEnterName"
           },
           {

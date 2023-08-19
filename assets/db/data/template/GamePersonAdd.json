@@ -1,105 +1,102 @@
 {
-  "flutterType": "Padding",
+  "flutterType": "CustomScrollView",
   "padding": 20,
-  "child": {
-    "flutterType": "CustomScrollView",
-    "includeBottomOffset": true,
-    "onStateDataUpdate": true,
-    "children": [
-      {
-        "flutterType": "Text",
-        "label": "Новый участник:"
+  "includeBottomOffset": true,
+  "onStateDataUpdate": true,
+  "children": [
+    {
+      "flutterType": "Text",
+      "label": "Новый участник:"
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "TextField",
+      "keyboardType": "text",
+      "onChangedNotify": false,
+      "style": {
+        "flutterType": "TextStyle",
+        "fontSize": 17
       },
-      {
-        "flutterType": "SizedBox",
-        "height": 20
-      },
-      {
-        "flutterType": "TextField",
-        "keyboardType": "text",
-        "onChangedNotify": false,
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 17
+      "name": "Name",
+      "decoration": {
+        "flutterType": "InputDecoration",
+        "hintText": "Имя",
+        "contentPadding": "15,0,15,0",
+        "filled": true,
+        "fillColor": "schema:onBackground",
+        "border": {
+          "flutterType": "OutlineInputBorder"
         },
-        "name": "Name",
-        "decoration": {
-          "flutterType": "InputDecoration",
-          "hintText": "Имя",
-          "contentPadding": "15,0,15,0",
-          "filled": true,
-          "fillColor": "schema:onBackground",
-          "border": {
-            "flutterType": "OutlineInputBorder"
+        "suffixIconConstraints": {
+          "flutterType": "BoxConstraints",
+          "minHeight": 44,
+          "maxHeight": 44
+        },
+        "suffixIcon": {
+          "flutterType": "IconButton",
+          "padding": 0,
+          "icon": {
+            "flutterType": "Icon",
+            "color": "grey",
+            "src": "clear",
+            "size": 18
           },
-          "suffixIconConstraints": {
-            "flutterType": "BoxConstraints",
-            "minHeight": 44,
-            "maxHeight": 44
-          },
-          "suffixIcon": {
-            "flutterType": "IconButton",
-            "padding": 0,
-            "icon": {
-              "flutterType": "Icon",
-              "color": "grey",
-              "src": "clear",
-              "size": 18
-            },
-            "onPressed": {
-              "sysInvoke": "ResetTextController",
-              "args": {
-                "key": "Name"
-              }
-            }
-          },
-          "enabledBorder": {
-            "flutterType": "OutlineInputBorder",
-            "borderRadius": 10,
-            "borderSide": {
-              "flutterType": "BorderSide",
-              "color": "transparent",
-              "width": 0
-            }
-          },
-          "focusedBorder": {
-            "flutterType": "OutlineInputBorder",
-            "borderRadius": 10,
-            "borderSide": {
-              "flutterType": "BorderSide",
-              "color": "transparent",
-              "width": 0
+          "onPressed": {
+            "sysInvoke": "ResetTextController",
+            "args": {
+              "key": "Name"
             }
           }
-        }
-      },
-      {
-        "flutterType": "SizedBox",
-        "height": 20
-      },
-      {
-        "flutterType": "Button",
-        "minimumSize": "9999,44",
-        "backgroundColor": "blue",
-        "height": 44,
-        "onPressed": {
-          "jsInvoke": "Game.js",
-          "args": {
-            "includeStateData": true,
-            "includePageArgument": true,
-            "switch": "addPerson"
+        },
+        "enabledBorder": {
+          "flutterType": "OutlineInputBorder",
+          "borderRadius": 10,
+          "borderSide": {
+            "flutterType": "BorderSide",
+            "color": "transparent",
+            "width": 0
           }
         },
-        "child": {
-          "flutterType": "Text",
-          "label": "Добавить",
-          "style": {
-            "flutterType": "TextStyle",
-            "fontSize": 14,
-            "color": "white"
+        "focusedBorder": {
+          "flutterType": "OutlineInputBorder",
+          "borderRadius": 10,
+          "borderSide": {
+            "flutterType": "BorderSide",
+            "color": "transparent",
+            "width": 0
           }
         }
       }
-    ]
-  }
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Button",
+      "minimumSize": "9999,44",
+      "backgroundColor": "blue",
+      "height": 44,
+      "onPressed": {
+        "jsInvoke": "Game.js",
+        "args": {
+          "includeStateData": true,
+          "includePageArgument": true,
+          "switch": "addPerson"
+        }
+      },
+      "child": {
+        "flutterType": "Text",
+        "label": "Добавить",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 14,
+          "color": "white"
+        }
+      }
+    }
+  ]
 }

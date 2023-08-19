@@ -25,37 +25,30 @@ if (bridge.args["switch"] == "onChange") {
 
         //bridge.log(socketData);
 
-
         //if (socketData["user" + bridge.unique] == undefined || socketData["user" + bridge.unique]["name"] == "") {
         newStateData["SwitchKey"] = socketData["gameState"];
         //}
         if (socketData["user" + bridge.unique] != undefined) {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
         }
-
         bridge.state["originSocketData"] = newStateData["originSocketData"] = socketData;
         newStateData["listPersonUndefined"] = getListPerson(socketData, "undefined");
         newStateData["listPersonRed"] = getListPerson(socketData, "red");
         newStateData["listPersonBlue"] = getListPerson(socketData, "blue");
-
         if (socketData["gameState"] == "team") {
             newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
         }
-
         newStateData["toNextTeam"] = (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false";
-
         if (["word", "run"].includes(socketData["gameState"])) {
             if (isOwner(socketData)) {
                 newStateData["visibleGenerateWord"] = "true";
             }
             newStateData["gridWord"] = getGridWord(socketData);
         }
-
         if (["run", "finish"].includes(socketData["gameState"])) {
             calculateScore(socketData, newStateData);
             newStateData["users"] = getUsers(socketData);
         }
-
         if (lastState != socketData["gameState"]) {
             onRenderFloatingActionButton();
         }
@@ -180,7 +173,7 @@ function isCaptain(socketData) {
 }
 
 function getMyTeam(socketData) {
-    return socketData["user" + bridge.unique]["team"];
+    return socketData["user" + bridge.unique] != undefined ? socketData["user" + bridge.unique]["team"] : "watcher";
 }
 
 function getPersonList(socketData) {
@@ -371,7 +364,6 @@ function isMyGame(socketData) {
 }
 
 function getGridWord(socketData) {
-    //bridge.orientation
     var listCard = [];
     for (var key in socketData) {
         if (key.startsWith("card")) {
@@ -483,6 +475,7 @@ function getGridWord(socketData) {
                 }
                 //Если карточка выбрана - показываем её реальный цвет
                 var curColorCard = (isCapt || cardData["selected"] != null) ? colorCard[cardData["team"]] : "#efd9b9";
+                var curColorText = (isCapt || cardData["selected"] != null) ? colorText[cardData["team"]] : "black";
                 var block = {
                     "flutterType": "Container",
                     "height": 50,
@@ -508,7 +501,7 @@ function getGridWord(socketData) {
                                                 "flutterType": "TextStyle",
                                                 "fontSize": 12,
                                                 "fontWeight": "bold",
-                                                "color": isCapt ? colorText[cardData["team"]] : "#efd9b9"
+                                                "color": curColorText
                                             }
                                         }
                                     },

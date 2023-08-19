@@ -82,7 +82,8 @@
               },
               "child": {
                 "flutterType": "Text",
-                "label": "${state(scoreBlue)} / ${state(scoreAll)}",
+                "label": "${state(scoreBlue)}",
+                "labelAll": "/ ${state(scoreAll)}",
                 "style": {
                   "flutterType": "TextStyle",
                   "fontSize": 12,
@@ -141,7 +142,7 @@
       },
       {
         "flutterType": "Padding",
-        "padding": "5,0,5,0",
+        "padding": "5,20,5,0",
         "child": {
           "flutterType": "Row",
           "crossAxisAlignment": "start",
@@ -153,12 +154,11 @@
                 "padding": "10,5,10,5",
                 "decoration": {
                   "flutterType": "BoxDecoration",
-                  "color": "red",
                   "borderRadius": 9
                 },
                 "child": {
                   "flutterType": "Text",
-                  "label": "${state(users.red)}",
+                  "label": "Красные:\n\n${state(users.red)}",
                   "style": {
                     "flutterType": "TextStyle",
                     "fontSize": 12,
@@ -179,12 +179,11 @@
                 "padding": "10,5,10,5",
                 "decoration": {
                   "flutterType": "BoxDecoration",
-                  "color": "blue",
                   "borderRadius": 9
                 },
                 "child": {
                   "flutterType": "Text",
-                  "label": "${state(users.blue)}",
+                  "label": "Синие:\n\n${state(users.blue)}",
                   "style": {
                     "flutterType": "TextStyle",
                     "fontSize": 12,
