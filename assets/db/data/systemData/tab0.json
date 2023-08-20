@@ -9,12 +9,15 @@
     "flutterType": "Notify",
     "link": {"template": "Game.json"},
     "linkContainer": "root",
-    "linkDefault": {
-      "template": {
-        "flutterType": "Scaffold",
-        "appBar": {
-          "flutterType": "AppBar",
-          "title": {"flutterType": "Text", "label": "FiveGame"}
+    "context": {
+      "key": "Tab0",
+      "data": {
+        "template": {
+          "flutterType": "Scaffold",
+          "appBar": {
+            "flutterType": "AppBar",
+            "title": {"flutterType": "Text", "label": "FiveGame"}
+          }
         }
       }
     },
