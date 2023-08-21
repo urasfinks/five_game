@@ -13,7 +13,6 @@
     "link": {
       "template": "Account.json"
     },
-    "linkContainer": "root",
     "context": {
       "key": "Tab1",
       "data": {

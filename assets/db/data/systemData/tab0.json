@@ -8,7 +8,6 @@
   "content": {
     "flutterType": "Notify",
     "link": {"template": "Game.json"},
-    "linkContainer": "root",
     "context": {
       "key": "Tab0",
       "data": {
