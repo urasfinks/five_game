@@ -1,7 +1,7 @@
 if (bridge.args["switch"] == "constructor") {
     //bridge.log("constructor");
     try {
-        if (bridge.state["game_code"] == undefined) {
+        if (bridge.state["main"]["game_code"] == undefined) {
             bridge.call('Http', {
                 "uri": "/GenCodeUuid",
                 "method": "GET",

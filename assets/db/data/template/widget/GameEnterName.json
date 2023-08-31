@@ -16,7 +16,7 @@
       {
         "flutterType": "TextField",
         "keyboardType": "text",
-        "data": "${state(deviceName,)}",
+        "data": "${state(main,deviceName,)}",
         "onChangedNotify": false,
         "style": {
           "flutterType": "TextStyle",
@@ -161,7 +161,7 @@
       },
       {
         "flutterType": "Visibility",
-        "visible": "${state(toWordGameState, false)}",
+        "visible": "${state(main,toWordGameState, false)}",
         "child": {
           "flutterType": "Button",
           "minimumSize": "9999,44",

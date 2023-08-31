@@ -7,7 +7,7 @@
   },
   "content": {
     "flutterType": "Notify",
-    "link": {"template": "Game.json"},
+    "link": {"template": "HomePage.json"},
     "context": {
       "key": "Tab0",
       "data": {
@@ -20,43 +20,9 @@
         }
       }
     },
-    "socket": true,
-    "socketUuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
-    "subscribeOnChangeUuid": ["bdc67a1c-ec5e-4709-b96c-5b94a96e8c19"],
-    "onChangeUuid": {
-      "jsInvoke": "Game.js",
-      "args": {
-        "includeStateData": true,
-        "includePageArgument": true,
-        "switch": "onChange"
-      }
-    },
-    "onChangeOrientation": {
-      "jsInvoke": "Game.js",
-      "args": {
-        "includeStateData": true,
-        "includePageArgument": true,
-        "switch": "onChangeOrientation"
-      }
-    },
-    "destructor": {
-      "jsInvoke": "Game.js",
-      "args": {
-        "switch": "destructor"
-      }
-    },
-    "onActive": {
-      "jsInvoke": "Game.js",
-      "args": {
-        "includeStateData": true,
-        "includePageArgument": true,
-        "switch": "onChangeOrientation"
-      }
-    },
     "constructor": {
-      "jsInvoke": "Game.js",
+      "jsInvoke": "HomePage.js",
       "args": {
-        "includeStateData": true,
         "switch": "constructor"
       }
     }

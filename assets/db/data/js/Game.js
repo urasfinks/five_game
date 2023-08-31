@@ -19,7 +19,7 @@ if (bridge.args["switch"] == "onChange") {
     if (bridge.args["data"] == undefined || bridge.args["data"] == null) {
         newStateData["SwitchKey"] = "error";
     } else {
-        var lastState = bridge.state["originSocketData"] != undefined ? bridge.state["originSocketData"]["gameState"] : "";
+        var lastState = bridge.state["main"]["originSocketData"] != undefined ? bridge.state["main"]["originSocketData"]["gameState"] : "";
 
         var socketData = bridge.args["data"];
 
@@ -31,7 +31,7 @@ if (bridge.args["switch"] == "onChange") {
         if (socketData["user" + bridge.unique] != undefined) {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
         }
-        bridge.state["originSocketData"] = newStateData["originSocketData"] = socketData;
+        bridge.state["main"]["originSocketData"] = newStateData["originSocketData"] = socketData;
         newStateData["listPersonUndefined"] = getListPerson(socketData, "undefined");
         newStateData["listPersonRed"] = getListPerson(socketData, "red");
         newStateData["listPersonBlue"] = getListPerson(socketData, "blue");
@@ -114,10 +114,10 @@ function calculateScore(socketData, newStateData) {
 }
 
 if (bridge.args["switch"] == "addPerson") {
-    if (bridge.state["Name"] != undefined && bridge.state["Name"].trim() != "") {
+    if (bridge.state["main"]["Name"] != undefined && bridge.state["main"]["Name"].trim() != "") {
         var data = {};
         userBlock = {
-            name: bridge.state["Name"]
+            name: bridge.state["main"]["Name"]
         };
         data["user" + bridge.call('Uuid', {})["uuid"]] = userBlock;
         socketSave(data);
@@ -131,11 +131,11 @@ if (bridge.args["switch"] == "setName") {
     //bridge.log();
     var data = {};
     var userBlock = {};
-    var socketData = bridge.state["originSocketData"];
+    var socketData = bridge.state["main"]["originSocketData"];
     if (socketData["user" + bridge.unique] != undefined) {
         userBlock = socketData["user" + bridge.unique];
     }
-    userBlock["name"] = bridge.state["Name"];
+    userBlock["name"] = bridge.state["main"]["Name"];
     data["user" + bridge.unique] = userBlock;
     socketSave(data);
 }
@@ -241,7 +241,7 @@ if (bridge.args["switch"] == "onRenderFloatingActionButton") {
 }
 
 function onRenderFloatingActionButton() {
-    if (isOwner(bridge.state["originSocketData"]) && bridge.state["originSocketData"]["gameState"] == "team") {
+    if (isOwner(bridge.state["main"]["originSocketData"]) && bridge.state["main"]["originSocketData"]["gameState"] == "team") {
         bridge.call("Show", {
             "case": "actionButton",
             "template": {
@@ -270,12 +270,12 @@ function onRenderFloatingActionButton() {
 }
 
 if (bridge.args["switch"] == "savePerson") {
-    if (bridge.state["Name"] != undefined && bridge.state["Name"].trim() != "") {
+    if (bridge.state["main"]["Name"] != undefined && bridge.state["main"]["Name"].trim() != "") {
         var data = {};
         bridge.overlay(bridge.pageArgs["personValue"], {
-            "name": bridge.state["Name"],
-            "role": bridge.state["Role"],
-            "team": bridge.state["Team"],
+            "name": bridge.state["main"]["Name"],
+            "role": bridge.state["main"]["Role"],
+            "team": bridge.state["main"]["Team"],
         });
         data[bridge.pageArgs["personKey"]] = bridge.pageArgs["personValue"];
         socketSave(data);
@@ -289,7 +289,7 @@ if (bridge.args["switch"] == "onCardTap") {
     bridge.log(bridge.args["index"]);
     var data = {};
     var key = "tapCard_" + bridge.args["index"] + "_" + bridge.unique;
-    data[key] = bridge.state["originSocketData"][key] == undefined ? true : null;
+    data[key] = bridge.state["main"]["originSocketData"][key] == undefined ? true : null;
     socketSave(data);
 }
 
@@ -301,7 +301,7 @@ if (bridge.args["switch"] == "removePerson") {
 }
 
 if (bridge.args["switch"] == "randomize") {
-    var socketData = bridge.state["originSocketData"];
+    var socketData = bridge.state["main"]["originSocketData"];
     var listPerson = getPersonList(socketData);
     listPerson = shuffle(listPerson);
     var data = {};
@@ -335,7 +335,7 @@ function getRandomInt(min, max) {
 }
 
 if (bridge.args["switch"] == "onChangeOrientation") {
-    var socketData = bridge.state["originSocketData"];
+    var socketData = bridge.state["main"]["originSocketData"];
     if (socketData != undefined && ["word", "run"].includes(socketData["gameState"])) {
         bridge.call('SetStateData', {
             "map": {
@@ -591,7 +591,7 @@ function getFlagToWordGameState(socketData) {
 }
 
 if (bridge.args["switch"] == "toNextTeam") {
-    var socketData = bridge.state["originSocketData"];
+    var socketData = bridge.state["main"]["originSocketData"];
     var newSocketUpdate = {};
     for (var key in socketData) {
         if (key.startsWith("tapCard_")) {

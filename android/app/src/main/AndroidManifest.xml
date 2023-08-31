@@ -38,7 +38,7 @@
                 <!-- Include one or more domains that should be verified. -->
                 <data
                     android:host="5gm.ru"
-                    android:pathPattern="/link/.*"
+                    android:pathPattern="/deeplink/.*"
                     android:scheme="https" />
             </intent-filter>
         </activity>

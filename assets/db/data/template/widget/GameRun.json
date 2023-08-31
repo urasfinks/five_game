@@ -24,12 +24,12 @@
               "padding": "10,5,10,5",
               "decoration": {
                 "flutterType": "BoxDecoration",
-                "color": "${state(originSocketData.runTeam)}",
+                "color": "${state(main,originSocketData.runTeam)}",
                 "borderRadius": 9
               },
               "child": {
                 "flutterType": "Text",
-                "label": "${state(originSocketData.runTeam)|map(blue,СИНИХ,red,КРАСНЫХ)}",
+                "label": "${state(main,originSocketData.runTeam)|map(blue,СИНИХ,red,КРАСНЫХ)}",
                 "style": {
                   "flutterType": "TextStyle",
                   "fontSize": 12,
@@ -59,7 +59,7 @@
               },
               "child": {
                 "flutterType": "Text",
-                "label": "${state(scoreRed)}",
+                "label": "${state(main,scoreRed)}",
                 "style": {
                   "flutterType": "TextStyle",
                   "fontSize": 12,
@@ -82,8 +82,8 @@
               },
               "child": {
                 "flutterType": "Text",
-                "label": "${state(scoreBlue)}",
-                "labelAll": "/ ${state(scoreAll)}",
+                "label": "${state(main,scoreBlue)}",
+                "labelAll": "/ ${state(main,scoreAll)}",
                 "style": {
                   "flutterType": "TextStyle",
                   "fontSize": 12,
@@ -109,7 +109,7 @@
       },
       {
         "flutterType": "Visibility",
-        "visible": "${state(toNextTeam, false)}",
+        "visible": "${state(main,toNextTeam, false)}",
         "child": {
           "flutterType": "Button",
           "minimumSize": "9999,44",
@@ -158,7 +158,7 @@
                 },
                 "child": {
                   "flutterType": "Text",
-                  "label": "Красные:\n\n${state(users.red)}",
+                  "label": "Красные:\n\n${state(main,users.red)}",
                   "style": {
                     "flutterType": "TextStyle",
                     "fontSize": 12,
@@ -183,7 +183,7 @@
                 },
                 "child": {
                   "flutterType": "Text",
-                  "label": "Синие:\n\n${state(users.blue)}",
+                  "label": "Синие:\n\n${state(main,users.blue)}",
                   "style": {
                     "flutterType": "TextStyle",
                     "fontSize": 12,

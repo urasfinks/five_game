@@ -1,0 +1,64 @@
+{
+  "name": "main",
+  "tab": {
+    "flutterType": "BottomNavigationBarItem",
+    "icon": {"flutterType": "Icon", "src": "crop_5_4"},
+    "label": "Home"
+  },
+  "content": {
+    "flutterType": "Notify",
+    "link": {"template": "Game.json"},
+    "context": {
+      "key": "Tab0",
+      "data": {
+        "template": {
+          "flutterType": "Scaffold",
+          "appBar": {
+            "flutterType": "AppBar",
+            "title": {"flutterType": "Text", "label": "FiveGame"}
+          }
+        }
+      }
+    },
+    "socket": true,
+    "socketUuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
+    "subscribeOnChangeUuid": ["bdc67a1c-ec5e-4709-b96c-5b94a96e8c19"],
+    "onChangeUuid": {
+      "jsInvoke": "Game.js",
+      "args": {
+        "includeStateData": true,
+        "includePageArgument": true,
+        "switch": "onChange"
+      }
+    },
+    "onChangeOrientation": {
+      "jsInvoke": "Game.js",
+      "args": {
+        "includeStateData": true,
+        "includePageArgument": true,
+        "switch": "onChangeOrientation"
+      }
+    },
+    "destructor": {
+      "jsInvoke": "Game.js",
+      "args": {
+        "switch": "destructor"
+      }
+    },
+    "onActive": {
+      "jsInvoke": "Game.js",
+      "args": {
+        "includeStateData": true,
+        "includePageArgument": true,
+        "switch": "onChangeOrientation"
+      }
+    },
+    "constructor": {
+      "jsInvoke": "Game.js",
+      "args": {
+        "includeStateData": true,
+        "switch": "constructor"
+      }
+    }
+  }
+}

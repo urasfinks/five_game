@@ -9,7 +9,7 @@
       "keyboardType": "text",
       "onChangedNotify": false,
       "setState": true,
-      "data": "${pageArgument(personValue.name)}",
+      "data": "${pageArgs(personValue.name)}",
       "style": {
         "flutterType": "TextStyle",
         "fontSize": 17
@@ -85,7 +85,7 @@
       },
       "height": 45,
       "name": "Role",
-      "data": "${pageArgument(personValue.role)}",
+      "data": "${pageArgs(personValue.role)}",
       "children": [
         {
           "case": "player",
@@ -125,7 +125,7 @@
       },
       "height": 45,
       "name": "Team",
-      "data": "${pageArgument(personValue.team)}",
+      "data": "${pageArgs(personValue.team)}",
       "children": [
         {
           "case": "undefined",

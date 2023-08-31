@@ -31,7 +31,7 @@
         "padding": 20,
         "child": {
           "flutterType": "Text",
-          "label": "${state(gameCode,Загрузка...)}",
+          "label": "${state(main,gameCode,Загрузка...)}",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 48,
@@ -58,8 +58,8 @@
           "height": 44,
           "onPressed": {
             "sysInvoke": "Share",
-            "args": {
-              "data": "${globalSettings(host,)}/link/ConnectCodeNames/code/${state(gameCode,undefined)}",
+            "args": { 
+              "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectCodeNames/code/${state(main,gameCode,undefined)}",
               "templateArguments": [
                 "data"
               ]
