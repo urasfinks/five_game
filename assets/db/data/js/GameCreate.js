@@ -2,7 +2,7 @@ if (bridge.args["switch"] == "constructor") {
     //bridge.log("constructor");
     try {
         if (bridge.state["main"]["game_code"] == undefined) {
-            bridge.call('Http', {
+            bridge.call("Http", {
                 "uri": "/GenCodeUuid",
                 "method": "GET",
                 "body": {},
@@ -24,7 +24,7 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
     if (bridge.args["httpResponse"]["status"] == false) {
         bridge.alert(bridge.args["httpResponse"]["error"]);
     } else {
-        bridge.call('SetStateData', {
+        bridge.call("SetStateData", {
             "map": {
                 "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
                 "gameUuid": bridge.args["httpResponse"]["data"]["data"]["uuid"]
@@ -43,7 +43,7 @@ if (bridge.args["switch"] == "GenCodeUuidResponse") {
             "team": "",
             "role":"player"
         };
-        bridge.call('DataSourceSet', {
+        bridge.call("DataSourceSet", {
             "beforeSync": true,
             "updateIfExist": false,
             //"uuid": bridge.args["httpResponse"]["data"]["data"]["uuid"],

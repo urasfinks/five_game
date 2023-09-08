@@ -2,7 +2,6 @@
   "flutterType": "Scaffold",
   "body": {
     "flutterType": "CustomScrollView",
-    "includeBottomOffset": true,
     "onStateDataUpdate": true,
     "appBar": {
       "flutterType": "SliverAppBar",
@@ -58,7 +57,7 @@
           "height": 44,
           "onPressed": {
             "sysInvoke": "Share",
-            "args": { 
+            "args": {
               "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectCodeNames/code/${state(main,gameCode,undefined)}",
               "templateArguments": [
                 "data"

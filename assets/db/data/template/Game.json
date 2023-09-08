@@ -2,7 +2,6 @@
   "flutterType": "Scaffold",
   "body": {
     "flutterType": "CustomScrollView",
-    "includeBottomOffset": true,
     "onStateDataUpdate": true,
     "appBar": {
       "flutterType": "SliverAppBar",
@@ -20,11 +19,6 @@
         "ChildrenExtension": "StateDataSwitch",
         "key": "SwitchKey",
         "children": [
-          {
-            "case": "default",
-            "flutterType": "Template",
-            "src": "GameDef"
-          },
           {
             "case": "team",
             "flutterType": "Template",

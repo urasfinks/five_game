@@ -19,12 +19,6 @@
           }
         }
       }
-    },
-    "constructor": {
-      "jsInvoke": "HomePage.js",
-      "args": {
-        "switch": "constructor"
-      }
     }
   }
 }

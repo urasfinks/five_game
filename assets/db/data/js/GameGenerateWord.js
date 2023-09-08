@@ -119,7 +119,7 @@ function shuffle(array) {
 
 function socketSave(data) {
     var socketUuid = bridge.pageArgs["socketUuid"];
-    bridge.call('DataSourceSet', {
+    bridge.call("DataSourceSet", {
         "debugTransaction": true,
         "type": "socket",
         "uuid": socketUuid,

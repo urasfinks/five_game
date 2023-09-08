@@ -2,7 +2,6 @@
   "flutterType": "Scaffold",
   "body": {
     "flutterType": "CustomScrollView",
-    "onStateDataUpdate": true,
     "appBar": {
       "flutterType": "SliverAppBar",
       "title": {

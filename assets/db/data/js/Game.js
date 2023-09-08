@@ -1,5 +1,5 @@
 if (bridge.args["switch"] == "destructor") {
-    bridge.call('Show', {"case": "bottomNavigationBar"});
+    bridge.call("Show", {"case": "bottomNavigationBar"});
     bridge.log("Bottom SHOW 2!!!");
     bridge.call("WakeLock", {
         "lock": false
@@ -53,7 +53,7 @@ if (bridge.args["switch"] == "onChange") {
             onRenderFloatingActionButton();
         }
     }
-    bridge.call('SetStateData', {
+    bridge.call("SetStateData", {
         "map": newStateData
     });
 }
@@ -119,7 +119,7 @@ if (bridge.args["switch"] == "addPerson") {
         userBlock = {
             name: bridge.state["main"]["Name"]
         };
-        data["user" + bridge.call('Uuid', {})["uuid"]] = userBlock;
+        data["user" + bridge.call("Uuid", {})["uuid"]] = userBlock;
         socketSave(data);
         bridge.call("NavigatorPop", {});
     } else {
@@ -142,7 +142,7 @@ if (bridge.args["switch"] == "setName") {
 
 function socketSave(data) {
     var socketUuid = bridge.pageArgs["socketUuid"];
-    bridge.call('DataSourceSet', {
+    bridge.call("DataSourceSet", {
         "debugTransaction": true,
         "type": "socket",
         "uuid": socketUuid,
@@ -152,7 +152,7 @@ function socketSave(data) {
 
 function socketExtend(action) {
     var socketUuid = bridge.pageArgs["socketUuid"];
-    bridge.call('Http', {
+    bridge.call("Http", {
         "uri": "/SocketExtend",
         "method": "POST",
         "body": {
@@ -337,7 +337,7 @@ function getRandomInt(min, max) {
 if (bridge.args["switch"] == "onChangeOrientation") {
     var socketData = bridge.state["main"]["originSocketData"];
     if (socketData != undefined && ["word", "run"].includes(socketData["gameState"])) {
-        bridge.call('SetStateData', {
+        bridge.call("SetStateData", {
             "map": {
                 "gridWord": getGridWord(socketData)
             }
@@ -352,9 +352,9 @@ if (bridge.args["switch"] == "onChangeOrientation") {
 function controlBottomNavigationBar() {
     if (bridge.pageActive) {
         if (bridge.orientation == "portrait") {
-            bridge.call('Show', {"case": "bottomNavigationBar"});
+            bridge.call("Show", {"case": "bottomNavigationBar"});
         } else {
-            bridge.call('Hide', {"case": "bottomNavigationBar"});
+            bridge.call("Hide", {"case": "bottomNavigationBar"});
         }
     }
 }

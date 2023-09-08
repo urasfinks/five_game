@@ -1,7 +1,6 @@
 {
   "flutterType": "CustomScrollView",
   "padding": 20,
-  "includeBottomOffset": true,
   "onStateDataUpdate": true,
   "children": [
     {
@@ -45,7 +44,7 @@
             "size": 18
           },
           "onPressed": {
-            "sysInvoke": "ResetTextController",
+            "sysInvoke": "Controller",
             "args": {
               "key": "Name"
             }
