@@ -1,101 +1,104 @@
 {
-  "flutterType": "CustomScrollView",
+  "flutterType": "Container",
   "padding": 20,
-  "onStateDataUpdate": true,
-  "children": [
-    {
-      "flutterType": "Text",
-      "label": "Новый участник:"
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "flutterType": "TextField",
-      "keyboardType": "text",
-      "onChangedNotify": false,
-      "style": {
-        "flutterType": "TextStyle",
-        "fontSize": 17
-      },
-      "name": "Name",
-      "decoration": {
-        "flutterType": "InputDecoration",
-        "hintText": "Имя",
-        "contentPadding": "15,0,15,0",
-        "filled": true,
-        "fillColor": "schema:onBackground",
-        "border": {
-          "flutterType": "OutlineInputBorder"
-        },
-        "suffixIconConstraints": {
-          "flutterType": "BoxConstraints",
-          "minHeight": 44,
-          "maxHeight": 44
-        },
-        "suffixIcon": {
-          "flutterType": "IconButton",
-          "padding": 0,
-          "icon": {
-            "flutterType": "Icon",
-            "color": "grey",
-            "src": "clear",
-            "size": 18
-          },
-          "onPressed": {
-            "sysInvoke": "Controller",
-            "args": {
-              "key": "Name"
-            }
-          }
-        },
-        "enabledBorder": {
-          "flutterType": "OutlineInputBorder",
-          "borderRadius": 10,
-          "borderSide": {
-            "flutterType": "BorderSide",
-            "color": "transparent",
-            "width": 0
-          }
-        },
-        "focusedBorder": {
-          "flutterType": "OutlineInputBorder",
-          "borderRadius": 10,
-          "borderSide": {
-            "flutterType": "BorderSide",
-            "color": "transparent",
-            "width": 0
-          }
-        }
-      }
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "flutterType": "Button",
-      "minimumSize": "9999,44",
-      "backgroundColor": "blue",
-      "height": 44,
-      "onPressed": {
-        "jsInvoke": "Game.js",
-        "args": {
-          "includeStateData": true,
-          "includePageArgument": true,
-          "switch": "addPerson"
-        }
-      },
-      "child": {
+  "child": {
+    "flutterType": "Column",
+    "children": [
+      {
         "flutterType": "Text",
-        "label": "Добавить",
+        "label": "Новый участник:"
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "TextField",
+        "keyboardType": "text",
+        "autofocus": true,
+        "onChangedSetStateNotify": false,
         "style": {
           "flutterType": "TextStyle",
-          "fontSize": 14,
-          "color": "white"
+          "fontSize": 17
+        },
+        "name": "Name",
+        "decoration": {
+          "flutterType": "InputDecoration",
+          "hintText": "Имя",
+          "contentPadding": "15,0,15,0",
+          "filled": true,
+          "fillColor": "schema:onBackground",
+          "border": {
+            "flutterType": "OutlineInputBorder"
+          },
+          "suffixIconConstraints": {
+            "flutterType": "BoxConstraints",
+            "minHeight": 44,
+            "maxHeight": 44
+          },
+          "suffixIcon": {
+            "flutterType": "IconButton",
+            "padding": 0,
+            "icon": {
+              "flutterType": "Icon",
+              "color": "grey",
+              "src": "clear",
+              "size": 18
+            },
+            "onPressed": {
+              "sysInvoke": "Controller",
+              "args": {
+                "controller": "Name",
+                "case": "reset"
+              }
+            }
+          },
+          "enabledBorder": {
+            "flutterType": "OutlineInputBorder",
+            "borderRadius": 10,
+            "borderSide": {
+              "flutterType": "BorderSide",
+              "color": "transparent",
+              "width": 0
+            }
+          },
+          "focusedBorder": {
+            "flutterType": "OutlineInputBorder",
+            "borderRadius": 10,
+            "borderSide": {
+              "flutterType": "BorderSide",
+              "color": "transparent",
+              "width": 0
+            }
+          }
+        }
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "Button",
+        "minimumSize": "9999,44",
+        "backgroundColor": "blue",
+        "height": 44,
+        "onPressed": {
+          "jsInvoke": "Game.js",
+          "args": {
+            "includeAll": true,
+            "switch": "addPerson"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Добавить",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
         }
       }
-    }
-  ]
+    ]
+  }
 }

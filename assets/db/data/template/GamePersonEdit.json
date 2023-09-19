@@ -1,217 +1,219 @@
 {
-  "flutterType": "CustomScrollView",
+  "flutterType": "Container",
   "padding": 20,
   "onStateDataUpdate": true,
-  "children": [
-    {
-      "flutterType": "TextField",
-      "keyboardType": "text",
-      "onChangedNotify": false,
-      "setState": true,
-      "data": "${pageArgs(personValue.name)}",
-      "style": {
-        "flutterType": "TextStyle",
-        "fontSize": 17
-      },
-      "name": "Name",
-      "decoration": {
-        "flutterType": "InputDecoration",
-        "hintText": "Имя",
-        "contentPadding": "15,0,15,0",
-        "filled": true,
-        "fillColor": "schema:onBackground",
-        "border": {
-          "flutterType": "OutlineInputBorder"
+  "child": {
+    "flutterType": "Column",
+    "children": [
+      {
+        "flutterType": "TextField",
+        "keyboardType": "text",
+        "onChangedSetStateNotify": false,
+        "setState": true,
+        "data": "${pageArgs(personValue.name)}",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17
         },
-        "suffixIconConstraints": {
-          "flutterType": "BoxConstraints",
-          "minHeight": 44,
-          "maxHeight": 44
-        },
-        "suffixIcon": {
-          "flutterType": "IconButton",
-          "padding": 0,
-          "icon": {
-            "flutterType": "Icon",
-            "color": "grey",
-            "src": "clear",
-            "size": 18
+        "name": "Name",
+        "decoration": {
+          "flutterType": "InputDecoration",
+          "hintText": "Имя",
+          "contentPadding": "15,0,15,0",
+          "filled": true,
+          "fillColor": "schema:onBackground",
+          "border": {
+            "flutterType": "OutlineInputBorder"
           },
-          "onPressed": {
-            "sysInvoke": "Controller",
-            "args": {
-              "key": "Name"
+          "suffixIconConstraints": {
+            "flutterType": "BoxConstraints",
+            "minHeight": 44,
+            "maxHeight": 44
+          },
+          "suffixIcon": {
+            "flutterType": "IconButton",
+            "padding": 0,
+            "icon": {
+              "flutterType": "Icon",
+              "color": "grey",
+              "src": "clear",
+              "size": 18
+            },
+            "onPressed": {
+              "sysInvoke": "Controller",
+              "args": {
+                "controller": "Name",
+                "case": "reset"
+              }
             }
-          }
-        },
-        "enabledBorder": {
-          "flutterType": "OutlineInputBorder",
-          "borderRadius": 10,
-          "borderSide": {
-            "flutterType": "BorderSide",
-            "color": "transparent",
-            "width": 0
-          }
-        },
-        "focusedBorder": {
-          "flutterType": "OutlineInputBorder",
-          "borderRadius": 10,
-          "borderSide": {
-            "flutterType": "BorderSide",
-            "color": "transparent",
-            "width": 0
-          }
-        }
-      }
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "flutterType": "SegmentControl",
-      "setState": true,
-      "onChangedNotify": false,
-      "decoration": {
-        "flutterType": "BoxDecoration",
-        "color": "schema:onBackground",
-        "borderRadius": 10
-      },
-      "thumbDecoration": {
-        "flutterType": "BoxDecoration",
-        "color": "schema:background",
-        "borderRadius": 9
-      },
-      "height": 45,
-      "name": "Role",
-      "data": "${pageArgs(personValue.role)}",
-      "children": [
-        {
-          "case": "player",
-          "flutterType": "Container",
-          "child": {
-            "flutterType": "Text",
-            "label": "Участник"
-          }
-        },
-        {
-          "case": "captain",
-          "flutterType": "Container",
-          "child": {
-            "flutterType": "Text",
-            "label": "Капитан"
-          }
-        }
-      ]
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "flutterType": "SegmentControl",
-      "setState": true,
-      "onChangedNotify": false,
-      "decoration": {
-        "flutterType": "BoxDecoration",
-        "color": "schema:onBackground",
-        "borderRadius": 10
-      },
-      "thumbDecoration": {
-        "flutterType": "BoxDecoration",
-        "color": "schema:background",
-        "borderRadius": 9
-      },
-      "height": 45,
-      "name": "Team",
-      "data": "${pageArgs(personValue.team)}",
-      "children": [
-        {
-          "case": "undefined",
-          "flutterType": "Container",
-          "child": {
-            "flutterType": "Text",
-            "label": "-"
-          }
-        },
-        {
-          "case": "red",
-          "flutterType": "Container",
-          "child": {
-            "flutterType": "Text",
-            "label": "Красная"
-          }
-        },
-        {
-          "case": "blue",
-          "flutterType": "Container",
-          "child": {
-            "flutterType": "Text",
-            "label": "Синяя"
-          }
-        }
-      ]
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "flutterType": "Button",
-      "minimumSize": "9999,44",
-      "backgroundColor": "blue",
-      "height": 44,
-      "onPressed": {
-        "jsInvoke": "Game.js",
-        "args": {
-          "includeStateData": true,
-          "includePageArgument": true,
-          "switch": "savePerson"
-        }
-      },
-      "child": {
-        "flutterType": "Text",
-        "label": "Сохранить",
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 14,
-          "color": "white"
-        }
-      }
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "flutterType": "Button",
-      "minimumSize": "9999,44",
-      "backgroundColor": "schema:onBackground",
-      "height": 44,
-      "onPressed": {
-        "sysInvoke": "Alert",
-        "args": {
-          "confirmRemove": true,
-          "backgroundColor": "schema:onBackground",
-          "onPressed": {
-            "jsInvoke": "Game.js",
-            "args": {
-              "includeStateData": true,
-              "includePageArgument": true,
-              "switch": "removePerson"
+          },
+          "enabledBorder": {
+            "flutterType": "OutlineInputBorder",
+            "borderRadius": 10,
+            "borderSide": {
+              "flutterType": "BorderSide",
+              "color": "transparent",
+              "width": 0
+            }
+          },
+          "focusedBorder": {
+            "flutterType": "OutlineInputBorder",
+            "borderRadius": 10,
+            "borderSide": {
+              "flutterType": "BorderSide",
+              "color": "transparent",
+              "width": 0
             }
           }
         }
       },
-      "child": {
-        "flutterType": "Text",
-        "label": "Удалить",
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 14,
-          "color": "white"
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "SegmentControl",
+        "setState": true,
+        "onChangedSetStateNotify": false,
+        "decoration": {
+          "flutterType": "BoxDecoration",
+          "color": "schema:onBackground",
+          "borderRadius": 10
+        },
+        "thumbDecoration": {
+          "flutterType": "BoxDecoration",
+          "color": "schema:background",
+          "borderRadius": 9
+        },
+        "height": 45,
+        "name": "Role",
+        "data": "${pageArgs(personValue.role)}",
+        "children": [
+          {
+            "case": "player",
+            "flutterType": "Container",
+            "child": {
+              "flutterType": "Text",
+              "label": "Участник"
+            }
+          },
+          {
+            "case": "captain",
+            "flutterType": "Container",
+            "child": {
+              "flutterType": "Text",
+              "label": "Капитан"
+            }
+          }
+        ]
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "SegmentControl",
+        "setState": true,
+        "onChangedSetStateNotify": false,
+        "decoration": {
+          "flutterType": "BoxDecoration",
+          "color": "schema:onBackground",
+          "borderRadius": 10
+        },
+        "thumbDecoration": {
+          "flutterType": "BoxDecoration",
+          "color": "schema:background",
+          "borderRadius": 9
+        },
+        "height": 45,
+        "name": "Team",
+        "data": "${pageArgs(personValue.team)}",
+        "children": [
+          {
+            "case": "undefined",
+            "flutterType": "Container",
+            "child": {
+              "flutterType": "Text",
+              "label": "-"
+            }
+          },
+          {
+            "case": "red",
+            "flutterType": "Container",
+            "child": {
+              "flutterType": "Text",
+              "label": "Красная"
+            }
+          },
+          {
+            "case": "blue",
+            "flutterType": "Container",
+            "child": {
+              "flutterType": "Text",
+              "label": "Синяя"
+            }
+          }
+        ]
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "Button",
+        "minimumSize": "9999,44",
+        "backgroundColor": "blue",
+        "height": 44,
+        "onPressed": {
+          "jsInvoke": "GameTeam.js",
+          "args": {
+            "includeAll": true,
+            "switch": "savePerson"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Сохранить",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
+        }
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "Button",
+        "minimumSize": "9999,44",
+        "backgroundColor": "schema:onBackground",
+        "height": 44,
+        "onPressed": {
+          "sysInvoke": "Alert",
+          "args": {
+            "confirmRemove": true,
+            "backgroundColor": "schema:onBackground",
+            "onPressed": {
+              "jsInvoke": "GameTeam.js",
+              "args": {
+                "includeAll": true,
+                "switch": "removePerson"
+              }
+            }
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Удалить",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
         }
       }
-    }
-  ]
+    ]
+  }
 }
