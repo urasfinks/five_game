@@ -1,0 +1,31 @@
+{
+  "flutterType": "Scaffold",
+  "body": {
+    "flutterType": "CustomScrollView",
+    "onStateDataUpdate": true,
+    "padding": "10,20,10,0",
+    "appBar": {
+      "flutterType": "SliverAppBar",
+      "title": {
+        "flutterType": "Text",
+        "label": "Мои игры",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17
+        }
+      }
+    },
+    "children": [
+      {
+        "ChildrenExtension": "Iterator",
+        "dataType": "state",
+        "key": "listGame",
+        "theme": "ButtonGroup",
+        "ifDataEmpty": {
+          "flutterType": "Text",
+          "label": "У вас пока нет игр"
+        }
+      }
+    ]
+  }
+}
