@@ -1,0 +1,103 @@
+{
+  "flutterType": "Container",
+  "padding": "10,20,10,0",
+  "child": {
+    "flutterType": "Column",
+    "mainAxisSize": "min",
+    "children": [
+      {
+        "flutterType": "Text",
+        "label": "Введите код для подключения к игре"
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 30
+      },
+      {
+        "flutterType": "TextField",
+        "autofocus": true,
+        "keyboardType": "number",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17
+        },
+        "name": "CodeValue",
+        "decoration": {
+          "flutterType": "InputDecoration",
+          "hintText": "Код",
+          "contentPadding": "15,0,15,0",
+          "filled": true,
+          "fillColor": "schema:onPrimary",
+          "border": {
+            "flutterType": "OutlineInputBorder"
+          },
+          "suffixIconConstraints": {
+            "flutterType": "BoxConstraints",
+            "minHeight": 44,
+            "maxHeight": 44
+          },
+          "suffixIcon": {
+            "flutterType": "IconButton",
+            "padding": 0,
+            "icon": {
+              "flutterType": "Icon",
+              "color": "grey",
+              "src": "clear",
+              "size": 18
+            },
+            "onPressed": {
+              "sysInvoke": "Controller",
+              "args": {
+                "controller": "CodeValue",
+                "case": "reset"
+              }
+            }
+          },
+          "enabledBorder": {
+            "flutterType": "OutlineInputBorder",
+            "borderRadius": 10,
+            "borderSide": {
+              "flutterType": "BorderSide",
+              "color": "transparent",
+              "width": 0
+            }
+          },
+          "focusedBorder": {
+            "flutterType": "OutlineInputBorder",
+            "borderRadius": 10,
+            "borderSide": {
+              "flutterType": "BorderSide",
+              "color": "transparent",
+              "width": 0
+            }
+          }
+        }
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "flutterType": "Button",
+        "backgroundColor": "blue",
+        "onPressed": {
+          "jsInvoke": "HomePage.js",
+          "args": {
+            "includeAll": true,
+            "switch": "requestConfirmCode"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Подтвердить",
+          "textAlign": "center",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
+        }
+      }
+    ]
+  }
+}
