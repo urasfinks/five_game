@@ -3,11 +3,12 @@
   "body": {
     "flutterType": "CustomScrollView",
     "onStateDataUpdate": true,
+    "padding": "10,20,10,0",
     "appBar": {
       "flutterType": "SliverAppBar",
       "title": {
         "flutterType": "Text",
-        "label": "CODENAMES",
+        "label": "CodeNames",
         "style": {
           "flutterType": "TextStyle",
           "fontSize": 17
@@ -17,17 +18,17 @@
     "children": [
       {
         "ChildrenExtension": "StateDataSwitch",
-        "key": "SwitchKey",
+        "key": "switchKey",
         "children": [
           {
             "case": "team",
             "flutterType": "Template",
-            "src": "GameEnterName"
+            "src": "GameTeam"
           },
           {
             "case": "word",
             "flutterType": "Template",
-            "src": "GameSelectWord"
+            "src": "GameWord"
           },
           {
             "case": "run",
@@ -47,13 +48,5 @@
         ]
       }
     ]
-  },
-  "onRenderFloatingActionButton": {
-    "jsInvoke": "Game.js",
-    "args": {
-      "includeStateData": true,
-      "includePageArgument": true,
-      "switch": "onRenderFloatingActionButton"
-    }
   }
 }

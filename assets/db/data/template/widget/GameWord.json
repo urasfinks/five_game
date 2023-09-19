@@ -1,0 +1,63 @@
+{
+  "flutterType": "Column",
+  "crossAxisAlignment": "start",
+  "children": [
+    {
+      "flutterType": "State",
+      "key": "gridWord"
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Button",
+      "minimumSize": "9999,44",
+      "backgroundColor": "blue",
+      "height": 44,
+      "onPressed": {
+        "jsInvoke": "GameStateWord.js",
+        "args": {
+          "includeAll": true,
+          "switch": "generateWord"
+        }
+      },
+      "child": {
+        "flutterType": "Text",
+        "label": "Сгенерировать слова",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 14,
+          "color": "white"
+        }
+      }
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Button",
+      "minimumSize": "9999,44",
+      "backgroundColor": "blue",
+      "height": 44,
+      "onPressed": {
+        "jsInvoke": "Game.js",
+        "args": {
+          "includeAll": true,
+          "switch": "changeGameState",
+          "gameState": "run"
+        }
+      },
+      "child": {
+        "flutterType": "Text",
+        "label": "Начать игру",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 14,
+          "color": "white"
+        }
+      }
+    }
+  ]
+}

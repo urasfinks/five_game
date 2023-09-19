@@ -1,0 +1,194 @@
+{
+  "flutterType": "Column",
+  "crossAxisAlignment": "start",
+  "children": [
+    {
+      "flutterType": "Padding",
+      "padding": "6,0,6,20",
+      "child": {
+        "flutterType": "Text",
+        "label": "Моё имя в игре: ",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "color": "schema:secondary"
+        }
+      }
+    },
+    {
+      "flutterType": "TextField",
+      "keyboardType": "text",
+      "data": "${state(main,deviceName,)|ifNotExist(\\$\\{storage(accountName,)|ifNotExist(1)\\})|template()}",
+      "onChangedSetStateNotify": false,
+      "style": {
+        "flutterType": "TextStyle",
+        "fontSize": 17
+      },
+      "name": "Name",
+      "decoration": {
+        "flutterType": "InputDecoration",
+        "hintText": "Имя",
+        "contentPadding": "15,0,15,0",
+        "filled": true,
+        "fillColor": "schema:onBackground",
+        "border": {
+          "flutterType": "OutlineInputBorder"
+        },
+        "suffixIconConstraints": {
+          "flutterType": "BoxConstraints",
+          "minHeight": 44,
+          "maxHeight": 44
+        },
+        "suffixIcon": {
+          "flutterType": "IconButton",
+          "padding": 0,
+          "icon": {
+            "flutterType": "Icon",
+            "color": "grey",
+            "src": "clear",
+            "size": 18
+          },
+          "onPressed": {
+            "sysInvoke": "Controller",
+            "args": {
+              "controller": "Name",
+              "case": "reset"
+            }
+          }
+        },
+        "enabledBorder": {
+          "flutterType": "OutlineInputBorder",
+          "borderRadius": 10,
+          "borderSide": {
+            "flutterType": "BorderSide",
+            "color": "transparent",
+            "width": 0
+          }
+        },
+        "focusedBorder": {
+          "flutterType": "OutlineInputBorder",
+          "borderRadius": 10,
+          "borderSide": {
+            "flutterType": "BorderSide",
+            "color": "transparent",
+            "width": 0
+          }
+        }
+      },
+      "onEditingComplete": {
+        "jsInvoke": "GameTeam.js",
+        "args": {
+          "includeAll": true,
+          "switch": "setName"
+        }
+      }
+    },
+    {
+      "flutterType": "Padding",
+      "padding": "6,20,6,20",
+      "child": {
+        "flutterType": "Text",
+        "label": "Участники игры: ",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "color": "schema:secondary"
+        }
+      }
+    },
+    {
+      "ChildrenExtension": "Iterator",
+      "dataType": "state",
+      "key": "listPersonUndefined",
+      "theme": "ButtonGroup"
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "ChildrenExtension": "Iterator",
+      "dataType": "state",
+      "key": "listPersonRed",
+      "theme": "ButtonGroup"
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "ChildrenExtension": "Iterator",
+      "dataType": "state",
+      "key": "listPersonBlue",
+      "theme": "ButtonGroup"
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Button",
+      "minimumSize": "9999,44",
+      "backgroundColor": "schema:onPrimary",
+      "height": 44,
+      "onPressed": {
+        "sysInvoke": "Alert",
+        "args": {
+          "confirm": true,
+          "actionLabel": "Перемешать",
+          "backgroundColor": "schema:onBackground",
+          "actionBackgroundColor": "blue",
+          "onPressed": {
+            "jsInvoke": "GameTeam.js",
+            "args": {
+              "includeAll": true,
+              "switch": "randomize"
+            }
+          }
+        }
+      },
+      "child": {
+        "flutterType": "Text",
+        "label": "Случайно перемешать",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 14,
+          "color": "schema:primary"
+        }
+      }
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Visibility",
+      "visible": "${state(main,toWordGameState, false)}",
+      "child": {
+        "flutterType": "Button",
+        "minimumSize": "9999,44",
+        "backgroundColor": "blue",
+        "height": 44,
+        "onPressed": {
+          "jsInvoke": "Game.js",
+          "args": {
+            "includeAll": true,
+            "switch": "changeGameState",
+            "gameState": "word"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Продолжить...",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
+        }
+      }
+    }
+  ]
+}
