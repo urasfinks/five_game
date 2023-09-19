@@ -1,4 +1,4 @@
-if (bridge.args["switch"] == "generateWord") {
+if (bridge.args["switch"] === "generateWord") {
     var list = [
         "Ноги",
         "Рупор",
@@ -75,7 +75,7 @@ if (bridge.args["switch"] == "generateWord") {
         "Выпивка",
         "Кульминация"
     ];
-    shuffle(list);
+    bridge.shuffle(list);
     var list2 = [];
     var all = 28;
     var med = Math.floor((all - 1) / 3);
@@ -95,26 +95,12 @@ if (bridge.args["switch"] == "generateWord") {
             });
         }
     }
-    shuffle(list2);
+    bridge.shuffle(list2);
     var data = {};
     for (var i = 0; i < all; i++) {
         data["card" + i] = list2[i];
     }
     socketSave(data);
-}
-
-function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-        // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-    }
-    return array;
 }
 
 function socketSave(data) {
