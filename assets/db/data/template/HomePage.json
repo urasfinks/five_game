@@ -2,6 +2,7 @@
   "flutterType": "Scaffold",
   "body": {
     "flutterType": "CustomScrollView",
+    "onStateDataUpdate": true,
     "appBar": {
       "flutterType": "SliverAppBar",
       "title": {
@@ -48,25 +49,29 @@
                     "theme": "ButtonGroup",
                     "list": [
                       {
-                        "label": "Создать игру",
-                        "templateWidgetSrc": "ButtonIcon",
+                        "label": "Создать новую игру",
+                        "templateWidgetSrc": "IteratorButton",
                         "onTap": {
-                          "sysInvoke": "NavigatorPush",
+                          "jsInvoke": "HomePage.js",
                           "args": {
-                            "uuid": "GameCreate.json",
-                            "constructor": {
-                              "jsInvoke": "GameCreate.js",
-                              "args": {
-                                "includeStateData": true,
-                                "switch": "constructor"
-                              }
-                            }
+                            "includeAll": true,
+                            "switch": "createGame"
                           }
                         }
                       },
                       {
                         "label": "Присоединиться к игре",
-                        "templateWidgetSrc": "ButtonIcon"
+                        "templateWidgetSrc": "IteratorButton",
+                        "onTap": {
+                          "sysInvoke": "NavigatorPush",
+                          "args": {
+                            "type": "bottomSheet",
+                            "height": 200,
+                            "link": {
+                              "template": "GameCode.json"
+                            }
+                          }
+                        }
                       }
                     ]
                   }
@@ -89,8 +94,22 @@
                   "theme": "ButtonGroup",
                   "list": [
                     {
-                      "label": "История игр",
-                      "templateWidgetSrc": "ButtonIcon"
+                      "label": "Мои игры",
+                      "templateWidgetSrc": "IteratorButtonExtraIcon",
+                      "labelExtra": "${state(main,countGameNotFinish,)}",
+                      "onTap": {
+                        "sysInvoke": "NavigatorPush",
+                        "args": {
+                          "uuid": "MyGame.json",
+                          "constructor": {
+                            "jsInvoke": "MyGame.js",
+                            "args": {
+                              "includeAll": true,
+                              "switch": "constructor"
+                            }
+                          }
+                        }
+                      }
                     }
                   ]
                 }
