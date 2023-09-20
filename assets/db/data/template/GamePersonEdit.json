@@ -9,7 +9,7 @@
         "flutterType": "TextField",
         "keyboardType": "text",
         "onChangedSetStateNotify": false,
-        "setState": true,
+        "onInitSetState": true,
         "data": "${pageArgs(personValue.name)}",
         "style": {
           "flutterType": "TextStyle",
@@ -73,7 +73,7 @@
       },
       {
         "flutterType": "SegmentControl",
-        "setState": true,
+        "onInitSetState": true,
         "onChangedSetStateNotify": false,
         "decoration": {
           "flutterType": "BoxDecoration",
@@ -113,7 +113,7 @@
       },
       {
         "flutterType": "SegmentControl",
-        "setState": true,
+        "onInitSetState": true,
         "onChangedSetStateNotify": false,
         "decoration": {
           "flutterType": "BoxDecoration",
