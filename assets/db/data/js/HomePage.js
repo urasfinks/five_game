@@ -44,7 +44,9 @@ if (bridge.args["switch"] === "createGame") {
     gameData["user" + bridge.unique] = {
         "name": bridge.call("GetStorage", {"key": "accountName", "default": ""})["accountName"],
         "team": "",
-        "role": "player"
+        "role": "player",
+        "id": bridge.unique,
+        "static": false
     };
     bridge.call("DataSourceSet", {
         // Хак, для сокетных данных, которые необходимо заинсертит в локальную БД
