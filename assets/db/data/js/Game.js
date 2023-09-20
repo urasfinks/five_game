@@ -28,7 +28,7 @@ if (bridge.args["switch"] === "onChange") {
             newStateData["users"] = getUsers(socketData);
         }
         if (lastGameState !== curGameState) {
-            onRenderFloatingActionButton(socketData);
+            onRenderFloatingActionButton(socketData, socketUuid);
         }
         bridge.overlay(newStateData, {
             switchKey: curGameState,

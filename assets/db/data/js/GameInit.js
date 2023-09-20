@@ -22,7 +22,7 @@ if (bridge.args["switch"] === "onChangeOrientation") {
 
 if (bridge.args["switch"] === "onRenderFloatingActionButton") {
     var socketData = bridge.state["main"]["originSocketData"];
-    onRenderFloatingActionButton(socketData);
+    onRenderFloatingActionButton(socketData, bridge.pageArgs["socketUuid"]);
 }
 
 function controlBottomNavigationBar() {

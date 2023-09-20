@@ -83,7 +83,7 @@
         "backgroundColor": "blue",
         "height": 44,
         "onPressed": {
-          "jsInvoke": "Game.js",
+          "jsInvoke": "GameTeam.js",
           "args": {
             "includeAll": true,
             "switch": "addPerson"
