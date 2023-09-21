@@ -272,7 +272,7 @@ function getListPerson(socketData) {
     var listPerson = [];
     for (var key in socketData) {
         if (key.startsWith("user")) {
-            socketData[key]["id"] = key;
+            socketData[key]["id"] = key.substring(4);
             listPerson.push(socketData[key]);
         }
     }
@@ -289,8 +289,8 @@ function getListPersonGroup(socketData, team, socketUuid) {
     for (var i = 0; i < listPerson.length; i++) {
         var curTeam = ["red", "blue"].includes(listPerson[i]["team"]) ? listPerson[i]["team"] : "undefined";
         if (curTeam === team) {
-            var ami = listPerson[i]["id"] === ("user" + bridge.unique) ? "(Я) " : "";
-            var isCaptain = listPerson[i]["role"] === "captain" ? "(Капитан) " : "";
+            var ami = listPerson[i]["id"] === bridge.unique ? "Я " : "";
+            var isCaptain = listPerson[i]["role"] === "captain" ? "Капитан " : "";
             var background = "schema:onBackground";
             if (team === "red") {
                 background = "red.600";
