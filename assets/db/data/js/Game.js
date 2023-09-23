@@ -6,12 +6,12 @@ if (bridge.args["switch"] === "onChange") {
         });
     } else {
         var newStateData = {};
-        var lastGameState = bridge.state["main"]["originSocketData"] !== undefined ? bridge.state["main"]["originSocketData"]["gameState"] : "";
+        var lastGameState = bridge.state["main"]["originSocketData"] != undefined ? bridge.state["main"]["originSocketData"]["gameState"] : "";
         var socketData = bridge.args["data"];
         var curGameState = socketData["gameState"];
         var socketUuid = bridge.pageArgs["socketUuid"];
 
-        if (socketData["user" + bridge.unique] !== undefined) {
+        if (socketData["user" + bridge.unique] != undefined) {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
         }
         if (["team"].includes(curGameState)) {

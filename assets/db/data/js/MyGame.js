@@ -19,7 +19,7 @@ if (bridge.args["switch"] === "selectMyGame") {
             var fetch = bridge.args["fetchDb"][i];
             var date = new Date(fetch["date_add_data"] * 1);
             var socketUuid = fetch["uuid_data"];
-            if (fetch["parent_uuid_data"] !== undefined && fetch["parent_uuid_data"].trim() !== "") {
+            if (fetch["parent_uuid_data"] != undefined && fetch["parent_uuid_data"].trim() !== "") {
                 socketUuid = fetch["parent_uuid_data"];
             }
             var gameUuid = fetch["uuid_data"];

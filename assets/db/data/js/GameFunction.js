@@ -5,15 +5,15 @@ function isMyGame(socketData) {
 }
 
 function isOwner(socketData) {
-    return socketData !== undefined && socketData["owner"] === bridge.unique;
+    return socketData != undefined && socketData["owner"] === bridge.unique;
 }
 
 function isCaptain(socketData) {
-    return socketData !== undefined && socketData["user" + bridge.unique] !== undefined && socketData["user" + bridge.unique]["role"] === "captain";
+    return socketData != undefined && socketData["user" + bridge.unique] != undefined && socketData["user" + bridge.unique]["role"] === "captain";
 }
 
 function getMyTeam(socketData) {
-    return socketData["user" + bridge.unique] !== undefined ? socketData["user" + bridge.unique]["team"] : "watcher";
+    return socketData["user" + bridge.unique] != undefined ? socketData["user" + bridge.unique]["team"] : "watcher";
 }
 
 function getGridWord(socketData) {
@@ -80,8 +80,8 @@ function getGridWord(socketData) {
                     "index": counter - 1
                 }
             } : null;
-            if (cardData !== undefined) {
-                var tapCount = mapCount["i" + curIndex] !== undefined ? {
+            if (cardData != undefined) {
+                var tapCount = mapCount["i" + curIndex] != undefined ? {
                     "flutterType": "Container",
                     "width": 20,
                     "height": 20,
@@ -237,7 +237,7 @@ function calculateScore(socketData, newStateData, socketUuid) {
             if (["red", "blue"].includes(socketData[key]["team"])) {
                 all++;
             }
-            if (socketData[key]["selected"] !== undefined) {
+            if (socketData[key]["selected"] != undefined) {
                 if (socketData[key]["team"] === "blue") {
                     blue++;
                 } else if (socketData[key]["team"] === "red") {

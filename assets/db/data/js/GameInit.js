@@ -10,7 +10,7 @@ if (bridge.args["switch"] === "constructor") {
 
 if (bridge.args["switch"] === "onChangeOrientation") {
     var socketData = bridge.state["main"]["originSocketData"];
-    if (socketData !== undefined && ["word", "run"].includes(socketData["gameState"])) {
+    if (socketData != undefined && ["word", "run"].includes(socketData["gameState"])) {
         bridge.call("SetStateData", {
             "map": {
                 "gridWord": getGridWord(socketData)

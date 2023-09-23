@@ -43,7 +43,7 @@ if (bridge.args["switch"] === "createGame") {
     };
     gameData["user" + bridge.unique] = {
         "name": bridge.call("GetStorage", {"key": "accountName", "default": ""})["accountName"],
-        "team": "",
+        "team": "undefined",
         "role": "player",
         "id": bridge.unique,
         "static": false

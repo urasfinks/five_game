@@ -1,5 +1,5 @@
 if (bridge.args["switch"] === "addPerson") {
-    if (bridge.state["main"]["Name"] !== undefined && bridge.state["main"]["Name"].trim() !== "") {
+    if (bridge.state["main"]["Name"] != undefined && bridge.state["main"]["Name"].trim() !== "") {
         var data = {};
         var uuidPerson = bridge.call("Util", {"case": "uuid"})["uuid"];
         userBlock = {
@@ -39,7 +39,7 @@ if (bridge.args["switch"] === "removePerson") {
 }
 
 if (bridge.args["switch"] === "savePerson") {
-    if (bridge.state["main"]["Name"] !== undefined && bridge.state["main"]["Name"].trim() !== "") {
+    if (bridge.state["main"]["Name"] != undefined && bridge.state["main"]["Name"].trim() !== "") {
         var data = {};
         bridge.overlay(bridge.pageArgs["personValue"], {
             "name": bridge.state["main"]["Name"] || "Гость",
@@ -58,7 +58,7 @@ if (bridge.args["switch"] === "setName") {
     var data = {};
     var userBlock = {};
     var socketData = bridge.state["main"]["originSocketData"];
-    if (socketData["user" + bridge.unique] !== undefined) {
+    if (socketData["user" + bridge.unique] != undefined) {
         userBlock = socketData["user" + bridge.unique];
     }
     userBlock["name"] = bridge.state["main"]["Name"];
