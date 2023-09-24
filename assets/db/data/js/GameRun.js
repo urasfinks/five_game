@@ -22,6 +22,12 @@ if (bridge.args["switch"] === "toNextTeam") {
     }
     newSocketUpdate["runTeam"] = socketData["runTeam"] === "blue" ? "red" : "blue";
     socketSave(newSocketUpdate, bridge.pageArgs["socketUuid"]);
+    bridge.socketExtend({
+        "action": "timestamp",
+        "arguments": {
+            "field": "session"
+        }
+    }, socketUuid);
 }
 
 if (bridge.args["switch"] === "onCardTap") {

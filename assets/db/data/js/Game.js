@@ -102,6 +102,14 @@ if (bridge.args["switch"] === "changeGameState") { //team/word/run/finish
             "field": curGameState
         }
     }, socketUuid);
+    if (curGameState === "run") {
+        bridge.socketExtend({
+            "action": "timestamp",
+            "arguments": {
+                "field": "session"
+            }
+        }, socketUuid);
+    }
 }
 
 if (bridge.args["switch"] === "GenCodeUuidResponse") {
