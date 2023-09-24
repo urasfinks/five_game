@@ -101,6 +101,12 @@
                         "sysInvoke": "NavigatorPush",
                         "args": {
                           "uuid": "MyGame.json",
+                          "subscribeToRefresh": {
+                            "lisUuid": [
+                              "HomePageFunction.js",
+                              "GameFunction.js"
+                            ]
+                          },
                           "constructor": {
                             "jsInvoke": "MyGame.js",
                             "args": {
