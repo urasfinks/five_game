@@ -40,7 +40,7 @@ function getGridWord(socketData) {
         "red": "red",
         "blue": "blue",
         "neutral": "#efd9b9",
-        "die": "black"
+        "die": "schema:onBackground"
     };
     var colorText = {
         "red": "white",
