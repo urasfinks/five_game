@@ -41,7 +41,8 @@ if (bridge.args["switch"] === "onChange") {
             listPersonUndefined: getListPersonGroup(socketData, "undefined", socketUuid),
             listPersonRed: getListPersonGroup(socketData, "red", socketUuid),
             listPersonBlue: getListPersonGroup(socketData, "blue", socketUuid),
-            toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false"
+            toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
+            socketUuid: socketUuid
         });
         //bridge.log(newStateData);
         bridge.call("SetStateData", {

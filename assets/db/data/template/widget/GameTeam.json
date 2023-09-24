@@ -22,25 +22,27 @@
         {
           "flutterType": "Expanded",
           "child": {
-            "flutterType": "Container",
-            "padding": "25,0,25,0",
+            "flutterType": "Button",
             "height": 44,
-            "decoration": {
-              "flutterType": "BoxDecoration",
-              "color": "schema:onBackground",
-              "borderRadius": 9
+            "backgroundColor": "schema:onBackground",
+            "onPressed": {
+              "sysInvoke": "Util",
+              "args": {
+                "case": "copyClipboard",
+                "data": "${state(main,gameCode,123456)}",
+                "templateArguments": [
+                  "data"
+                ]
+              }
             },
             "child": {
-              "flutterType": "Center",
-              "child": {
-                "flutterType": "Text",
-                "label": "${state(main,gameCode,123456)}",
-                "style": {
-                  "flutterType": "TextStyle",
-                  "fontSize": 14,
-                  "fontWeight": "bold",
-                  "color": "schema:inversePrimary"
-                }
+              "flutterType": "Text",
+              "label": "${state(main,gameCode,123456)}",
+              "style": {
+                "flutterType": "TextStyle",
+                "fontSize": 14,
+                "fontWeight": "bold",
+                "color": "schema:inversePrimary"
               }
             }
           }
@@ -56,9 +58,10 @@
             "height": 44,
             "backgroundColor": "schema:onPrimary",
             "onPressed": {
-              "sysInvoke": "Share",
+              "sysInvoke": "Util",
               "args": {
-                "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectCodeNames/gameUuid/${state(main,gameUuid,undefined)}",
+                "case": "share",
+                "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectCodeNames/socketUuid/${state(main,socketUuid,undefined)}",
                 "templateArguments": [
                   "data"
                 ]
