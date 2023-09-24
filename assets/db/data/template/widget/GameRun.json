@@ -116,7 +116,7 @@
           "args": {
             "confirmAction": true,
             "onPressed": {
-              "jsInvoke": "Game.js",
+              "jsInvoke": "GameRun.js",
               "args": {
                 "includeAll": true,
                 "switch": "toNextTeam"
