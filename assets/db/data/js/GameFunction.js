@@ -128,6 +128,16 @@ function getGridWord(socketData) {
                 //Если карточка выбрана - показываем её реальный цвет
                 var curColorCard = (isCapt || cardData["selected"] != null) ? colorCard[cardData["team"]] : "#efd9b9";
                 var curColorText = (isCapt || cardData["selected"] != null) ? colorText[cardData["team"]] : "black";
+                var decoration = "none";
+                if (cardData["selected"] != null) {
+                    curColorText = "schema:secondary";
+                    curColorCard = "schema:onBackground";
+                    if (cardData["selected"] !== cardData["team"]) {
+                        decoration = "lineThrough";
+                        curColorText = "schema:secondary";
+                    }
+                }
+
                 var block = {
                     "flutterType": "Container",
                     "height": 50,
@@ -146,14 +156,19 @@ function getGridWord(socketData) {
                                     {
                                         "flutterType": "Center",
                                         "child": {
-                                            "flutterType": "Text",
-                                            "textAlign": "center",
-                                            "label": cardData["selected"] == null ? cardData["label"].toUpperCase() : "",
-                                            "style": {
-                                                "flutterType": "TextStyle",
-                                                "fontSize": 12,
-                                                "fontWeight": "bold",
-                                                "color": curColorText
+                                            "flutterType": "Opacity",
+                                            "opacity": cardData["selected"] == null ? 1 : 1,
+                                            "child": {
+                                                "flutterType": "Text",
+                                                "textAlign": "center",
+                                                "label": cardData["label"].toUpperCase(),
+                                                "style": {
+                                                    "flutterType": "TextStyle",
+                                                    "decoration": decoration,
+                                                    "fontSize": 12,
+                                                    "fontWeight": "bold",
+                                                    "color": curColorText
+                                                }
                                             }
                                         }
                                     },
