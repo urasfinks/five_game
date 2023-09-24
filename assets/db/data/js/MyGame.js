@@ -1,7 +1,4 @@
 if (bridge.args["switch"] === "constructor") {
-
-    bridge.asyncImport("GameFunction.js", {});
-
     bridge.call("DbQuery", {
         "sql": "select * from data where key_data = ? and is_remove_data = 0 order by id_data desc",
         "args": ["Game"],

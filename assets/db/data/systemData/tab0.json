@@ -15,7 +15,8 @@
     },
     "subscribeToRefresh": {
       "lisUuid": [
-        "HomePage.js"
+        "HomePage.js",
+        "GameFunction.js"
       ],
       "listKey": [
         "Game"
