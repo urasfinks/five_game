@@ -100,15 +100,6 @@ if (bridge.args["switch"] === "generateWord") {
     for (var i = 0; i < all; i++) {
         data["card" + i] = list2[i];
     }
-    socketSave(data);
-}
-
-function socketSave(data) {
-    var socketUuid = bridge.pageArgs["socketUuid"];
-    bridge.call("DataSourceSet", {
-        "debugTransaction": true,
-        "type": "socket",
-        "uuid": socketUuid,
-        "value": data
-    });
+    data["isGeneratedCard"] = true;
+    socketSave(data, bridge.pageArgs["socketUuid"]);
 }

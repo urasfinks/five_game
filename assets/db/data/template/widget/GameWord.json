@@ -3,6 +3,20 @@
   "crossAxisAlignment": "start",
   "children": [
     {
+      "flutterType": "Padding",
+      "padding": "6,0,6,20",
+      "child": {
+        "flutterType": "Text",
+        "label": "Генерация карточек",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "color": "schema:secondary"
+        }
+      }
+    },
+    {
       "flutterType": "State",
       "key": "gridWord"
     },
@@ -11,23 +25,27 @@
       "height": 20
     },
     {
-      "flutterType": "Button",
-      "height": 44,
-      "backgroundColor": "blue",
-      "onPressed": {
-        "jsInvoke": "GameStateWord.js",
-        "args": {
-          "includeAll": true,
-          "switch": "generateWord"
-        }
-      },
+      "flutterType": "Visibility",
+      "visible": "${state(main,isOwner,false)}",
       "child": {
-        "flutterType": "Text",
-        "label": "Сгенерировать слова",
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 14,
-          "color": "white"
+        "flutterType": "Button",
+        "height": 44,
+        "backgroundColor": "blue",
+        "onPressed": {
+          "jsInvoke": "GameWord.js",
+          "args": {
+            "includeAll": true,
+            "switch": "generateWord"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Сгенерировать карточки",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
         }
       }
     },
@@ -36,24 +54,28 @@
       "height": 20
     },
     {
-      "flutterType": "Button",
-      "height": 44,
-      "backgroundColor": "blue",
-      "onPressed": {
-        "jsInvoke": "Game.js",
-        "args": {
-          "includeAll": true,
-          "switch": "changeGameState",
-          "gameState": "run"
-        }
-      },
+      "flutterType": "Visibility",
+      "visible": "${state(main,toNextRun,false)}",
       "child": {
-        "flutterType": "Text",
-        "label": "Начать игру",
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 14,
-          "color": "white"
+        "flutterType": "Button",
+        "height": 44,
+        "backgroundColor": "blue",
+        "onPressed": {
+          "jsInvoke": "Game.js",
+          "args": {
+            "includeAll": true,
+            "switch": "changeGameState",
+            "gameState": "run"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Начать игру",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
         }
       }
     }

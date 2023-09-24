@@ -12,8 +12,9 @@ if (bridge.args["switch"] === "onChange") {
         var socketUuid = bridge.pageArgs["socketUuid"];
         var timestampCodeGenerate = socketData["timestampCodeGenerate"] || 0;
         var curTimestamp = bridge.util("timestamp", {});
+        var isOwn = isOwner(socketData);
 
-        if (isOwner(socketData) && curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
+        if (isOwn && curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
             bridge.call("Http", {
                 "uri": "/GenCodeUuid",
                 "method": "POST",
@@ -67,6 +68,10 @@ if (bridge.args["switch"] === "onChange") {
         if (lastGameState !== curGameState) {
             onRenderFloatingActionButton(socketData, socketUuid);
         }
+        var toNextRun = false;
+        if (isOwn && socketData["isGeneratedCard"] === true) {
+            toNextRun = true;
+        }
         bridge.overlay(newStateData, {
             switchKey: curGameState,
             originSocketData: socketData,
@@ -76,7 +81,8 @@ if (bridge.args["switch"] === "onChange") {
             toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
             socketUuid: socketUuid,
             gameCode: socketData["gameCode"] || "...",
-            isOwner: isOwner(socketData)
+            isOwner: isOwn,
+            toNextRun: toNextRun
         });
         //bridge.log(newStateData);
         bridge.call("SetStateData", {
