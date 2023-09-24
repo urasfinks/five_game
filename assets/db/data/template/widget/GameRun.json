@@ -36,7 +36,24 @@
             }
           },
           {
-            "flutterType": "Expanded"
+            "flutterType": "Expanded",
+            "child": {
+              "flutterType": "Stream",
+              "stream": {
+                "case": "Periodic",
+                "timerMillis": 1000,
+                "data": {
+                  "count": 0
+                }
+              },
+              "child": {
+                "flutterType": "Center",
+                "child": {
+                  "flutterType": "Text",
+                  "label": "${state(main,originSocketData.session)|timeSoFar(sec)}"
+                }
+              }
+            }
           },
           {
             "flutterType": "Text",
