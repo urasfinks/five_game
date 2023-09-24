@@ -313,14 +313,19 @@ function getListPersonGroup(socketData, team, socketUuid) {
                     }
                 }
             } : {};
+            var iconPerson = "person_outline";
             var name = listPerson[i]["name"];
             if (listPerson[i]["static"] != undefined && listPerson[i]["static"] === true) {
-                name = "[" + name + "]";
+                if (isOwn) {
+                    name = "[" + name + "]";
+                }
+                iconPerson = "android";
             }
+            var iconSrc = isOwn ? "edit" : iconPerson;
             result.push({
                 "label": ami + isCaptain + name,
                 "templateWidgetSrc": "IteratorButtonIcon",
-                "iconSrc": isOwn ? "edit" : "person_outline",
+                "iconSrc": iconSrc,
                 "background": background,
                 "iconColor": iconColor,
                 "onTap": onTap
