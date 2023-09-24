@@ -80,7 +80,6 @@
             "child": {
               "flutterType": "Text",
               "label": "${state(main,scoreBlue)}",
-              "labelAll": "/ ${state(main,scoreAll)}",
               "style": {
                 "flutterType": "TextStyle",
                 "fontSize": 12,
