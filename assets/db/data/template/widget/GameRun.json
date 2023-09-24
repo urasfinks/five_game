@@ -126,7 +126,7 @@
         },
         "child": {
           "flutterType": "Text",
-          "label": "Готово",
+          "label": "Выбор сделан, ехаем!",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,

@@ -73,7 +73,7 @@ function getGridWord(socketData) {
             var curIndex = counter++;
             var cardData = listCard[curIndex];
             var onTap = (canBePressed && cardData["selected"] == null) ? {
-                "jsInvoke": "Game.js",
+                "jsInvoke": "GameRun.js",
                 "args": {
                     "includeAll": true,
                     "switch": "onCardTap",
