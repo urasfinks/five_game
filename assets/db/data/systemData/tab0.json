@@ -2,12 +2,27 @@
   "name": "main",
   "tab": {
     "flutterType": "BottomNavigationBarItem",
-    "icon": {"flutterType": "Icon", "src": "crop_5_4"},
+    "icon": {
+      "flutterType": "Icon",
+      "src": "crop_5_4"
+    },
     "label": "Home"
   },
   "content": {
     "flutterType": "Notify",
-    "link": {"template": "HomePage.json"},
+    "link": {
+      "template": "HomePage.json"
+    },
+    "subscribeToRefresh": {
+      "lisUuid": [
+        "HomePage.js",
+        "HomePageFunction.js",
+        "GameFunction.js"
+      ],
+      "listKey": [
+        "Game"
+      ]
+    },
     "context": {
       "key": "Tab0",
       "data": {
@@ -15,7 +30,10 @@
           "flutterType": "Scaffold",
           "appBar": {
             "flutterType": "AppBar",
-            "title": {"flutterType": "Text", "label": "FiveGame"}
+            "title": {
+              "flutterType": "Text",
+              "label": "FiveGame"
+            }
           }
         }
       }
@@ -25,9 +43,6 @@
       "args": {
         "switch": "constructor"
       }
-    },
-    "subscribeToRefresh": {
-      "key": "Game"
     }
   }
 }

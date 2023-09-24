@@ -13,6 +13,9 @@
     "link": {
       "template": "Account.json"
     },
+    "subscribeToRefresh": {
+      "uuid": "Account.js"
+    },
     "context": {
       "key": "Tab1",
       "data": {
