@@ -14,7 +14,8 @@ if (bridge.args["switch"] === "onChange") {
         var curTimestamp = bridge.util("timestamp", {});
         var isOwn = isOwner(socketData);
 
-        if (isOwn && curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
+        if (isOwn && ["team"].includes(curGameState) && curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
+            bridge.log("timestampCodeGenerate: " + timestampCodeGenerate + "; curTimestamp: " + curTimestamp);
             bridge.call("Http", {
                 "uri": "/GenCodeUuid",
                 "method": "POST",
@@ -31,7 +32,7 @@ if (bridge.args["switch"] === "onChange") {
             });
         }
 
-        bridge.log("timestampCodeGenerate: " + timestampCodeGenerate + "; curTimestamp: " + curTimestamp);
+
 
         if (socketData["user" + bridge.unique] != undefined) {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
