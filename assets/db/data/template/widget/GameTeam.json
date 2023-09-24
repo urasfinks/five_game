@@ -7,7 +7,82 @@
       "padding": "6,0,6,20",
       "child": {
         "flutterType": "Text",
-        "label": "Моё имя в игре: ",
+        "label": "Код для подключения к игре",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "color": "schema:secondary"
+        }
+      }
+    },
+    {
+      "flutterType": "Row",
+      "children": [
+        {
+          "flutterType": "Expanded",
+          "child": {
+            "flutterType": "Container",
+            "padding": "25,0,25,0",
+            "height": 44,
+            "decoration": {
+              "flutterType": "BoxDecoration",
+              "color": "schema:onBackground",
+              "borderRadius": 9
+            },
+            "child": {
+              "flutterType": "Center",
+              "child": {
+                "flutterType": "Text",
+                "label": "${state(main,gameCode,123456)}",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 14,
+                  "fontWeight": "bold",
+                  "color": "schema:inversePrimary"
+                }
+              }
+            }
+          }
+        },
+        {
+          "flutterType": "SizedBox",
+          "width": 20
+        },
+        {
+          "flutterType": "Expanded",
+          "child": {
+            "flutterType": "Button",
+            "height": 44,
+            "backgroundColor": "schema:onPrimary",
+            "onPressed": {
+              "sysInvoke": "Share",
+              "args": {
+                "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectCodeNames/gameUuid/${state(main,gameUuid,undefined)}",
+                "templateArguments": [
+                  "data"
+                ]
+              }
+            },
+            "child": {
+              "flutterType": "Text",
+              "label": "Поделиться",
+              "style": {
+                "flutterType": "TextStyle",
+                "fontSize": 14,
+                "color": "schema:inversePrimary"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "flutterType": "Padding",
+      "padding": "6,20,6,20",
+      "child": {
+        "flutterType": "Text",
+        "label": "Моё имя в игре",
         "style": {
           "flutterType": "TextStyle",
           "fontSize": 17,
@@ -85,18 +160,72 @@
       }
     },
     {
-      "flutterType": "Padding",
-      "padding": "6,20,6,20",
-      "child": {
-        "flutterType": "Text",
-        "label": "Участники игры: ",
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 17,
-          "fontWeight": "bold",
-          "color": "schema:secondary"
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Row",
+      "crossAxisAlignment": "start",
+      "children": [
+        {
+          "flutterType": "Expanded",
+          "child": {
+            "flutterType": "Padding",
+            "padding": "6,0,6,20",
+            "child": {
+              "flutterType": "Text",
+              "label": "Участники игры",
+              "style": {
+                "flutterType": "TextStyle",
+                "fontSize": 17,
+                "fontWeight": "bold",
+                "color": "schema:secondary"
+              }
+            }
+          }
+        },
+        {
+          "flutterType": "SizedBox",
+          "width": 20
+        },
+        {
+          "flutterType": "Expanded",
+          "child": {
+            "flutterType": "Button",
+            "height": 44,
+            "backgroundColor": "schema:onPrimary",
+            "onPressed": {
+              "sysInvoke": "Alert",
+              "args": {
+                "confirmAction": true,
+                "actionLabel": "Распределить",
+                "backgroundColor": "schema:onBackground",
+                "actionBackgroundColor": "blue",
+                "onPressed": {
+                  "jsInvoke": "GameTeam.js",
+                  "args": {
+                    "includeAll": true,
+                    "switch": "randomize"
+                  }
+                }
+              }
+            },
+            "child": {
+              "flutterType": "Text",
+              "label": "Распределить",
+              "style": {
+                "flutterType": "TextStyle",
+                "fontSize": 14,
+                "color": "schema:inversePrimary"
+              }
+            }
+          }
         }
-      }
+      ]
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
     },
     {
       "ChildrenExtension": "Iterator",
@@ -129,37 +258,6 @@
       "height": 20
     },
     {
-      "flutterType": "Button",
-      "minimumSize": "9999,44",
-      "backgroundColor": "schema:onPrimary",
-      "height": 44,
-      "onPressed": {
-        "sysInvoke": "Alert",
-        "args": {
-          "confirmAction": true,
-          "actionLabel": "Перемешать",
-          "backgroundColor": "schema:onBackground",
-          "actionBackgroundColor": "blue",
-          "onPressed": {
-            "jsInvoke": "GameTeam.js",
-            "args": {
-              "includeAll": true,
-              "switch": "randomize"
-            }
-          }
-        }
-      },
-      "child": {
-        "flutterType": "Text",
-        "label": "Случайно перемешать!",
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 14,
-          "color": "schema:primary"
-        }
-      }
-    },
-    {
       "flutterType": "SizedBox",
       "height": 20
     },
@@ -168,9 +266,8 @@
       "visible": "${state(main,toWordGameState, false)}",
       "child": {
         "flutterType": "Button",
-        "minimumSize": "9999,44",
-        "backgroundColor": "blue",
         "height": 44,
+        "backgroundColor": "blue",
         "onPressed": {
           "jsInvoke": "Game.js",
           "args": {
@@ -181,7 +278,7 @@
         },
         "child": {
           "flutterType": "Text",
-          "label": "Продолжить...",
+          "label": "Продолжить",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,
