@@ -2,14 +2,13 @@ if (bridge.args["switch"] === "addPerson") {
     if (bridge.state["main"]["Name"] != undefined && bridge.state["main"]["Name"].trim() !== "") {
         var data = {};
         var uuidPerson = bridge.call("Util", {"case": "uuid"})["uuid"];
-        userBlock = {
+        data["user" + uuidPerson] = {
             name: bridge.state["main"]["Name"],
             id: uuidPerson,
             "static": true,
             "team": "",
             "role": "player"
         };
-        data["user" + uuidPerson] = userBlock;
         socketSave(data, bridge.pageArgs["socketUuid"]);
         bridge.call("NavigatorPop", {});
     } else {
