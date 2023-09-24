@@ -304,18 +304,21 @@ function getListPersonGroup(socketData, team, socketUuid) {
                 "sysInvoke": "NavigatorPush",
                 "args": {
                     "socketUuid": socketUuid,
-                    "personKey": listPerson[i]["id"],
+                    "personId": listPerson[i]["id"],
                     "personValue": listPerson[i],
                     "type": "bottomSheet",
-                    "height": 400,
+                    "height": 360,
                     "link": {
                         "template": "GamePersonEdit.json",
                     }
                 }
             } : {};
-
+            var name = listPerson[i]["name"];
+            if (listPerson[i]["static"] != undefined && listPerson[i]["static"] === true) {
+                name = "[" + name + "]";
+            }
             result.push({
-                "label": ami + isCaptain + listPerson[i]["name"],
+                "label": ami + isCaptain + name,
                 "templateWidgetSrc": "IteratorButtonIcon",
                 "iconSrc": isOwn ? "edit" : "person_outline",
                 "background": background,
