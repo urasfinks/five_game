@@ -161,7 +161,7 @@
       },
       {
         "flutterType": "Button",
-        "minimumSize": "9999,44",
+        "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
           "jsInvoke": "GameTeam.js",
@@ -186,7 +186,7 @@
       },
       {
         "flutterType": "Button",
-        "minimumSize": "9999,44",
+        "height": 44,
         "backgroundColor": "schema:onBackground",
         "onPressed": {
           "sysInvoke": "Alert",
