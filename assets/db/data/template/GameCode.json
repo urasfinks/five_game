@@ -89,7 +89,7 @@
         },
         "child": {
           "flutterType": "Text",
-          "label": "Подтвердить",
+          "label": "Присоединиться",
           "textAlign": "center",
           "style": {
             "flutterType": "TextStyle",

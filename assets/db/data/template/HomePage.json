@@ -103,7 +103,6 @@
                           "uuid": "MyGame.json",
                           "subscribeToRefresh": {
                             "lisUuid": [
-                              "HomePageFunction.js",
                               "GameFunction.js"
                             ]
                           },

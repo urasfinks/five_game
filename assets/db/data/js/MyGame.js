@@ -1,6 +1,5 @@
 if (bridge.args["switch"] === "constructor") {
 
-    bridge.asyncImport("HomePageFunction.js", {});
     bridge.asyncImport("GameFunction.js", {});
 
     bridge.call("DbQuery", {
