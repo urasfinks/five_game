@@ -81,7 +81,6 @@
         "flutterType": "Button",
         "minimumSize": "9999,44",
         "backgroundColor": "blue",
-        "height": 44,
         "onPressed": {
           "jsInvoke": "GameTeam.js",
           "args": {

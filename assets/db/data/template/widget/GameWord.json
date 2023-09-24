@@ -14,7 +14,6 @@
       "flutterType": "Button",
       "minimumSize": "9999,44",
       "backgroundColor": "blue",
-      "height": 44,
       "onPressed": {
         "jsInvoke": "GameStateWord.js",
         "args": {
@@ -40,7 +39,6 @@
       "flutterType": "Button",
       "minimumSize": "9999,44",
       "backgroundColor": "blue",
-      "height": 44,
       "onPressed": {
         "jsInvoke": "Game.js",
         "args": {
