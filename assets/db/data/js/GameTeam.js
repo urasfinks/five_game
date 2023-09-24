@@ -32,8 +32,9 @@ if (bridge.args["switch"] === "randomize") {
 }
 
 if (bridge.args["switch"] === "removePerson") {
+    //TODO: сделать проверку что персона статичная
     var data = {};
-    data[bridge.pageArgs["personKey"]] = null;
+    data["user" + bridge.pageArgs["personId"]] = null;
     socketSave(data, bridge.pageArgs["socketUuid"]);
     bridge.call("NavigatorPop", {});
 }
@@ -46,7 +47,7 @@ if (bridge.args["switch"] === "savePerson") {
             "role": bridge.state["main"]["Role"] || "player",
             "team": bridge.state["main"]["Team"] || "undefined",
         });
-        data[bridge.pageArgs["personKey"]] = bridge.pageArgs["personValue"];
+        data["user" + bridge.pageArgs["personId"]] = bridge.pageArgs["personValue"];
         socketSave(data, bridge.pageArgs["socketUuid"]);
         bridge.call("NavigatorPop", {});
     } else {
