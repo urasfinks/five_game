@@ -32,8 +32,6 @@ if (bridge.args["switch"] === "onChange") {
             });
         }
 
-
-
         if (socketData["user" + bridge.unique] != undefined) {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
         } else {
@@ -56,14 +54,14 @@ if (bridge.args["switch"] === "onChange") {
         } else {
             bridge.call("Util", {"case": "dynamicPageApi", "api": "stopReloadEach"});
         }
-        if (["word", "run"].includes(curGameState)) {
+        if (["word", "run", "finish"].includes(curGameState)) {
             if (isOwner(socketData)) {
                 newStateData["visibleGenerateWord"] = "true";
             }
             newStateData["gridWord"] = getGridWord(socketData);
         }
         if (["run", "finish"].includes(curGameState)) {
-            calculateScore(socketData, newStateData);
+            calculateScore(socketData, newStateData, socketUuid);
             newStateData["users"] = getUsers(socketData);
         }
         if (lastGameState !== curGameState) {

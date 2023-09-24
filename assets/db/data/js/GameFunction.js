@@ -46,7 +46,7 @@ function getGridWord(socketData) {
         "red": "white",
         "blue": "white",
         "neutral": "black",
-        "die": "white"
+        "die": "red"
     };
     var mapCount = {};
     var mapCountMy = {};
@@ -246,11 +246,14 @@ function getUsers(socketData) {
 }
 
 function calculateScore(socketData, newStateData, socketUuid) {
-    var blue = 0, red = 0, all = 0;
+    var blue = 0, red = 0, allBlue = 0, allRed = 0;
     for (var key in socketData) {
         if (key.startsWith("card")) {
-            if (["red", "blue"].includes(socketData[key]["team"])) {
-                all++;
+            if (socketData[key]["team"] === "red") {
+                allRed++;
+            }
+            if (socketData[key]["team"] === "blue") {
+                allBlue++;
             }
             if (socketData[key]["selected"] != undefined) {
                 if (socketData[key]["team"] === "blue") {
@@ -261,17 +264,28 @@ function calculateScore(socketData, newStateData, socketUuid) {
             }
         }
     }
-    if (socketData["description"] === undefined) {
-        if (blue + red === all) {
+    //bridge.log("Score: blue: " + blue + "; allBlue: " + allBlue + "; red: " + red + "; allRed: " + allRed);
+    if (socketData["finishDescription"] === undefined) {
+        if (blue === allBlue && red === allRed) {
             socketSave({
-                description: "Победила команда " + (blue > red ? "синих" : "красных"),
+                finishDescription: "Ничья!",
+                gameState: "finish"
+            }, socketUuid);
+        } else if (blue === allBlue) {
+            socketSave({
+                finishDescription: "Победила команда синих",
+                gameState: "finish"
+            }, socketUuid);
+        } else if (red === allRed) {
+            bridge.log("Приехали");
+            socketSave({
+                finishDescription: "Победила команда красных",
                 gameState: "finish"
             }, socketUuid);
         }
     }
     newStateData["scoreRed"] = red;
     newStateData["scoreBlue"] = blue;
-    newStateData["scoreAll"] = all;
 }
 
 function socketSave(data, socketUuid) {
