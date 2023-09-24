@@ -194,32 +194,36 @@
         {
           "flutterType": "Expanded",
           "child": {
-            "flutterType": "Button",
-            "height": 44,
-            "backgroundColor": "schema:onPrimary",
-            "onPressed": {
-              "sysInvoke": "Alert",
-              "args": {
-                "confirmAction": true,
-                "actionLabel": "Распределить",
-                "backgroundColor": "schema:onBackground",
-                "actionBackgroundColor": "blue",
-                "onPressed": {
-                  "jsInvoke": "GameTeam.js",
-                  "args": {
-                    "includeAll": true,
-                    "switch": "randomize"
+            "flutterType": "Visibility",
+            "visible": "${state(main,isOwner, false)}",
+            "child": {
+              "flutterType": "Button",
+              "height": 44,
+              "backgroundColor": "schema:onPrimary",
+              "onPressed": {
+                "sysInvoke": "Alert",
+                "args": {
+                  "confirmAction": true,
+                  "actionLabel": "Распределить",
+                  "backgroundColor": "schema:onBackground",
+                  "actionBackgroundColor": "blue",
+                  "onPressed": {
+                    "jsInvoke": "GameTeam.js",
+                    "args": {
+                      "includeAll": true,
+                      "switch": "randomize"
+                    }
                   }
                 }
-              }
-            },
-            "child": {
-              "flutterType": "Text",
-              "label": "Распределить",
-              "style": {
-                "flutterType": "TextStyle",
-                "fontSize": 14,
-                "color": "schema:inversePrimary"
+              },
+              "child": {
+                "flutterType": "Text",
+                "label": "Распределить",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 14,
+                  "color": "schema:inversePrimary"
+                }
               }
             }
           }
