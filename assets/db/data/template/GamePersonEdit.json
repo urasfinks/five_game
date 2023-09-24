@@ -11,6 +11,7 @@
         "onChangedSetStateNotify": false,
         "onInitSetState": true,
         "data": "${pageArgs(personValue.name)}",
+        "enabled": "${pageArgs(personValue.static,false)}",
         "style": {
           "flutterType": "TextStyle",
           "fontSize": 17
@@ -186,30 +187,34 @@
         "height": 20
       },
       {
-        "flutterType": "Button",
-        "height": 44,
-        "backgroundColor": "schema:onBackground",
-        "onPressed": {
-          "sysInvoke": "Alert",
-          "args": {
-            "confirmRemove": true,
-            "backgroundColor": "schema:onBackground",
-            "onPressed": {
-              "jsInvoke": "GameTeam.js",
-              "args": {
-                "includeAll": true,
-                "switch": "removePerson"
+        "flutterType": "Visibility",
+        "visible": "${pageArgs(personValue.static,false)}",
+        "child": {
+          "flutterType": "Button",
+          "height": 44,
+          "backgroundColor": "schema:onBackground",
+          "onPressed": {
+            "sysInvoke": "Alert",
+            "args": {
+              "confirmRemove": true,
+              "backgroundColor": "schema:onBackground",
+              "onPressed": {
+                "jsInvoke": "GameTeam.js",
+                "args": {
+                  "includeAll": true,
+                  "switch": "removePerson"
+                }
               }
             }
-          }
-        },
-        "child": {
-          "flutterType": "Text",
-          "label": "Удалить",
-          "style": {
-            "flutterType": "TextStyle",
-            "fontSize": 14,
-            "color": "white"
+          },
+          "child": {
+            "flutterType": "Text",
+            "label": "Удалить",
+            "style": {
+              "flutterType": "TextStyle",
+              "fontSize": 14,
+              "color": "white"
+            }
           }
         }
       }
