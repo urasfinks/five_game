@@ -10,6 +10,27 @@ if (bridge.args["switch"] === "onChange") {
         var socketData = bridge.args["data"];
         var curGameState = socketData["gameState"];
         var socketUuid = bridge.pageArgs["socketUuid"];
+        var timestampCodeGenerate = socketData["timestampCodeGenerate"] || 0;
+        var curTimestamp = bridge.util("timestamp", {});
+
+        if (curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
+            bridge.call("Http", {
+                "uri": "/GenCodeUuid",
+                "method": "POST",
+                "body": {
+                    "uuid": socketUuid
+                },
+                "onResponse": {
+                    "jsInvoke": "Game.js",
+                    "args": {
+                        "includeAll": true,
+                        "switch": "GenCodeUuidResponse"
+                    }
+                }
+            });
+        }
+
+        bridge.log("timestampCodeGenerate: " + timestampCodeGenerate + "; curTimestamp: " + curTimestamp);
 
         if (socketData["user" + bridge.unique] != undefined) {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
@@ -42,7 +63,8 @@ if (bridge.args["switch"] === "onChange") {
             listPersonRed: getListPersonGroup(socketData, "red", socketUuid),
             listPersonBlue: getListPersonGroup(socketData, "blue", socketUuid),
             toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
-            socketUuid: socketUuid
+            socketUuid: socketUuid,
+            gameCode: socketData["gameCode"] || "..."
         });
         //bridge.log(newStateData);
         bridge.call("SetStateData", {
@@ -63,4 +85,13 @@ if (bridge.args["switch"] === "changeGameState") { //team/word/run/finish
             "field": curGameState
         }
     }, socketUuid);
+}
+
+if (bridge.args["switch"] === "GenCodeUuidResponse") {
+    if (bridge.checkHttpResponse([])) {
+        socketSave({
+            "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
+            "timestampCodeGenerate": bridge.util("timestamp", {})
+        }, bridge.pageArgs["socketUuid"]);
+    }
 }
