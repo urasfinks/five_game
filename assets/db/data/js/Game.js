@@ -13,7 +13,7 @@ if (bridge.args["switch"] === "onChange") {
         var timestampCodeGenerate = socketData["timestampCodeGenerate"] || 0;
         var curTimestamp = bridge.util("timestamp", {});
 
-        if (curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
+        if (isOwner(socketData) && curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
             bridge.call("Http", {
                 "uri": "/GenCodeUuid",
                 "method": "POST",
@@ -34,6 +34,17 @@ if (bridge.args["switch"] === "onChange") {
 
         if (socketData["user" + bridge.unique] != undefined) {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
+        } else {
+            //Если нет данных об этом устройстве - добавим
+            var data = {};
+            data["user" + bridge.unique] = {
+                name: bridge.getStorage("accountName", "Новый игрок"),
+                id: bridge.unique,
+                "static": false,
+                "team": "",
+                "role": "player"
+            };
+            socketSave(data, socketUuid);
         }
         if (["team"].includes(curGameState)) {
             newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
@@ -64,7 +75,8 @@ if (bridge.args["switch"] === "onChange") {
             listPersonBlue: getListPersonGroup(socketData, "blue", socketUuid),
             toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
             socketUuid: socketUuid,
-            gameCode: socketData["gameCode"] || "..."
+            gameCode: socketData["gameCode"] || "...",
+            isOwner: isOwner(socketData)
         });
         //bridge.log(newStateData);
         bridge.call("SetStateData", {
