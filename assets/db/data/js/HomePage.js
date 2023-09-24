@@ -110,6 +110,7 @@ if (bridge.args["switch"] === "onConfirmCodeResponse") {
                 "args": {
                     "socketUuid": socketUuid,
                     "includeAll": true,
+                    "closeBottomSheet": true,
                     "switch": "selectAllReadyGame"
                 }
             }
@@ -118,10 +119,12 @@ if (bridge.args["switch"] === "onConfirmCodeResponse") {
 }
 
 if (bridge.args["switch"] === "selectAllReadyGame") {
+    //Эта штука для DeepLink сделана, что бы окно последнее не закрывать, так как ничего не открывалось
+    var closeBottomSheet = bridge.args["closeBottomSheet"] || true;
     var socketUuid = bridge.args["socketUuid"];
     if (bridge.args["fetchDb"].length > 0) {
         var fetch = bridge.args["fetchDb"][0];
-        closeThisPageAndOpenGame(socketUuid, fetch["uuid_data"]);
+        closeThisPageAndOpenGame(socketUuid, fetch["uuid_data"], closeBottomSheet);
     } else {
         var gameUuid = bridge.call("Util", {"case": "uuid"})["uuid"];
         bridge.call("DataSourceSet", {
@@ -143,6 +146,7 @@ if (bridge.args["switch"] === "selectAllReadyGame") {
                     "includeAll": true,
                     "socketUuid": socketUuid,
                     "gameUuid": gameUuid,
+                    "closeBottomSheet": closeBottomSheet,
                     "switch": "gameConnectSaveToDb"
                 }
             }
@@ -151,10 +155,12 @@ if (bridge.args["switch"] === "selectAllReadyGame") {
 }
 
 if (bridge.args["switch"] === "gameConnectSaveToDb") {
-    closeThisPageAndOpenGame(bridge.args["socketUuid"], bridge.args["gameUuid"]);
+    closeThisPageAndOpenGame(bridge.args["socketUuid"], bridge.args["gameUuid"], bridge.args["closeBottomSheet"]);
 }
 
-function closeThisPageAndOpenGame(socketUuid, gameUuid) {
-    bridge.call("NavigatorPop", {});
+function closeThisPageAndOpenGame(socketUuid, gameUuid, closeBottomSheet) {
+    if (closeBottomSheet) {
+        bridge.call("NavigatorPop", {});
+    }
     bridge.call("NavigatorPush", getNavigatorPushGameArgs(gameUuid, socketUuid));
 }
