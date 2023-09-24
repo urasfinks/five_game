@@ -21,8 +21,15 @@ if (bridge.args["switch"] === "randomize") {
     var listPerson = getListPerson(socketData);
     listPerson = bridge.shuffle(listPerson);
     var data = {};
+    var countCaptain = 0;
     for (var i = 0; i < listPerson.length; i++) {
-        listPerson[i]["role"] = i < 2 ? "captain" : "player";
+        var isStatic = listPerson[i]["static"] || false;
+        if (countCaptain < 2 && !isStatic) {
+            listPerson[i]["role"] = "captain";
+            countCaptain++;
+        } else {
+            listPerson[i]["role"] = "player";
+        }
         listPerson[i]["team"] = i % 2 == 0 ? "red" : "blue";
         data["user" + listPerson[i]["id"]] = listPerson[i];
     }
