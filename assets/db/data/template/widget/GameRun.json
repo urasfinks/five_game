@@ -10,7 +10,7 @@
         "children": [
           {
             "flutterType": "Text",
-            "label": "Сейчас ход:"
+            "label": "Ход:"
           },
           {
             "flutterType": "SizedBox",
@@ -73,7 +73,7 @@
             },
             "child": {
               "flutterType": "Text",
-              "label": "${state(main,scoreRed)}",
+              "label": "${state(main,scoreRed)}/${state(main,allRed)}",
               "style": {
                 "flutterType": "TextStyle",
                 "fontSize": 12,
@@ -96,7 +96,7 @@
             },
             "child": {
               "flutterType": "Text",
-              "label": "${state(main,scoreBlue)}",
+              "label": "${state(main,scoreBlue)}/${state(main,allBlue)}",
               "style": {
                 "flutterType": "TextStyle",
                 "fontSize": 12,
@@ -126,7 +126,7 @@
       "child": {
         "flutterType": "Button",
         "height": 44,
-        "backgroundColor": "blue",
+        "backgroundColor": "${state(main,originSocketData.runTeam, false)}",
         "onPressed": {
           "sysInvoke": "Alert",
           "args": {

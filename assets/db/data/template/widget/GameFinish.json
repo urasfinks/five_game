@@ -40,7 +40,7 @@
             },
             "child": {
               "flutterType": "Text",
-              "label": "${state(main,scoreRed)}",
+              "label": "${state(main,scoreRed)}/${state(main,allRed)}",
               "style": {
                 "flutterType": "TextStyle",
                 "fontSize": 12,
@@ -63,7 +63,7 @@
             },
             "child": {
               "flutterType": "Text",
-              "label": "${state(main,scoreBlue)}",
+              "label": "${state(main,scoreBlue)}/${state(main,allBlue)}",
               "style": {
                 "flutterType": "TextStyle",
                 "fontSize": 12,

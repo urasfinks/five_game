@@ -117,7 +117,7 @@ function getGridWord(socketData) {
                         "height": 10,
                         "decoration": {
                             "flutterType": "BoxDecoration",
-                            "color": cardData["selected"],
+                            "color": cardData["team"],
                             "borderRadius": 9
                         },
                         "child": {
@@ -135,6 +135,9 @@ function getGridWord(socketData) {
                     if (cardData["selected"] !== cardData["team"]) {
                         decoration = "lineThrough";
                         curColorText = "schema:secondary";
+                        //curColorText = cardData["selected"];
+                    } else {
+                        curColorText = cardData["selected"]
                     }
                 }
 
@@ -156,19 +159,15 @@ function getGridWord(socketData) {
                                     {
                                         "flutterType": "Center",
                                         "child": {
-                                            "flutterType": "Opacity",
-                                            "opacity": cardData["selected"] == null ? 1 : 1,
-                                            "child": {
-                                                "flutterType": "Text",
-                                                "textAlign": "center",
-                                                "label": cardData["label"].toUpperCase(),
-                                                "style": {
-                                                    "flutterType": "TextStyle",
-                                                    "decoration": decoration,
-                                                    "fontSize": 12,
-                                                    "fontWeight": "bold",
-                                                    "color": curColorText
-                                                }
+                                            "flutterType": "Text",
+                                            "textAlign": "center",
+                                            "label": cardData["label"].toUpperCase(),
+                                            "style": {
+                                                "flutterType": "TextStyle",
+                                                "decoration": decoration,
+                                                "fontSize": 12,
+                                                "fontWeight": "bold",
+                                                "color": curColorText
                                             }
                                         }
                                     },
@@ -255,17 +254,18 @@ function calculateScore(socketData, newStateData, socketUuid) {
             if (socketData[key]["team"] === "blue") {
                 allBlue++;
             }
-            if (socketData[key]["selected"] != undefined) {
+            if (socketData[key]["selected"] != undefined && socketData[key]["selected"] != null) {
                 if (socketData[key]["team"] === "blue") {
                     blue++;
-                } else if (socketData[key]["team"] === "red") {
+                }
+                if (socketData[key]["team"] === "red") {
                     red++;
                 }
             }
         }
     }
     //bridge.log("Score: blue: " + blue + "; allBlue: " + allBlue + "; red: " + red + "; allRed: " + allRed);
-    if (socketData["finishDescription"] === undefined) {
+    if (socketData["finishDescription"] == undefined) {
         if (blue === allBlue && red === allRed) {
             socketSave({
                 finishDescription: "Ничья!",
@@ -286,6 +286,8 @@ function calculateScore(socketData, newStateData, socketUuid) {
     }
     newStateData["scoreRed"] = red;
     newStateData["scoreBlue"] = blue;
+    newStateData["allBlue"] = allBlue;
+    newStateData["allRed"] = allRed;
 }
 
 function socketSave(data, socketUuid) {
