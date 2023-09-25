@@ -40,13 +40,13 @@ function getGridWord(socketData) {
         "red": "red",
         "blue": "blue",
         "neutral": "#efd9b9",
-        "die": "schema:onBackground"
+        "die": "black"
     };
     var colorText = {
         "red": "white",
         "blue": "white",
         "neutral": "black",
-        "die": "red"
+        "die": "white"
     };
     var mapCount = {};
     var mapCountMy = {};
@@ -129,15 +129,13 @@ function getGridWord(socketData) {
                 var curColorCard = (isCapt || cardData["selected"] != null) ? colorCard[cardData["team"]] : "#efd9b9";
                 var curColorText = (isCapt || cardData["selected"] != null) ? colorText[cardData["team"]] : "black";
                 var decoration = "none";
+                var curWeightText = "bold";
                 if (cardData["selected"] != null) {
+                    curWeightText = "normal";
                     curColorText = "schema:secondary";
                     curColorCard = "schema:onBackground";
                     if (cardData["selected"] !== cardData["team"]) {
                         decoration = "lineThrough";
-                        curColorText = "schema:secondary";
-                        //curColorText = cardData["selected"];
-                    } else {
-                        curColorText = cardData["selected"]
                     }
                 }
 
@@ -166,7 +164,7 @@ function getGridWord(socketData) {
                                                 "flutterType": "TextStyle",
                                                 "decoration": decoration,
                                                 "fontSize": 12,
-                                                "fontWeight": "bold",
+                                                "fontWeight": curWeightText,
                                                 "color": curColorText
                                             }
                                         }
