@@ -15,6 +15,12 @@ if (bridge.args["switch"] === "constructor") {
 if (bridge.args["switch"] === "selectMyGame") {
     var list = [];
     if (bridge.args["fetchDb"].length > 0) {
+        var stateMap = {
+            "team": "Набор команды",
+            "word": "Выбор карточек",
+            "run": "Игра начата",
+            "finish": "Игра закончена",
+        };
         for (var i = 0; i < bridge.args["fetchDb"].length; i++) {
             var fetch = bridge.args["fetchDb"][i];
             var date = new Date(fetch["date_add_data"] * 1);
@@ -23,8 +29,9 @@ if (bridge.args["switch"] === "selectMyGame") {
                 socketUuid = fetch["parent_uuid_data"];
             }
             var gameUuid = fetch["uuid_data"];
+            var state = " \r\n" + stateMap[bridge.args["fetchDb"][i]["value_data"]["gameState"]];
             list.push({
-                "label": (bridge.args["fetchDb"][i]["value_data"]["description"] || "Игра без описания"),
+                "label": (bridge.args["fetchDb"][i]["value_data"]["description"] || "Игра без описания") + state,
                 "labelExtra": dateFormat(date),
                 "templateWidgetSrc": "IteratorButtonExtraIcon",
                 "onTap": {
