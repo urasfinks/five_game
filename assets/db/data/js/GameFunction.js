@@ -137,6 +137,9 @@ function getGridWord(socketData) {
                     if (cardData["selected"] !== cardData["team"]) {
                         decoration = "lineThrough";
                     }
+                    if(cardData["team"] == "die"){
+                        curColorText = "red";
+                    }
                 }
 
                 var block = {
