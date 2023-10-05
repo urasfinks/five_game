@@ -18,20 +18,28 @@ if (bridge.args["switch"] === "addPerson") {
 
 if (bridge.args["switch"] === "randomize") {
     var socketData = bridge.state["main"]["originSocketData"];
-    var listPerson = getListPerson(socketData);
-    listPerson = bridge.shuffle(listPerson);
+    var listPerson = bridge.shuffle(getListPerson(socketData));
     var data = {};
     var countCaptain = 0;
+    var listNotCaptain = [];
     for (var i = 0; i < listPerson.length; i++) {
         var isStatic = listPerson[i]["static"] || false;
-        if (countCaptain < 2 && !isStatic) {
-            listPerson[i]["role"] = "captain";
-            countCaptain++;
+        if (isStatic === true) {
+            listNotCaptain.push(listPerson[i]);
         } else {
-            listPerson[i]["role"] = "player";
+            if (countCaptain == 0 || countCaptain == 1) {
+                listPerson[i]["role"] = "captain";
+                listPerson[i]["team"] = countCaptain === 0 ? "red" : "blue";
+                countCaptain++;
+                data["user" + listPerson[i]["id"]] = listPerson[i];
+            } else {
+                listNotCaptain.push(listPerson[i]);
+            }
         }
-        listPerson[i]["team"] = i % 2 == 0 ? "red" : "blue";
-        data["user" + listPerson[i]["id"]] = listPerson[i];
+    }
+    for (var i = 0; i < listNotCaptain.length; i++) {
+        listNotCaptain[i]["team"] = i % 2 == 0 ? "red" : "blue";
+        data["user" + listNotCaptain[i]["id"]] = listNotCaptain[i];
     }
     bridge.log("randomize: " + JSON.stringify(data));
     socketSave(data, bridge.pageArgs["socketUuid"]);

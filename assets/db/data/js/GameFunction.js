@@ -345,9 +345,7 @@ function getListPersonGroup(socketData, team, socketUuid) {
             var iconPerson = "person_outline";
             var name = listPerson[i]["name"];
             if (listPerson[i]["static"] != undefined && listPerson[i]["static"] === true) {
-                if (isOwn) {
-                    name = "[" + name + "]";
-                }
+                name = "[" + name + "]";
                 iconPerson = "android";
             }
             var iconSrc = isOwn ? "edit" : iconPerson;
