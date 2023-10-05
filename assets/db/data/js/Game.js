@@ -1,6 +1,6 @@
 if (bridge.args["switch"] === "onChange") {
     bridge.log(bridge.args["data"]);
-    if (bridge.args["data"] === undefined || bridge.args["data"] === null) {
+    if (bridge.args["data"] == undefined || bridge.args["data"] === null) {
         bridge.call("SetStateData", {
             "map": {switchKey: "error"}
         });

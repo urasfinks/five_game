@@ -54,7 +54,7 @@ function getGridWord(socketData) {
         if (key.startsWith("tapCard_")) {
             var curKey = "i" + key.split("tapCard_")[1].split("_")[0];
             var amI = key.split("tapCard_")[1].split("_")[1];
-            if (mapCount[curKey] === undefined) {
+            if (mapCount[curKey] == undefined) {
                 mapCount[curKey] = 1;
             } else {
                 mapCount[curKey]++;
@@ -87,7 +87,7 @@ function getGridWord(socketData) {
                     "height": 20,
                     "decoration": {
                         "flutterType": "BoxDecoration",
-                        "color": mapCountMy["i" + curIndex] === undefined ? "rgba:0,0,0,0.75" : "rgba:50,205,50,0.75",
+                        "color": mapCountMy["i" + curIndex] == undefined ? "rgba:0,0,0,0.75" : "rgba:50,205,50,0.75",
                         "borderRadius": 9,
                         "border": {
                             "flutterType": "Border",
@@ -384,7 +384,7 @@ function getFlagToWordGameState(socketData) {
             }
         }
 
-        if (listPerson[i]["team"] === undefined || listPerson[i]["team"] === "undefined") {
+        if (listPerson[i]["team"] == undefined || listPerson[i]["team"] === "undefined") {
             countUndefined++;
         }
     }

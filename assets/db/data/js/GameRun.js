@@ -6,7 +6,7 @@ if (bridge.args["switch"] === "toNextTeam") {
             var curIndexCard = key.split("tapCard_")[1].split("_")[0];
             newSocketUpdate[key] = null;
             var card = newSocketUpdate["card" + curIndexCard] || socketData["card" + curIndexCard];
-            if (card["userPress"] === undefined) {
+            if (card["userPress"] == undefined) {
                 card["userPress"] = [];
             }
             if (card["team"] === "black") {
@@ -33,6 +33,6 @@ if (bridge.args["switch"] === "toNextTeam") {
 if (bridge.args["switch"] === "onCardTap") {
     var data = {};
     var key = "tapCard_" + bridge.args["index"] + "_" + bridge.unique;
-    data[key] = bridge.state["main"]["originSocketData"][key] === undefined ? true : null;
+    data[key] = bridge.state["main"]["originSocketData"][key] == undefined ? true : null;
     socketSave(data, bridge.pageArgs["socketUuid"]);
 }

@@ -76,7 +76,7 @@ if (bridge.args["switch"] === "gameSaveToDb") {
 }
 
 if (bridge.args["switch"] === "requestConfirmCode") {
-    if (bridge.state["main"]["CodeValue"] === undefined || bridge.state["main"]["CodeValue"].trim() === "") {
+    if (bridge.state["main"]["CodeValue"] == undefined || bridge.state["main"]["CodeValue"].trim() === "") {
         bridge.alert("Код слишком пустой)");
     } else {
         bridge.call("Http", {
