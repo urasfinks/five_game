@@ -9,9 +9,9 @@ if (bridge.args["switch"] === "toNextTeam") {
             if (card["userPress"] == undefined) {
                 card["userPress"] = [];
             }
-            if (card["team"] === "black") {
+            if (card["team"] === "die") {
                 newSocketUpdate["gameState"] = "finish";
-                newSocketUpdate["description"] = "Выбрана чёрная карта." +
+                newSocketUpdate["finishDescription"] = "Выбрана чёрная карта." +
                     ". Выиграла " + (socketData["runTeam"] === "blue" ? "красная" : "синяя") +
                     " команда";
             }
