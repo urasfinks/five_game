@@ -34,7 +34,7 @@ if (bridge.args["switch"] === "selectMyGame") {
 if (bridge.args["switch"] === "createGame") {
     var uuid = bridge.call("Util", {"case": "uuid"})["uuid"];
     gameData = {
-        "description": "CodeNames",
+        "description": "AlternativeWord",
         "gameUuid": uuid,
         "owner": bridge.unique,
         "runTeam": "red",

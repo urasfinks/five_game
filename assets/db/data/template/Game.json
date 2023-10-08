@@ -8,7 +8,7 @@
       "flutterType": "SliverAppBar",
       "title": {
         "flutterType": "Text",
-        "label": "CodeNames",
+        "label": "AlternativeWord",
         "style": {
           "flutterType": "TextStyle",
           "fontSize": 17
