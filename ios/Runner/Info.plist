@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>five_game</string>
+	<string>FiveGame</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -28,6 +28,8 @@
 	<string>FiveGame просит доступ к камере, что бы загрузить фотографию вашего профиля</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>FiveGame просит доступ к галерее, что бы загрузить фотографию вашего профиля</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The application does not use this feature</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
