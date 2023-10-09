@@ -10,7 +10,7 @@
         "keyboardType": "text",
         "onChangedSetStateNotify": false,
         "onInitSetState": true,
-        "data": "${pageArgs(personValue.name)}",
+        "data": "${pageArgs(personValue.name)|ifNotExist(Имя)}",
         "enabled": "${pageArgs(personValue.static,false)}",
         "style": {
           "flutterType": "TextStyle",
