@@ -142,7 +142,7 @@
         },
         "child": {
           "flutterType": "Text",
-          "label": "Выбор сделан, ехаем!",
+          "label": "Принять все выбранные слова",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,
