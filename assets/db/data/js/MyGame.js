@@ -12,6 +12,30 @@ if (bridge.args["switch"] === "constructor") {
     });
 }
 
+if (bridge.args["switch"] === "onRemove") {
+    bridge.call("DbQuery", {
+        "sql": "update data set is_remove_data = 1 where id_data = ?",
+        "args": [bridge.args["id_data"]],
+        "onFetch": {
+            "jsInvoke": "MyGame.js",
+            "args": {
+                "includeAll": true,
+                "switch": "onRemoved"
+            }
+        }
+    });
+}
+
+if (bridge.args["switch"] === "onRemoved") {
+    bridge.call("PageReload", {
+        "case": "current"
+    });
+    bridge.call("PageReload", {
+        "case": "subscribed",
+        "key": "Game"
+    });
+}
+
 if (bridge.args["switch"] === "selectMyGame") {
     var list = [];
     if (bridge.args["fetchDb"].length > 0) {
@@ -33,7 +57,8 @@ if (bridge.args["switch"] === "selectMyGame") {
             list.push({
                 "label": (bridge.args["fetchDb"][i]["value_data"]["description"] || "Игра без описания") + state,
                 "labelExtra": dateFormat(date),
-                "templateWidgetSrc": "IteratorButtonExtraIcon",
+                "templateWidgetSrc": "IteratorButtonExtraIconWithRemove",
+                "id_data": bridge.args["fetchDb"][i]["id_data"],
                 "onTap": {
                     "sysInvoke": "NavigatorPush",
                     "args": getNavigatorPushGameArgs(gameUuid, socketUuid)
