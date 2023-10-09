@@ -80,6 +80,24 @@ function getGridWord(socketData) {
                     "index": counter - 1
                 }
             } : null;
+            var onLongPress = (canBePressed && isCapt) ? {
+                "sysInvoke": "Alert",
+                "args": {
+                    "confirmAction": true,
+                    "label": "Подтвердите выбор слова, если это промах, ход автоматически перейдёт к другой команде",
+                    "actionLabel": "Принять",
+                    "backgroundColor": "schema:onBackground",
+                    "actionBackgroundColor": "blue",
+                    "onPressed": {
+                        "jsInvoke": "GameRun.js",
+                        "args": {
+                            "includeAll": true,
+                            "indexCard": cardData["index"],
+                            "switch": "confirmSelect"
+                        }
+                    }
+                }
+            } : null;
             if (cardData != undefined) {
                 var tapCount = mapCount["i" + curIndex] != undefined ? {
                     "flutterType": "Container",
@@ -137,7 +155,7 @@ function getGridWord(socketData) {
                     if (cardData["selected"] !== cardData["team"]) {
                         decoration = "lineThrough";
                     }
-                    if(cardData["team"] == "die"){
+                    if (cardData["team"] == "die") {
                         curColorText = "red";
                     }
                 }
@@ -153,6 +171,7 @@ function getGridWord(socketData) {
                         "child": {
                             "flutterType": "InkWell",
                             "onTap": onTap,
+                            "onLongPress": onLongPress,
                             "child": {
                                 "flutterType": "Stack",
                                 "alignment": "topEnd",

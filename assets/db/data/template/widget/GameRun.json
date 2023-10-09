@@ -126,11 +126,13 @@
       "child": {
         "flutterType": "Button",
         "height": 44,
+        "width": "infinity",
         "backgroundColor": "${state(main,originSocketData.runTeam, false)}",
         "onPressed": {
           "sysInvoke": "Alert",
           "args": {
             "confirmAction": true,
+            "label": "Все выделенные слова будут сброшены и ход перейдёт другой команде. Если хотите подтвердить выбор слова, используйте долгое нажатие на карточку",
             "onPressed": {
               "jsInvoke": "GameRun.js",
               "args": {
@@ -142,7 +144,7 @@
         },
         "child": {
           "flutterType": "Text",
-          "label": "Принять все выбранные слова",
+          "label": "Передать игру следующей команде",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,
