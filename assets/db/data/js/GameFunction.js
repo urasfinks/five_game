@@ -80,7 +80,7 @@ function getGridWord(socketData) {
                     "index": counter - 1
                 }
             } : null;
-            var onLongPress = (canBePressed && isCapt) ? {
+            var onLongPress = (canBePressed && cardData["selected"] == null) ? {
                 "sysInvoke": "Alert",
                 "args": {
                     "confirmAction": true,
