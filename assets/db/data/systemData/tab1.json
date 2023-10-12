@@ -34,7 +34,15 @@
     "constructor": {
       "jsInvoke": "Account.js",
       "args": {
+        "includeAll": true,
         "switch": "constructor"
+      }
+    },
+    "onActive": {
+      "jsInvoke": "Account.js",
+      "args": {
+        "includeAll": true,
+        "switch": "onActive"
       }
     }
   }
