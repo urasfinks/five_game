@@ -14,7 +14,7 @@
       "template": "HomePage.json"
     },
     "subscribeToRefresh": {
-      "lisUuid": [
+      "listUuid": [
         "HomePage.js",
         "GameFunction.js"
       ],

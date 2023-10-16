@@ -97,7 +97,7 @@
     {
       "flutterType": "TextField",
       "keyboardType": "text",
-      "data": "${state(main,deviceName,)|ifNotExist(\\$\\{storage(accountName,)|ifNotExist(1)\\})|template()|ifNotExist(Имя)}",
+      "data": "${state(main,deviceName,)|ifNotExist(\\$\\{storage(accountName,)|ifNotExist(Имя)\\})|template()|ifNotExist(Имя)}",
       "onChangedSetStateNotify": false,
       "style": {
         "flutterType": "TextStyle",

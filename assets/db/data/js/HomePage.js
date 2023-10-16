@@ -1,5 +1,5 @@
 if (bridge.args["switch"] === "constructor") {
-
+    bridge.call("Hide", {"case": "customLoader"});
     bridge.asyncImport("GameFunction.js", {});
 
     bridge.call("DbQuery", {
@@ -32,6 +32,7 @@ if (bridge.args["switch"] === "selectMyGame") {
 }
 
 if (bridge.args["switch"] === "createGame") {
+    bridge.call("Show", {"case": "customLoader"});
     var uuid = bridge.call("Util", {"case": "uuid"})["uuid"];
     gameData = {
         "description": "AlternativeWord",
@@ -72,6 +73,7 @@ if (bridge.args["switch"] === "createGame") {
 }
 
 if (bridge.args["switch"] === "gameSaveToDb") {
+    bridge.call("Hide", {"case": "customLoader"});
     bridge.call("NavigatorPush", getNavigatorPushGameArgs(bridge.args["gameUuid"], bridge.args["gameUuid"]));
 }
 
@@ -211,6 +213,11 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid) {
                 "includeAll": true,
                 "switch": "onRenderFloatingActionButton"
             }
+        },
+        "subscribeToRefresh": {
+            "listUuid": [
+                "GameFunction.js"
+            ]
         }
     };
 }
