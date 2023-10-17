@@ -34,19 +34,12 @@ if (bridge.args["switch"] === "selectMyGame") {
 if (bridge.args["switch"] === "createGame") {
     bridge.call("Show", {"case": "customLoader"});
     var uuid = bridge.call("Util", {"case": "uuid"})["uuid"];
-    gameData = {
+    var gameData = {
         "description": "AlternativeWord",
         "gameUuid": uuid,
         "owner": bridge.unique,
         "runTeam": "red",
         "gameState": "team", //team/word/run/finish
-    };
-    gameData["user" + bridge.unique] = {
-        "name": bridge.call("GetStorage", {"key": "accountName", "default": ""})["accountName"],
-        "team": "undefined",
-        "role": "player",
-        "id": bridge.unique,
-        "static": false
     };
     bridge.call("DataSourceSet", {
         // Хак, для сокетных данных, которые необходимо заинсертит в локальную БД

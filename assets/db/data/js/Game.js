@@ -1,6 +1,6 @@
 if (bridge.args["switch"] === "onChange") {
     bridge.log(bridge.args["data"]);
-    if (bridge.args["data"] == undefined || bridge.args["data"] === null) {
+    if (bridge.args["data"] == undefined || bridge.args["data"] == null) {
         bridge.call("SetStateData", {
             "map": {switchKey: "error"}
         });
@@ -36,13 +36,18 @@ if (bridge.args["switch"] === "onChange") {
             newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
         } else {
             //Если нет данных об этом устройстве - добавим
+            newStateData["deviceName"] = "Укажите своё имя";
             var data = {};
+            var accName = bridge.getStorage("accountName", newStateData["deviceName"]);
+            if (accName == undefined || accName == "" || accName.trim() == "") {
+                accName = newStateData["deviceName"];
+            }
             data["user" + bridge.unique] = {
-                name: bridge.getStorage("accountName", "Новый игрок"),
+                name: accName,
                 id: bridge.unique,
-                "static": false,
-                "team": "",
-                "role": "player"
+                static: false,
+                team: "",
+                role: "player"
             };
             socketSave(data, socketUuid);
         }
