@@ -80,8 +80,8 @@ if (bridge.args["switch"] === "generateWord") {
     var all = 28;
     var med = Math.floor((all - 1) / 3);
     var mark = {
-        red: med,
-        blue: med + 1,
+        red: med + 1,
+        blue: med,
         die: 1,
         neutral: all - 2 - (med * 2)
     };
