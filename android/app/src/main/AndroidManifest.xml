@@ -3,7 +3,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:label="five_game"
+        android:label="Five Game"
         android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
