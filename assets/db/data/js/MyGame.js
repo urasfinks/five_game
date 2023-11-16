@@ -1,6 +1,6 @@
 if (bridge.args["switch"] === "constructor") {
     bridge.call("DbQuery", {
-        "sql": "select * from data where key_data = ? and is_remove_data = 0 order by id_data desc",
+        "sql": "select * from data where key_data = ? and is_remove_data = 0 order by date_add_data desc",
         "args": ["Game"],
         "onFetch": {
             "jsInvoke": "MyGame.js",
