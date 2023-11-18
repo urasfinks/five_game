@@ -123,5 +123,7 @@ if (bridge.args["switch"] === "GenCodeUuidResponse") {
             "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
             "timestampCodeGenerate": bridge.util("timestamp", {})
         }, bridge.pageArgs["socketUuid"]);
+    } else {
+        bridge.util("dataSync", {});
     }
 }
