@@ -52,7 +52,7 @@ if (bridge.args["switch"] === "onChange") {
             socketSave(data, socketUuid);
         }
         if (["team"].includes(curGameState)) {
-            newStateData["toWordGameState"] = getFlagToWordGameState(socketData);
+            getFlagToWordGameState(socketData, newStateData);
             // Так как код для подключения истекает каждые 5 минут будем передёргивать страницу каждые 5 минут 10 секунд
             // ЧТо бы заново сгенерировать код для подключения
             bridge.call("Util", {"case": "dynamicPageApi", "api": "startReloadEach", "eachReload": 310});

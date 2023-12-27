@@ -18,31 +18,35 @@ if (bridge.args["switch"] === "addPerson") {
 
 if (bridge.args["switch"] === "randomize") {
     var socketData = bridge.state["main"]["originSocketData"];
-    var listPerson = bridge.shuffle(getListPerson(socketData));
+    var listPerson = groupFirstRealPerson(bridge.shuffle(getListPerson(socketData)));
     var data = {};
     var countCaptain = 0;
-    var listNotCaptain = [];
     for (var i = 0; i < listPerson.length; i++) {
-        var isStatic = listPerson[i]["static"] || false;
-        if (isStatic === true) {
-            listNotCaptain.push(listPerson[i]);
+        if(i === 0 || i === 1){
+            listPerson[i]["role"] = "captain";
+            listPerson[i]["team"] = countCaptain++ === 0 ? "red" : "blue";
         } else {
-            if (countCaptain == 0 || countCaptain == 1) {
-                listPerson[i]["role"] = "captain";
-                listPerson[i]["team"] = countCaptain === 0 ? "red" : "blue";
-                countCaptain++;
-                data["user" + listPerson[i]["id"]] = listPerson[i];
-            } else {
-                listNotCaptain.push(listPerson[i]);
-            }
+            listPerson[i]["role"] = "player";
+            listPerson[i]["team"] = i % 2 == 0 ? "red" : "blue";
         }
-    }
-    for (var i = 0; i < listNotCaptain.length; i++) {
-        listNotCaptain[i]["team"] = i % 2 == 0 ? "red" : "blue";
-        data["user" + listNotCaptain[i]["id"]] = listNotCaptain[i];
+        data["user" + listPerson[i]["id"]] = listPerson[i];
     }
     bridge.log("randomize: " + JSON.stringify(data));
     socketSave(data, bridge.pageArgs["socketUuid"]);
+}
+
+function groupFirstRealPerson(listPerson){
+    var listReal = [];
+    var listStatic = [];
+    for (var i = 0; i < listPerson.length; i++) {
+        var isStatic = listPerson[i]["static"] || false;
+        if (isStatic === true) {
+            listStatic.push(listPerson[i]);
+        }else{
+            listReal.push(listPerson[i]);
+        }
+    }
+    return listReal.concat(listStatic);
 }
 
 if (bridge.args["switch"] === "removePerson") {

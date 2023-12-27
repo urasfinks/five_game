@@ -30,7 +30,7 @@
               "args": {
                 "case": "copyClipboard",
                 "data": "${state(main,gameCode,123456)}",
-                "templateArguments": [
+                "currentRenderTemplateList": [
                   "data"
                 ]
               }
@@ -62,7 +62,7 @@
               "args": {
                 "case": "share",
                 "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectAlternativeWord/socketUuid/${state(main,socketUuid,undefined)}",
-                "templateArguments": [
+                "currentRenderTemplateList": [
                   "data"
                 ]
               }
@@ -267,6 +267,10 @@
     {
       "flutterType": "SizedBox",
       "height": 20
+    },
+    {
+      "flutterType": "Text",
+      "label": "${state(main,error)}"
     },
     {
       "flutterType": "Visibility",

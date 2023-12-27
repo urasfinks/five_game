@@ -18,7 +18,7 @@
               "args": {
                 "switch": "onRemove",
                 "id_data": "${id_data}",
-                "templateArguments": [
+                "currentRenderTemplateList": [
                   "id_data"
                 ]
               }

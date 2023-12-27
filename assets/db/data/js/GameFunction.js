@@ -35,7 +35,7 @@ function getGridWord(socketData) {
         "flutterType": "Column",
         "children": []
     };
-    var matrix = bridge.orientation === "portrait" ? {col: 4, row: 7} : {col: 7, row: 4};
+    var matrix = bridge.orientation === "portrait" ? {col: 4, row: 6} : {col: 6, row: 4};
     var colorCard = {
         "red": "red",
         "blue": "blue",
@@ -384,46 +384,32 @@ function getListPersonGroup(socketData, team, socketUuid) {
     return result;
 }
 
-function getFlagToWordGameState(socketData) {
+function getFlagToWordGameState(socketData, state) {
     if (!isOwner(socketData)) {
-        return "false";
+        state["toWordGameState"] = "false";
+        return;
     }
 
     var listPerson = getListPerson(socketData);
     var countCaptain = 0;
-    var countRed = 0;
-    var countBlue = 0;
-    var countUndefined = 0;
 
     for (var i = 0; i < listPerson.length; i++) {
         if (listPerson[i]["role"] === "captain") {
             countCaptain++;
-            if (listPerson[i]["team"] === "red") {
-                countRed++;
-            }
-            if (listPerson[i]["team"] === "blue") {
-                countBlue++;
-            }
-        }
-
-        if (listPerson[i]["team"] == undefined || listPerson[i]["team"] === "undefined") {
-            countUndefined++;
         }
     }
-
-    if (countCaptain !== 2) {
-        if (listPerson.length > 1) {
-            bridge.alert("Надо выбрать капитанов для двух команд");
-        }
-        return "false";
+    var first2CommandIndex = Math.floor(listPerson.length/2);
+    //bridge.log(socketData);
+    //bridge.log(listPerson);
+    if (countCaptain < 2) {
+        state["error"] = "Надо выбрать капитанов для двух команд";
+        state["toWordGameState"] = "false";
+    } else if(listPerson[first2CommandIndex]["static"] === true){
+        state["error"] = "Капитан второй команды не может быть статичным участником";
+        state["toWordGameState"] = "false";
     }
-    if (countUndefined > 0) {
-        bridge.alert("Надо распределить " + countUndefined + " человек по командам");
-        return "false";
+    if (state["toWordGameState"] == undefined) {
+        state["error"] = "";
+        state["toWordGameState"] = "true";
     }
-    if (countRed > 1 || countBlue > 1) {
-        bridge.alert("У команды должен быть 1 капитан");
-        return "false";
-    }
-    return "true";
 }

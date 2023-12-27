@@ -74,5 +74,7 @@
 	<array>
 		<string>applinks:5gm.ru</string>
 	</array>
+	<key>FLTEnableImpeller</key>
+    <false/>
 </dict>
 </plist>
