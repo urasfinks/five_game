@@ -389,23 +389,29 @@ function getFlagToWordGameState(socketData, state) {
         state["toWordGameState"] = "false";
         return;
     }
+    //Надо что бы капитаны были реальные игроки
+    //Надо что бы капитанов было 2
 
     var listPerson = getListPerson(socketData);
     var countCaptain = 0;
+    var countRealCaptain = 0;
 
     for (var i = 0; i < listPerson.length; i++) {
         if (listPerson[i]["role"] === "captain") {
             countCaptain++;
+            if(listPerson[i]["static"] !== true){
+                countRealCaptain++;
+            }
         }
     }
-    var first2CommandIndex = Math.floor(listPerson.length/2);
+
     //bridge.log(socketData);
     //bridge.log(listPerson);
     if (countCaptain < 2) {
         state["error"] = "Надо выбрать капитанов для двух команд";
         state["toWordGameState"] = "false";
-    } else if(listPerson[first2CommandIndex]["static"] === true){
-        state["error"] = "Капитан второй команды не может быть статичным участником";
+    } else if(countRealCaptain < 2){
+        state["error"] = "Капитан не может быть статичным участником";
         state["toWordGameState"] = "false";
     }
     if (state["toWordGameState"] == undefined) {
