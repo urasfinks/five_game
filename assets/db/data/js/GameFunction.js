@@ -343,11 +343,14 @@ function getListPersonGroup(socketData, team, socketUuid) {
             var ami = listPerson[i]["id"] === bridge.unique ? "Я " : "";
             var isCaptain = listPerson[i]["role"] === "captain" ? "Капитан " : "";
             var background = "schema:onBackground";
+            var textColor = "schema:inversePrimary";
             if (team === "red") {
                 background = "red.600";
+                textColor = "white";
             }
             if (team === "blue") {
                 background = "blue.600";
+                textColor = "white";
             }
             var iconColor = (team === "red" || team === "blue") ? "#ffffff" : "#999999";
 
@@ -376,6 +379,7 @@ function getListPersonGroup(socketData, team, socketUuid) {
                 "templateWidgetSrc": "IteratorButtonIcon",
                 "iconSrc": iconSrc,
                 "background": background,
+                "textColor": textColor,
                 "iconColor": iconColor,
                 "onTap": onTap
             });
@@ -399,19 +403,19 @@ function getFlagToWordGameState(socketData, state) {
     for (var i = 0; i < listPerson.length; i++) {
         if (listPerson[i]["role"] === "captain") {
             countCaptain++;
-            if(listPerson[i]["static"] !== true){
+            if (listPerson[i]["static"] !== true) {
                 countRealCaptain++;
             }
         }
     }
-
-    //bridge.log(socketData);
-    //bridge.log(listPerson);
     if (countCaptain < 2) {
         state["error"] = "Надо выбрать капитанов для двух команд";
         state["toWordGameState"] = "false";
-    } else if(countRealCaptain < 2){
+    } else if (countRealCaptain < 2) {
         state["error"] = "Капитан не может быть статичным участником";
+        state["toWordGameState"] = "false";
+    } else if (countCaptain > 2) {
+        state["error"] = "Должно быть по одному капитану в каждой команде";
         state["toWordGameState"] = "false";
     }
     if (state["toWordGameState"] == undefined) {

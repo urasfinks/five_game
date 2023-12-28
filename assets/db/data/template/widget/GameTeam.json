@@ -270,7 +270,7 @@
     },
     {
       "flutterType": "Text",
-      "label": "${state(main,error)}"
+      "label": "${state(main,error,)}"
     },
     {
       "flutterType": "Visibility",

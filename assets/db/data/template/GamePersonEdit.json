@@ -83,7 +83,7 @@
         },
         "thumbDecoration": {
           "flutterType": "BoxDecoration",
-          "color": "schema:background",
+          "color": "schema:onPrimary",
           "borderRadius": 9
         },
         "height": 45,
@@ -123,7 +123,7 @@
         },
         "thumbDecoration": {
           "flutterType": "BoxDecoration",
-          "color": "schema:background",
+          "color": "schema:onPrimary",
           "borderRadius": 9
         },
         "height": 45,
@@ -213,7 +213,7 @@
             "style": {
               "flutterType": "TextStyle",
               "fontSize": 14,
-              "color": "white"
+              "color": "schema:inversePrimary"
             }
           }
         }
