@@ -1,4 +1,5 @@
 if (bridge.args["switch"] === "generateWord") {
+
     var list = [
         "Ноги",
         "Рупор",
@@ -77,7 +78,7 @@ if (bridge.args["switch"] === "generateWord") {
     ];
     bridge.shuffle(list);
     var list2 = [];
-    var all = 28;
+    var all = 24;
     var med = Math.floor((all - 1) / 3);
     var mark = {
         red: med + 1,
