@@ -13,8 +13,12 @@
     "link": {
       "template": "Account.json"
     },
+    "reloadBackground": true,
     "subscribeToRefresh": {
-      "uuid": "Account.js"
+      "listUuid": [
+        "Account.js",
+        "account"
+      ]
     },
     "context": {
       "key": "Tab1",
