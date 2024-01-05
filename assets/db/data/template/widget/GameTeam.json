@@ -61,7 +61,7 @@
               "sysInvoke": "Util",
               "args": {
                 "case": "share",
-                "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectAlternativeWord/socketUuid/${state(main,socketUuid,undefined)}",
+                "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/ConnectSecretConnections/socketUuid/${state(main,socketUuid,undefined)}",
                 "currentRenderTemplateList": [
                   "data"
                 ]

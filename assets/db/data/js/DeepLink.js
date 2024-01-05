@@ -2,7 +2,7 @@ if (bridge.args["switch"] === "switch") {
     bridge.alert("Hello DeepLink key: " + bridge.args["key"]);
 }
 
-if (bridge.args["switch"] === "ConnectAlternativeWord") {
+if (bridge.args["switch"] === "ConnectSecretConnections") {
     var socketUuid = bridge.args["socketUuid"];
     bridge.call("DbQuery", {
         "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",

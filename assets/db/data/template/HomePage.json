@@ -52,10 +52,16 @@
                         "label": "Создать новую игру",
                         "templateWidgetSrc": "IteratorButton",
                         "onTap": {
-                          "jsInvoke": "HomePage.js",
+                          "sysInvoke": "NavigatorPush",
                           "args": {
-                            "includeAll": true,
-                            "switch": "createGame"
+                            "uuid": "GameAvailable.json",
+                            "constructor": {
+                              "jsInvoke": "GameAvailable.js",
+                              "args": {
+                                "includeAll": true,
+                                "switch": "constructor"
+                              }
+                            }
                           }
                         }
                       },

@@ -25,7 +25,7 @@ if (bridge.args["switch"] === "selectMyGame") {
         }
         bridge.call("SetStateData", {
             "map": {
-                "countGameNotFinish": countGameNotFinish == 0 ? "" : countGameNotFinish
+                "countGameNotFinish": countGameNotFinish === 0 ? "" : countGameNotFinish
             }
         });
     }
@@ -35,7 +35,7 @@ if (bridge.args["switch"] === "createGame") {
     bridge.call("Show", {"case": "customLoader"});
     var uuid = bridge.call("Util", {"case": "uuid"})["uuid"];
     var gameData = {
-        "description": "AlternativeWord",
+        "description": "SecretConnections",
         "gameUuid": uuid,
         "owner": bridge.unique,
         "runTeam": "red",

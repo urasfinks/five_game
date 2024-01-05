@@ -1,0 +1,130 @@
+{
+  "flutterType": "Scaffold",
+  "body": {
+    "flutterType": "CustomScrollView",
+    "onStateDataUpdate": true,
+    "padding": "10,20,10,0",
+    "appBar": {
+      "flutterType": "SliverAppBar",
+      "title": {
+        "flutterType": "Text",
+        "label": "Выбор игры",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17
+        }
+      }
+    },
+    "children": [
+      {
+        "ChildrenExtension": "Iterator",
+        "dataType": "state",
+        "key": "listGame",
+        "emptyStartCard": {
+          "flutterType": "SizedBox"
+        },
+        "templateLabel": {
+          "flutterType": "Padding",
+          "padding": "5,20,0,20",
+          "child": {
+            "flutterType": "Text",
+            "label": "${label}",
+            "style": {
+              "flutterType": "TextStyle",
+              "fontSize": 17,
+              "fontWeight": "bold",
+              "color": "schema:secondary"
+            }
+          }
+        },
+        "templateGameLine": {
+          "flutterType": "Padding",
+          "padding": "4,0,4,20",
+          "child": {
+            "flutterType": "Row",
+            "children": [
+              {
+                "flutterType": "Expanded",
+                "child": {
+                  "flutterType": "ImageTitled",
+                  "textGradient": false,
+                  "childKey": "${childKey1}",
+                  "label": "${label1}",
+                  "onTap": "${onTap1|jsonEncode()}",
+                  "image": {
+                    "flutterType": "ImageBase64",
+                    "height": 140,
+                    "width": "infinity",
+                    "fit": "cover",
+                    "src": "${src1}",
+                    "controller": "${contextKey()}_1column"
+                  },
+                  "currentRenderTemplateList": [
+                    "image.controller"
+                  ],
+                  "templateLockScreen": {
+                    "flutterType": "Container",
+                    "alignment": "topRight",
+                    "color": "#000000|opacity(0.65)",
+                    "child": {
+                      "flutterType": "Padding",
+                      "padding": "10",
+                      "child": {
+                        "flutterType": "Icon",
+                        "src": "lock_outline",
+                        "color": "white"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "flutterType": "SizedBox",
+                "width": 20
+              },
+              {
+                "flutterType": "Expanded",
+                "child": {
+                  "flutterType": "ImageTitled",
+                  "textGradient": false,
+                  "childKey": "${childKey2}",
+                  "label": "${label2}",
+                  "onTap": "${onTap2|jsonEncode()}",
+                  "image": {
+                    "flutterType": "ImageBase64",
+                    "height": 140,
+                    "width": "infinity",
+                    "fit": "cover",
+                    "src": "${src2}",
+                    "controller": "${contextKey()}_2column"
+                  },
+                  "currentRenderTemplateList": [
+                    "image.controller"
+                  ],
+                  "templateLockScreen": {
+                    "flutterType": "Container",
+                    "alignment": "topRight",
+                    "color": "#000000|opacity(0.65)",
+                    "child": {
+                      "flutterType": "Padding",
+                      "padding": "10",
+                      "child": {
+                        "flutterType": "Icon",
+                        "src": "lock_outline",
+                        "color": "white"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      }
+    ]
+  }
+}
