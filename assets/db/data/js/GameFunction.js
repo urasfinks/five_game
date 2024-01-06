@@ -73,7 +73,7 @@ function getGridWord(socketData) {
             var curIndex = counter++;
             var cardData = listCard[curIndex];
             var onTap = (canBePressed && cardData["selected"] == null) ? {
-                "jsInvoke": "GameRun.js",
+                "jsInvoke": "SecretConnections/GameRun.js",
                 "args": {
                     "includeAll": true,
                     "switch": "onCardTap",
@@ -89,7 +89,7 @@ function getGridWord(socketData) {
                     "backgroundColor": "schema:onBackground",
                     "actionBackgroundColor": "blue",
                     "onPressed": {
-                        "jsInvoke": "GameRun.js",
+                        "jsInvoke": "SecretConnections/GameRun.js",
                         "args": {
                             "includeAll": true,
                             "indexCard": cardData["index"],
@@ -225,7 +225,7 @@ function onRenderFloatingActionButton(socketData, socketUuid) {
                         "type": "bottomSheet",
                         "height": 200,
                         "link": {
-                            "template": "GamePersonAdd.json",
+                            "template": "SecretConnections/GamePersonAdd.json",
                         }
                     }
                 }
@@ -363,7 +363,7 @@ function getListPersonGroup(socketData, team, socketUuid) {
                     "type": "bottomSheet",
                     "height": 360,
                     "link": {
-                        "template": "GamePersonEdit.json",
+                        "template": "SecretConnections/GamePersonEdit.json",
                     }
                 }
             } : {};
@@ -427,47 +427,47 @@ function getFlagToWordGameState(socketData, state) {
 function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
     //game тут нужен, что бы подставить правильный шаблон той игры, которую запускаем
     return {
-        "uuid": "Game.json",
+        "uuid": "SecretConnections/Game.json",
         "gameUuid": gameUuid,
         "socketUuid": socketUuid,
         "socket": true,
         "subscribeOnChangeUuid": [gameUuid],
         "constructor": {
-            "jsInvoke": "GameInit.js",
+            "jsInvoke": "SecretConnections/GameInit.js",
             "args": {
                 "includeAll": true,
                 "switch": "constructor"
             }
         },
         "onChangeUuid": {
-            "jsInvoke": "Game.js",
+            "jsInvoke": "SecretConnections/Game.js",
             "args": {
                 "includeAll": true,
                 "switch": "onChange"
             }
         },
         "onChangeOrientation": {
-            "jsInvoke": "GameInit.js",
+            "jsInvoke": "SecretConnections/GameInit.js",
             "args": {
                 "includeAll": true,
                 "switch": "onChangeOrientation"
             }
         },
         "destructor": {
-            "jsInvoke": "GameInit.js",
+            "jsInvoke": "SecretConnections/GameInit.js",
             "args": {
                 "switch": "destructor"
             }
         },
         "onActive": {
-            "jsInvoke": "GameInit.js",
+            "jsInvoke": "SecretConnections/GameInit.js",
             "args": {
                 "includeAll": true,
                 "switch": "onChangeOrientation"
             }
         },
         "onRenderFloatingActionButton": {
-            "jsInvoke": "GameInit.js",
+            "jsInvoke": "SecretConnections/GameInit.js",
             "args": {
                 "includeAll": true,
                 "switch": "onRenderFloatingActionButton"

@@ -137,7 +137,7 @@
               "confirmAction": true,
               "label": "Все выделенные слова будут сброшены и ход перейдёт другой команде. Если хотите подтвердить выбор слова, используйте долгое нажатие на карточку",
               "onPressed": {
-                "jsInvoke": "GameRun.js",
+                "jsInvoke": "SecretConnections/GameRun.js",
                 "args": {
                   "includeAll": true,
                   "switch": "toNextTeam"

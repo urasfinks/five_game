@@ -32,7 +32,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "GameWord.js",
+          "jsInvoke": "SecretConnections/GameWord.js",
           "args": {
             "includeAll": true,
             "switch": "generateWord"
@@ -61,7 +61,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "Game.js",
+          "jsInvoke": "SecretConnections/Game.js",
           "args": {
             "includeAll": true,
             "switch": "changeGameState",

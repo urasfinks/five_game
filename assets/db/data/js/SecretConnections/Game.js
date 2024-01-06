@@ -23,7 +23,7 @@ if (bridge.args["switch"] === "onChange") {
                     "uuid": socketUuid
                 },
                 "onResponse": {
-                    "jsInvoke": "Game.js",
+                    "jsInvoke": "SecretConnections/Game.js",
                     "args": {
                         "includeAll": true,
                         "switch": "GenCodeUuidResponse"

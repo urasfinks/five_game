@@ -155,7 +155,7 @@
         }
       },
       "onEditingComplete": {
-        "jsInvoke": "GameTeam.js",
+        "jsInvoke": "SecretConnections/GameTeam.js",
         "args": {
           "includeAll": true,
           "switch": "setName"
@@ -208,7 +208,7 @@
                   "backgroundColor": "schema:onBackground",
                   "actionBackgroundColor": "blue",
                   "onPressed": {
-                    "jsInvoke": "GameTeam.js",
+                    "jsInvoke": "SecretConnections/GameTeam.js",
                     "args": {
                       "includeAll": true,
                       "switch": "randomize"
@@ -280,7 +280,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "Game.js",
+          "jsInvoke": "SecretConnections/Game.js",
           "args": {
             "includeAll": true,
             "switch": "changeGameState",

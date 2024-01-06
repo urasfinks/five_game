@@ -82,7 +82,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "GameTeam.js",
+          "jsInvoke": "SecretConnections/GameTeam.js",
           "args": {
             "includeAll": true,
             "switch": "addPerson"
