@@ -1,6 +1,7 @@
 function constructor() {
     bridge.call("Hide", {"case": "customLoader"});
     bridge.asyncImport("GameFunction.js", {});
+    bridge.asyncImport("SecretConnections/GameFunction.js", {});
 
     bridge.call("DbQuery", {
         "sql": "select * from data where key_data = ? and is_remove_data = 0 order by id_data desc",

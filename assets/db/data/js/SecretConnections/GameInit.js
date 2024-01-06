@@ -13,7 +13,7 @@ if (bridge.args["switch"] === "onChangeOrientation") {
     if (socketData != undefined && ["word", "run"].includes(socketData["gameState"])) {
         bridge.call("SetStateData", {
             "map": {
-                "gridWord": getGridWord(socketData)
+                "gridWord": bridge.global.SecretConnections.getGridWord(socketData)
             }
         });
         controlBottomNavigationBar();

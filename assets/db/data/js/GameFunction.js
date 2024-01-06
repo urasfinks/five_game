@@ -118,9 +118,6 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
             "listUuid": [
                 game + "/GameFunction.js"
             ]
-        },
-        "js": [
-            game + "/GameFunction.js"
-        ]
+        }
     };
 }

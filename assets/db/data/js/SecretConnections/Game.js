@@ -52,7 +52,7 @@ if (bridge.args["switch"] === "onChange") {
             socketSave(data, socketUuid);
         }
         if (["team"].includes(curGameState)) {
-            getFlagToWordGameState(socketData, newStateData);
+            bridge.global.SecretConnections.getFlagToWordGameState(socketData, newStateData);
             // Так как код для подключения истекает каждые 5 минут будем передёргивать страницу каждые 5 минут 10 секунд
             // ЧТо бы заново сгенерировать код для подключения
             bridge.call("Util", {"case": "dynamicPageApi", "api": "startReloadEach", "eachReload": 310});
@@ -63,7 +63,7 @@ if (bridge.args["switch"] === "onChange") {
             if (isOwner(socketData)) {
                 newStateData["visibleGenerateWord"] = "true";
             }
-            newStateData["gridWord"] = getGridWord(socketData);
+            newStateData["gridWord"] = bridge.global.SecretConnections.getGridWord(socketData);
         }
         if (["run", "finish"].includes(curGameState)) {
             calculateScore(socketData, newStateData, socketUuid);
@@ -79,9 +79,9 @@ if (bridge.args["switch"] === "onChange") {
         bridge.overlay(newStateData, {
             switchKey: curGameState,
             originSocketData: socketData,
-            listPersonUndefined: getListPersonGroup(socketData, "undefined", socketUuid),
-            listPersonRed: getListPersonGroup(socketData, "red", socketUuid),
-            listPersonBlue: getListPersonGroup(socketData, "blue", socketUuid),
+            listPersonUndefined: bridge.global.SecretConnections.getListPersonGroup(socketData, "undefined", socketUuid),
+            listPersonRed: bridge.global.SecretConnections.getListPersonGroup(socketData, "red", socketUuid),
+            listPersonBlue: bridge.global.SecretConnections.getListPersonGroup(socketData, "blue", socketUuid),
             toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
             socketUuid: socketUuid,
             gameCode: socketData["gameCode"] || "...",

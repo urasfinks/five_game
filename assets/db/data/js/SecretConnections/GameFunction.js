@@ -1,6 +1,7 @@
 bridge.log("SecretConnections/GameFunction.js included");
 
-function getGridWord(socketData) {
+bridge.global.SecretConnections = {};
+bridge.global.SecretConnections.getGridWord = function(socketData) {
     var listCard = [];
     for (var key in socketData) {
         if (key.startsWith("card")) {
@@ -192,7 +193,7 @@ function getGridWord(socketData) {
     return column;
 }
 
-function getUsers(socketData) {
+bridge.global.SecretConnections.getUsers = function(socketData) {
     var reds = [], blues = [];
     for (var key in socketData) {
         if (key.startsWith("user") && socketData[key]["role"] === "captain") {
@@ -218,7 +219,7 @@ function getUsers(socketData) {
     }
 }
 
-function calculateScore(socketData, newStateData, socketUuid) {
+bridge.global.SecretConnections.calculateScore = function(socketData, newStateData, socketUuid) {
     var blue = 0, red = 0, allBlue = 0, allRed = 0;
     for (var key in socketData) {
         if (key.startsWith("card")) {
@@ -264,18 +265,7 @@ function calculateScore(socketData, newStateData, socketUuid) {
     newStateData["allRed"] = allRed;
 }
 
-function getListPerson(socketData) {
-    var listPerson = [];
-    for (var key in socketData) {
-        if (key.startsWith("user")) {
-            socketData[key]["id"] = key.substring(4);
-            listPerson.push(socketData[key]);
-        }
-    }
-    return listPerson;
-}
-
-function getListPersonGroup(socketData, team, socketUuid) {
+bridge.global.SecretConnections.getListPersonGroup = function(socketData, team, socketUuid) {
     var result = [];
     var isOwn = isOwner(socketData);
     var listPerson = getListPerson(socketData);
@@ -333,7 +323,7 @@ function getListPersonGroup(socketData, team, socketUuid) {
     return result;
 }
 
-function getFlagToWordGameState(socketData, state) {
+bridge.global.SecretConnections.getFlagToWordGameState = function(socketData, state) {
     if (!isOwner(socketData)) {
         state["toWordGameState"] = "false";
         return;
