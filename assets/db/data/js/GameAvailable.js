@@ -15,11 +15,19 @@ if (bridge.args["switch"] === "constructor") {
         "onTap1": {
             "jsInvoke": "HomePage.js",
             "args": {
+                "game": "SecretConnections",
                 "includeAll": true,
                 "switch": "createGame"
             }
         },
-        "onTap2": {}
+        "onTap2": {
+            "jsInvoke": "HomePage.js",
+            "args": {
+                "game": "BattleOfMinds",
+                "includeAll": true,
+                "switch": "createGame"
+            }
+        }
     });
     bridge.call("SetStateData", {
         "map": {

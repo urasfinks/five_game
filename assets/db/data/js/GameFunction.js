@@ -423,3 +423,60 @@ function getFlagToWordGameState(socketData, state) {
         state["toWordGameState"] = "true";
     }
 }
+
+function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
+    //game тут нужен, что бы подставить правильный шаблон той игры, которую запускаем
+    return {
+        "uuid": "Game.json",
+        "gameUuid": gameUuid,
+        "socketUuid": socketUuid,
+        "socket": true,
+        "subscribeOnChangeUuid": [gameUuid],
+        "constructor": {
+            "jsInvoke": "GameInit.js",
+            "args": {
+                "includeAll": true,
+                "switch": "constructor"
+            }
+        },
+        "onChangeUuid": {
+            "jsInvoke": "Game.js",
+            "args": {
+                "includeAll": true,
+                "switch": "onChange"
+            }
+        },
+        "onChangeOrientation": {
+            "jsInvoke": "GameInit.js",
+            "args": {
+                "includeAll": true,
+                "switch": "onChangeOrientation"
+            }
+        },
+        "destructor": {
+            "jsInvoke": "GameInit.js",
+            "args": {
+                "switch": "destructor"
+            }
+        },
+        "onActive": {
+            "jsInvoke": "GameInit.js",
+            "args": {
+                "includeAll": true,
+                "switch": "onChangeOrientation"
+            }
+        },
+        "onRenderFloatingActionButton": {
+            "jsInvoke": "GameInit.js",
+            "args": {
+                "includeAll": true,
+                "switch": "onRenderFloatingActionButton"
+            }
+        },
+        "subscribeToRefresh": {
+            "listUuid": [
+                "GameFunction.js"
+            ]
+        }
+    };
+}

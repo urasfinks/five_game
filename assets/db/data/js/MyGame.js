@@ -53,15 +53,16 @@ if (bridge.args["switch"] === "selectMyGame") {
                 socketUuid = fetch["parent_uuid_data"];
             }
             var gameUuid = fetch["uuid_data"];
+            var game = bridge.args["fetchDb"][i]["value_data"]["game"] || "Игра без описания";
             var state = " \r\n" + stateMap[bridge.args["fetchDb"][i]["value_data"]["gameState"]];
             list.push({
-                "label": (bridge.args["fetchDb"][i]["value_data"]["description"] || "Игра без описания") + state,
+                "label": translateGame(game) + state,
                 "labelExtra": dateFormat(date),
                 "templateWidgetSrc": "IteratorButtonExtraIconWithRemove",
                 "id_data": bridge.args["fetchDb"][i]["id_data"],
                 "onTap": {
                     "sysInvoke": "NavigatorPush",
-                    "args": getNavigatorPushGameArgs(gameUuid, socketUuid)
+                    "args": getNavigatorPushGameArgs(gameUuid, socketUuid, game)
                 }
             });
         }
@@ -71,6 +72,19 @@ if (bridge.args["switch"] === "selectMyGame") {
             }
         });
     }
+}
+
+function translateGame(game) {
+    switch (game) {
+        case "SecretConnections":
+        case "AlternativeWord":
+            return "Тайные Связи";
+        case "BattleOfMinds":
+            return "Битва умов";
+        default:
+            return game;
+    }
+
 }
 
 function dateFormat(d) {

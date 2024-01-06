@@ -1,4 +1,4 @@
-if (bridge.args["switch"] === "constructor") {
+function constructor() {
     bridge.call("Hide", {"case": "customLoader"});
     bridge.asyncImport("GameFunction.js", {});
 
@@ -9,13 +9,15 @@ if (bridge.args["switch"] === "constructor") {
             "jsInvoke": "HomePage.js",
             "args": {
                 "includeAll": true,
-                "switch": "selectMyGame"
+                "switch": selectMyGame.name
             }
         }
     });
 }
 
-if (bridge.args["switch"] === "selectMyGame") {
+bridge.addHandler(constructor);
+
+function selectMyGame() {
     var countGameNotFinish = 0;
     if (bridge.args["fetchDb"].length > 0) {
         for (var i = 0; i < bridge.args["fetchDb"].length; i++) {
@@ -31,43 +33,30 @@ if (bridge.args["switch"] === "selectMyGame") {
     }
 }
 
-if (bridge.args["switch"] === "createGame") {
-    bridge.call("Show", {"case": "customLoader"});
-    var uuid = bridge.call("Util", {"case": "uuid"})["uuid"];
+bridge.addHandler(selectMyGame);
+
+function createGame() {
+    var gameUuid = bridge.call("Util", {"case": "uuid"})["uuid"];
     var gameData = {
-        "description": "SecretConnections",
-        "gameUuid": uuid,
+        "game": bridge.args["game"],
+        "gameUuid": gameUuid,
         "owner": bridge.unique,
-        "runTeam": "red",
-        "gameState": "team", //team/word/run/finish
     };
-    bridge.call("DataSourceSet", {
-        // Хак, для сокетных данных, которые необходимо заинсертит в локальную БД
-        // В стандартном случае посылается diff на сервер, а нам этого не надо
-        // Таким образом новая сокетная запись при синхронизации уедет на сервер
-        // Иначе мы будем получать ошибку, что НЕТ ДОСТУПА, так как данного uuid нет в удалённой БД
-        "beforeSync": true,
-        "updateIfExist": false,
-        "uuid": uuid,
-        "value": gameData,
-        "parent": null,
-        "type": "socket",
-        "debugTransaction": true,
-        "key": "Game",
-        "onPersist": {
-            "jsInvoke": "HomePage.js",
-            "args": {
-                "includeAll": true,
-                "gameUuid": uuid,
-                "switch": "gameSaveToDb"
-            }
-        }
-    });
+    gameDataExtend(gameData);
+    newCreateGame(gameUuid, gameUuid, gameData);
 }
 
-if (bridge.args["switch"] === "gameSaveToDb") {
-    bridge.call("Hide", {"case": "customLoader"});
-    bridge.call("NavigatorPush", getNavigatorPushGameArgs(bridge.args["gameUuid"], bridge.args["gameUuid"]));
+bridge.addHandler(createGame);
+
+function gameDataExtend(gameData) {
+    switch (gameData["game"]) {
+        case "SecretConnections":
+            gameData["runTeam"] = "red";
+            gameData["gameState"] = "team"; //team/word/run/finish
+            break;
+        case "BattleOfMinds":
+            break;
+    }
 }
 
 if (bridge.args["switch"] === "requestConfirmCode") {
@@ -95,122 +84,102 @@ if (bridge.args["switch"] === "onConfirmCodeResponse") {
         error: "$.code: must have a minimum value of 100000",
         display: "Код должен быть 6 знаков"
     }])) {
+        bridge.call("NavigatorPop", {});
         var socketUuid = bridge.args["httpResponse"]["data"]["data"]["uuid"];
-        bridge.call("DbQuery", {
-            "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
-            "args": [socketUuid, socketUuid],
-            "onFetch": {
-                "jsInvoke": "HomePage.js",
-                "args": {
-                    "socketUuid": socketUuid,
-                    "includeAll": true,
-                    "closeBottomSheet": true,
-                    "switch": "selectAllReadyGame"
-                }
-            }
-        });
+        checkAlreadyGame(socketUuid);
     }
 }
 
-if (bridge.args["switch"] === "selectAllReadyGame") {
-    //Эта штука для DeepLink сделана, что бы окно последнее не закрывать, так как ничего не открывалось
-    var closeBottomSheet = bridge.args["closeBottomSheet"] || true;
+function newCreateGame(gameUuid, socketUuid, data) {
+    bridge.call("Show", {"case": "customLoader"});
+    var gameUuid = bridge.call("Util", {"case": "uuid"})["uuid"];
+    bridge.call("DataSourceSet", {
+        // В стандартном случае для сокетных данных посылается diff на сервер, а нам этого не надо
+        // Хак (beforeSync=true)
+        // Мы говорим, что эти данные пришли якобы с сервера и они просто заинсертятся в локальну БД
+        // Таким образом новая сокетная запись при синхронизации уедет на сервер
+        // Иначе мы будем получать ошибку, что НЕТ ДОСТУПА, так как данного uuid нет в удалённой БД
+        // так как мы послыаем diff в отдельный end-point для сокетных данных
+        "beforeSync": true,
+        "updateIfExist": false,
+        "uuid": gameUuid,
+        "parent": socketUuid === gameUuid ? null : socketUuid,
+        "value": data,
+        "type": "socket",
+        "debugTransaction": true,
+        "key": "Game",
+        "onPersist": {
+            "jsInvoke": "HomePage.js",
+            "args": {
+                "includeAll": true,
+                "gameUuid": gameUuid,
+                "socketUuid": socketUuid,
+                "switch": onGamePersist.name
+            }
+        }
+    });
+}
+
+function onGamePersist() {
     var socketUuid = bridge.args["socketUuid"];
+    bridge.call("DbQuery", {
+        "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
+        "args": [socketUuid, socketUuid],
+        "onFetch": {
+            "jsInvoke": "HomePage.js",
+            "args": {
+                "includeAll": true,
+                "switch": onSelectGame.name
+            }
+        }
+    });
+}
+
+bridge.addHandler(onGamePersist);
+
+function onSelectGame() {
+    bridge.call("Hide", {"case": "customLoader"});
     if (bridge.args["fetchDb"].length > 0) {
-        var fetch = bridge.args["fetchDb"][0];
-        closeThisPageAndOpenGame(socketUuid, fetch["uuid_data"], closeBottomSheet);
+        var game = bridge.args["fetchDb"][0]["value_data"]["game"];
+        var gameUuid = bridge.args["fetchDb"][0]["uuid_data"];
+        var socketUuid = bridge.args["fetchDb"][0]["parent_uuid_data"];
+        if (socketUuid == null || socketUuid === "" || socketUuid == undefined) {
+            socketUuid = gameUuid;
+        }
+        bridge.call("NavigatorPush", getNavigatorPushGameArgs(gameUuid, socketUuid, game));
+    } else {
+        bridge.alert("Игра не найдена");
+    }
+}
+
+bridge.addHandler(onSelectGame);
+
+function checkAlreadyGame(socketUuid) {
+    bridge.call("DbQuery", {
+        "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
+        "args": [socketUuid, socketUuid],
+        "onFetch": {
+            "jsInvoke": "HomePage.js",
+            "args": {
+                "socketUuid": socketUuid,
+                "includeAll": true,
+                "switch": onSelectGameCheckAlready.name
+            }
+        }
+    });
+}
+
+function onSelectGameCheckAlready() {
+    if (bridge.args["fetchDb"].length > 0) {
+        onSelectGame();
     } else {
         var gameUuid = bridge.call("Util", {"case": "uuid"})["uuid"];
-        bridge.call("DataSourceSet", {
-            // Хак, для сокетных данных, которые необходимо заинсертит в локальную БД
-            // В стандартном случае посылается diff на сервер, а нам этого не надо
-            // Таким образом новая сокетная запись при синхронизации уедет на сервер
-            // Иначе мы будем получать ошибку, что НЕТ ДОСТУПА, так как данного uuid нет в удалённой БД
-            "beforeSync": true,
-            "updateIfExist": false,
-            "uuid": gameUuid,
-            "value": {},
-            "parent": socketUuid,
-            "type": "socket",
-            "debugTransaction": true,
-            "key": "Game",
-            "onPersist": {
-                "jsInvoke": "HomePage.js",
-                "args": {
-                    "includeAll": true,
-                    "socketUuid": socketUuid,
-                    "gameUuid": gameUuid,
-                    "closeBottomSheet": closeBottomSheet,
-                    "switch": "gameConnectSaveToDb"
-                }
-            }
-        });
+        var socketUuid = bridge.args["socketUuid"];
+        newCreateGame(gameUuid, socketUuid, {});
     }
 }
 
-if (bridge.args["switch"] === "gameConnectSaveToDb") {
-    closeThisPageAndOpenGame(bridge.args["socketUuid"], bridge.args["gameUuid"], bridge.args["closeBottomSheet"]);
-}
+bridge.addHandler(onSelectGameCheckAlready);
 
-function closeThisPageAndOpenGame(socketUuid, gameUuid, closeBottomSheet) {
-    if (closeBottomSheet) {
-        bridge.call("NavigatorPop", {});
-    }
-    bridge.call("NavigatorPush", getNavigatorPushGameArgs(gameUuid, socketUuid));
-}
 
-function getNavigatorPushGameArgs(gameUuid, socketUuid) {
-    return {
-        "uuid": "Game.json",
-        "gameUuid": gameUuid,
-        "socketUuid": socketUuid,
-        "socket": true,
-        "subscribeOnChangeUuid": [gameUuid],
-        "constructor": {
-            "jsInvoke": "GameInit.js",
-            "args": {
-                "includeAll": true,
-                "switch": "constructor"
-            }
-        },
-        "onChangeUuid": {
-            "jsInvoke": "Game.js",
-            "args": {
-                "includeAll": true,
-                "switch": "onChange"
-            }
-        },
-        "onChangeOrientation": {
-            "jsInvoke": "GameInit.js",
-            "args": {
-                "includeAll": true,
-                "switch": "onChangeOrientation"
-            }
-        },
-        "destructor": {
-            "jsInvoke": "GameInit.js",
-            "args": {
-                "switch": "destructor"
-            }
-        },
-        "onActive": {
-            "jsInvoke": "GameInit.js",
-            "args": {
-                "includeAll": true,
-                "switch": "onChangeOrientation"
-            }
-        },
-        "onRenderFloatingActionButton": {
-            "jsInvoke": "GameInit.js",
-            "args": {
-                "includeAll": true,
-                "switch": "onRenderFloatingActionButton"
-            }
-        },
-        "subscribeToRefresh": {
-            "listUuid": [
-                "GameFunction.js"
-            ]
-        }
-    };
-}
+bridge.runHandler();
