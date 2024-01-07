@@ -239,7 +239,6 @@ bridge.global.SecretConnections.calculateScore = function(socketData, newStateDa
             }
         }
     }
-    //bridge.log("Score: blue: " + blue + "; allBlue: " + allBlue + "; red: " + red + "; allRed: " + allRed);
     if (socketData["finishDescription"] == undefined) {
         if (blue === allBlue && red === allRed) {
             socketSave({
@@ -252,7 +251,6 @@ bridge.global.SecretConnections.calculateScore = function(socketData, newStateDa
                 gameState: "finish"
             }, socketUuid);
         } else if (red === allRed) {
-            bridge.log("Приехали");
             socketSave({
                 finishDescription: "Победила команда красных",
                 gameState: "finish"

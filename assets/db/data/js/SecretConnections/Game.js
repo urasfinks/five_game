@@ -1,129 +1,92 @@
-if (bridge.args["switch"] === "onChange") {
-    bridge.log(bridge.args["data"]);
-    if (bridge.args["data"] == undefined || bridge.args["data"] == null) {
-        bridge.call("SetStateData", {
-            "map": {switchKey: "error"}
-        });
-    } else {
-        var newStateData = {};
-        var lastGameState = bridge.state["main"]["originSocketData"] != undefined ? bridge.state["main"]["originSocketData"]["gameState"] : "";
-        var socketData = bridge.args["data"];
-        var curGameState = socketData["gameState"];
-        var socketUuid = bridge.pageArgs["socketUuid"];
-        var timestampCodeGenerate = socketData["timestampCodeGenerate"] || 0;
-        var curTimestamp = bridge.util("timestamp", {});
-        var isOwn = isOwner(socketData);
+function SecretConnectionsGameRouter() {
 
-        if (isOwn && ["team"].includes(curGameState) && curTimestamp > (timestampCodeGenerate + (300 * 1000))) {
-            bridge.log("timestampCodeGenerate: " + timestampCodeGenerate + "; curTimestamp: " + curTimestamp);
-            bridge.call("Http", {
-                "uri": "/GenCodeUuid",
-                "method": "POST",
-                "body": {
-                    "uuid": socketUuid
-                },
-                "onResponse": {
-                    "jsInvoke": "SecretConnections/Game.js",
-                    "args": {
-                        "includeAll": true,
-                        "switch": "GenCodeUuidResponse"
-                    }
+    this.onChange = function () {
+        // onChange - вызывается после изменения сокетных данных
+        // Низя в этом обработчике вызывать socketSave - так как это может привести к зацикливанию
+        // Уже так было когда сервер выдавал ошибку мы просто раскручивались в рекурсии
+        if (bridge.args["data"] == undefined || bridge.args["data"] == null) {
+            bridge.call("SetStateData", {
+                "map": {
+                    "switchKey": "error"
                 }
             });
-        }
+        } else {
+            var newStateData = {};
+            var lastGameState = bridge.state["main"]["originSocketData"] != undefined ? bridge.state["main"]["originSocketData"]["gameState"] : "";
+            var socketData = bridge.args["data"];
+            var curGameState = socketData["gameState"];
+            var socketUuid = bridge.pageArgs["socketUuid"];
+            var isOwn = isOwner(socketData);
 
-        if (socketData["user" + bridge.unique] != undefined) {
-            newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
-        } else {
-            //Если нет данных об этом устройстве - добавим
-            newStateData["deviceName"] = "Укажите своё имя";
-            var data = {};
-            var accName = bridge.getStorage("accountName", newStateData["deviceName"]);
-            if (accName == undefined || accName == "" || accName.trim() == "") {
-                accName = newStateData["deviceName"];
+            if (socketData["user" + bridge.unique] != undefined) {
+                newStateData["deviceName"] = socketData["user" + bridge.unique]["name"];
+            } else {
+                //Если нет данных об этом устройстве - добавим
+                newStateData["deviceName"] = "Укажите своё имя";
             }
-            data["user" + bridge.unique] = {
-                name: accName,
-                id: bridge.unique,
-                static: false,
-                team: "",
-                role: "player"
-            };
-            socketSave(data, socketUuid);
-        }
-        if (["team"].includes(curGameState)) {
-            bridge.global.SecretConnections.getFlagToWordGameState(socketData, newStateData);
-            // Так как код для подключения истекает каждые 5 минут будем передёргивать страницу каждые 5 минут 10 секунд
-            // ЧТо бы заново сгенерировать код для подключения
-            bridge.call("Util", {"case": "dynamicPageApi", "api": "startReloadEach", "eachReload": 310});
-        } else {
-            bridge.call("Util", {"case": "dynamicPageApi", "api": "stopReloadEach"});
-        }
-        if (["word", "run", "finish"].includes(curGameState)) {
-            if (isOwner(socketData)) {
-                newStateData["visibleGenerateWord"] = "true";
+            if (["team"].includes(curGameState)) {
+                bridge.global.SecretConnections.getFlagToWordGameState(socketData, newStateData);
+            } else {
+                bridge.call("Util", {"case": "dynamicPageApi", "api": "stopReloadEach"});
             }
-            newStateData["gridWord"] = bridge.global.SecretConnections.getGridWord(socketData);
+            if (["word", "run", "finish"].includes(curGameState)) {
+                if (isOwner(socketData)) {
+                    newStateData["visibleGenerateWord"] = "true";
+                }
+                newStateData["gridWord"] = bridge.global.SecretConnections.getGridWord(socketData);
+            }
+            if (["run", "finish"].includes(curGameState)) {
+                calculateScore(socketData, newStateData, socketUuid);
+                newStateData["users"] = getUsers(socketData);
+            }
+            if (lastGameState !== curGameState) {
+                onRenderFloatingActionButton(socketData, socketUuid);
+            }
+            var toNextRun = false;
+            if (isOwn && socketData["isGeneratedCard"] === true) {
+                toNextRun = true;
+            }
+            bridge.overlay(newStateData, {
+                switchKey: curGameState,
+                originSocketData: socketData,
+                listPersonUndefined: bridge.global.SecretConnections.getListPersonGroup(socketData, "undefined", socketUuid),
+                listPersonRed: bridge.global.SecretConnections.getListPersonGroup(socketData, "red", socketUuid),
+                listPersonBlue: bridge.global.SecretConnections.getListPersonGroup(socketData, "blue", socketUuid),
+                toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
+                socketUuid: socketUuid,
+                gameCode: socketData["gameCode"] || "...",
+                isOwner: isOwn,
+                toNextRun: toNextRun
+            });
+            bridge.call("SetStateData", {
+                "map": newStateData
+            });
         }
-        if (["run", "finish"].includes(curGameState)) {
-            calculateScore(socketData, newStateData, socketUuid);
-            newStateData["users"] = getUsers(socketData);
-        }
-        if (lastGameState !== curGameState) {
-            onRenderFloatingActionButton(socketData, socketUuid);
-        }
-        var toNextRun = false;
-        if (isOwn && socketData["isGeneratedCard"] === true) {
-            toNextRun = true;
-        }
-        bridge.overlay(newStateData, {
-            switchKey: curGameState,
-            originSocketData: socketData,
-            listPersonUndefined: bridge.global.SecretConnections.getListPersonGroup(socketData, "undefined", socketUuid),
-            listPersonRed: bridge.global.SecretConnections.getListPersonGroup(socketData, "red", socketUuid),
-            listPersonBlue: bridge.global.SecretConnections.getListPersonGroup(socketData, "blue", socketUuid),
-            toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
-            socketUuid: socketUuid,
-            gameCode: socketData["gameCode"] || "...",
-            isOwner: isOwn,
-            toNextRun: toNextRun
-        });
-        //bridge.log(newStateData);
-        bridge.call("SetStateData", {
-            "map": newStateData
-        });
     }
-}
 
-if (bridge.args["switch"] === "changeGameState") { //team/word/run/finish
-    var curGameState = bridge.args["gameState"];
-    var socketUuid = bridge.pageArgs["socketUuid"];
-    socketSave({
-        "gameState": curGameState
-    }, socketUuid);
-    bridge.socketExtend({
-        "action": "timestamp",
-        "arguments": {
-            "field": curGameState
-        }
-    }, socketUuid);
-    if (curGameState === "run") {
+    this.changeGameState = function () {//team/word/run/finish
+        var curGameState = bridge.args["gameState"];
+        var socketUuid = bridge.pageArgs["socketUuid"];
+        socketSave({
+            "gameState": curGameState
+        }, socketUuid);
         bridge.socketExtend({
             "action": "timestamp",
             "arguments": {
-                "field": "session"
+                "field": curGameState
             }
         }, socketUuid);
+        if (curGameState === "run") {
+            bridge.socketExtend({
+                "action": "timestamp",
+                "arguments": {
+                    "field": "session"
+                }
+            }, socketUuid);
+        }
     }
 }
 
-if (bridge.args["switch"] === "GenCodeUuidResponse") {
-    if (bridge.checkHttpResponse([])) {
-        socketSave({
-            "gameCode": bridge.args["httpResponse"]["data"]["data"]["code"],
-            "timestampCodeGenerate": bridge.util("timestamp", {})
-        }, bridge.pageArgs["socketUuid"]);
-    } else {
-        bridge.util("dataSync", {});
-    }
-}
+var objSecretConnectionsGameRouter = new SecretConnectionsGameRouter();
+
+bridge.runRouter(objSecretConnectionsGameRouter);

@@ -47,12 +47,16 @@ function onRenderFloatingActionButton(socketData, socketUuid) {
 }
 
 function socketSave(data, socketUuid) {
-    bridge.call("DataSourceSet", {
-        //"debugTransaction": true,
-        "type": "socket",
-        "uuid": socketUuid,
-        "value": data
-    });
+    if (socketUuid == undefined || socketUuid === "" || socketUuid.trim() === "") {
+        bridge.alert("Сокетный идентификатор пуст");
+    } else {
+        bridge.call("DataSourceSet", {
+            //"debugTransaction": true,
+            "type": "socket",
+            "uuid": socketUuid,
+            "value": data
+        });
+    }
 }
 
 function getListPerson(socketData) {
@@ -72,6 +76,7 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
         "gameUuid": gameUuid,
         "socketUuid": socketUuid,
         "socket": true,
+        "game": game,
         "subscribeOnChangeUuid": [gameUuid],
         "constructor": {
             "jsInvoke": game + "/GameInit.js",
@@ -120,4 +125,73 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
             ]
         }
     };
+}
+
+function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
+    bridge.call("Util", {"case": "wakeLock"});
+
+    var cause = bridge.args["cause"];
+    var socketUuid = bridge.pageArgs["socketUuid"];
+    var gameUuid = bridge.pageArgs["gameUuid"];
+    var game = bridge.pageArgs["game"];
+
+    //Если gameUuid равен socketUuid - значит это владелец
+    if (
+        socketUuid != undefined
+        //&& socketUuid === gameUuid
+        && cause != undefined
+        && (
+            cause.includes("init")
+            || cause.includes("TimePeriodic")
+        )
+    ) {
+        //Только владелец перезапускает перегенирацию кода
+        bridge.call("Util", {"case": "dynamicPageApi", "api": "startReloadEach", "eachReload": 300});
+        bridge.call("DbQuery", {
+            "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
+            "args": [socketUuid, socketUuid],
+            "onFetch": {
+                "jsInvoke": game + "/GameInit.js",
+                "args": {
+                    "includeAll": true,
+                    "switch": switchKeyOnCheckUserSetUser
+                }
+            }
+        });
+        bridge.call("Http", {
+            "uri": "/GenCodeUuid",
+            "method": "POST",
+            "body": {
+                "uuid": socketUuid
+            },
+            "onResponse": {
+                "jsInvoke": game + "/GameInit.js",
+                "args": {
+                    "includeAll": true,
+                    // Не стоит использовать текущий файл для обработки события ответа
+                    // так как это функциональный файл, в нём должны находится статичные функции
+                    // которые загружаются 1 раз в память
+                    // если мы сюда приземлил обработчик, то кажый раз будеут переопределятся все функции
+                    // Это будет замедлять работу приложения, и нам этого не надо
+                    "switch": switchKeyOnResponseCode
+                }
+            }
+        });
+    }
+    controlBottomNavigationBar();
+}
+
+function destructorGame() {
+    bridge.call("Show", {"case": "bottomNavigationBar"});
+    bridge.call("Util", {"case": "wakeUnlock"});
+}
+
+function controlBottomNavigationBar() {
+    if (bridge.pageActive) {
+        if (bridge.orientation === "portrait") {
+            bridge.call("Show", {"case": "bottomNavigationBar"});
+        } else {
+            bridge.call("Hide", {"case": "bottomNavigationBar"});
+        }
+    }
 }

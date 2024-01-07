@@ -31,7 +31,6 @@ if (bridge.args["switch"] === "randomize") {
         }
         data["user" + listPerson[i]["id"]] = listPerson[i];
     }
-    bridge.log("randomize: " + JSON.stringify(data));
     socketSave(data, bridge.pageArgs["socketUuid"]);
 }
 
