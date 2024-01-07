@@ -138,7 +138,7 @@ function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
     //Если gameUuid равен socketUuid - значит это владелец
     if (
         socketUuid != undefined
-        //&& socketUuid === gameUuid
+        && socketUuid === gameUuid
         && cause != undefined
         && (
             cause.includes("init")

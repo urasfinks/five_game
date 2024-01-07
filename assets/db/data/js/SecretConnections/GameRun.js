@@ -9,7 +9,7 @@ if (bridge.args["switch"] === "toNextTeam") {
         "arguments": {
             "field": "session"
         }
-    }, socketUuid);
+    }, bridge.pageArgs["socketUuid"]);
 }
 
 if (bridge.args["switch"] === "confirmSelect") {

@@ -154,7 +154,7 @@
           }
         }
       },
-      "onEditingComplete": {
+      "onSubmitted": {
         "jsInvoke": "SecretConnections/GameTeam.js",
         "args": {
           "includeAll": true,

@@ -36,8 +36,8 @@ function SecretConnectionsGameRouter() {
                 newStateData["gridWord"] = bridge.global.SecretConnections.getGridWord(socketData);
             }
             if (["run", "finish"].includes(curGameState)) {
-                calculateScore(socketData, newStateData, socketUuid);
-                newStateData["users"] = getUsers(socketData);
+                bridge.global.SecretConnections.calculateScore(socketData, newStateData, socketUuid);
+                newStateData["users"] = bridge.global.SecretConnections.getUsers(socketData);
             }
             if (lastGameState !== curGameState) {
                 onRenderFloatingActionButton(socketData, socketUuid);
