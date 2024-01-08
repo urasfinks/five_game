@@ -4,6 +4,7 @@ function HomePageRouter() {
         bridge.call("Hide", {"case": "customLoader"});
         bridge.asyncImport("GameFunction.js", {});
         bridge.asyncImport("SecretConnections/GameFunction.js", {});
+        bridge.asyncImport("BattleOfMinds/GameFunction.js", {});
 
         bridge.call("DbQuery", {
             "sql": "select * from data where key_data = ? and is_remove_data = 0 order by id_data desc",
@@ -126,6 +127,8 @@ function gameDataExtend(gameData) {
             gameData["gameState"] = "team"; //team/word/run/finish
             break;
         case "BattleOfMinds":
+            gameData["runTeam"] = "red";
+            gameData["gameState"] = "team"; //team/word/run/finish
             break;
     }
 }

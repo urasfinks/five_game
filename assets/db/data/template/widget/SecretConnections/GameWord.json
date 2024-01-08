@@ -1,0 +1,83 @@
+{
+  "flutterType": "Column",
+  "crossAxisAlignment": "start",
+  "children": [
+    {
+      "flutterType": "Padding",
+      "padding": "6,0,6,20",
+      "child": {
+        "flutterType": "Text",
+        "label": "Генерация карточек",
+        "style": {
+          "flutterType": "TextStyle",
+          "fontSize": 17,
+          "fontWeight": "bold",
+          "color": "schema:secondary"
+        }
+      }
+    },
+    {
+      "flutterType": "State",
+      "key": "gridWord"
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Visibility",
+      "visible": "${state(main,isOwner,false)}",
+      "child": {
+        "flutterType": "Button",
+        "height": 44,
+        "backgroundColor": "blue",
+        "onPressed": {
+          "jsInvoke": "SecretConnections/GameWord.js",
+          "args": {
+            "includeAll": true,
+            "switch": "generateWord"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Сгенерировать карточки",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
+        }
+      }
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
+      "flutterType": "Visibility",
+      "visible": "${state(main,toNextRun,false)}",
+      "child": {
+        "flutterType": "Button",
+        "height": 44,
+        "backgroundColor": "blue",
+        "onPressed": {
+          "jsInvoke": "SecretConnections/Game.js",
+          "args": {
+            "includeAll": true,
+            "switch": "changeGameState",
+            "gameState": "run"
+          }
+        },
+        "child": {
+          "flutterType": "Text",
+          "label": "Начать игру",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "color": "white"
+          }
+        }
+      }
+    }
+  ]
+}

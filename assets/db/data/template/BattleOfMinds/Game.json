@@ -8,7 +8,7 @@
       "flutterType": "SliverAppBar",
       "title": {
         "flutterType": "Text",
-        "label": "Тайные Связи",
+        "label": "Битва умов",
         "style": {
           "flutterType": "TextStyle",
           "fontSize": 17
@@ -23,27 +23,27 @@
           {
             "case": "team",
             "flutterType": "Template",
-            "src": "SecretConnections/GameTeam"
+            "src": "BattleOfMinds/GameTeam"
           },
           {
             "case": "word",
             "flutterType": "Template",
-            "src": "SecretConnections/GameWord"
+            "src": "BattleOfMinds/GameWord"
           },
           {
             "case": "run",
             "flutterType": "Template",
-            "src": "SecretConnections/GameRun"
+            "src": "BattleOfMinds/GameRun"
           },
           {
             "case": "finish",
             "flutterType": "Template",
-            "src": "SecretConnections/GameFinish"
+            "src": "BattleOfMinds/GameFinish"
           },
           {
             "case": "error",
             "flutterType": "Template",
-            "src": "SecretConnections/GameError"
+            "src": "BattleOfMinds/GameError"
           }
         ]
       }

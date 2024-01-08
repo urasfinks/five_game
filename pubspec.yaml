@@ -72,6 +72,8 @@ flutter:
     - assets/db/data/template/SecretConnections/
     - assets/db/data/template/BattleOfMinds/
     - assets/db/data/template/widget/
+    - assets/db/data/template/widget/SecretConnections/
+    - assets/db/data/template/widget/BattleOfMinds/
     - assets/db/data/systemData/
     - assets/images/
   # To add assets to your application, add an assets section, like this:
