@@ -113,48 +113,17 @@
         "height": 20
       },
       {
-        "flutterType": "SegmentControl",
-        "onInitSetState": true,
-        "onChangedSetStateNotify": false,
-        "decoration": {
-          "flutterType": "BoxDecoration",
-          "color": "schema:onBackground",
-          "borderRadius": 10
-        },
-        "thumbDecoration": {
-          "flutterType": "BoxDecoration",
-          "color": "schema:onPrimary",
-          "borderRadius": 9
-        },
-        "height": 45,
-        "name": "Team",
-        "data": "${pageArgs(personValue.team)}",
+        "flutterType": "SelectSheet",
+        "extend": true,
         "children": [
           {
-            "case": "undefined",
-            "flutterType": "Container",
-            "child": {
-              "flutterType": "Text",
-              "label": "-"
-            }
-          },
-          {
-            "case": "red",
-            "flutterType": "Container",
-            "child": {
-              "flutterType": "Text",
-              "label": "Красная"
-            }
-          },
-          {
-            "case": "blue",
-            "flutterType": "Container",
-            "child": {
-              "flutterType": "Text",
-              "label": "Синяя"
-            }
+            "label": "Группа 1"
           }
-        ]
+        ],
+        "childrenTemplate": {
+          "flutterType": "Text",
+          "label": "${label}"
+        }
       },
       {
         "flutterType": "SizedBox",

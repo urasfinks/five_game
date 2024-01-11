@@ -17,6 +17,35 @@ function HomePageRouter() {
                 }
             }
         });
+
+        bridge.call("NavigatorPush", {
+            "type": "bottomSheet",
+            "height": 360,
+            "link": {
+                "template": "SelectSheetData.json",
+            },
+            "constructor": {
+                "jsInvoke": "SelectSheetData.js",
+                "args": {
+                    "includeAll": true,
+                    "switch": "constructor",
+                    "listItem": [
+                        {
+                            "label": "x1",
+                            "templateWidgetSrc": "IteratorButton"
+                        },
+                        {
+                            "label": "x2",
+                            "templateWidgetSrc": "IteratorButton"
+                        },
+                        {
+                            "label": "x3",
+                            "templateWidgetSrc": "IteratorButton"
+                        }
+                    ]
+                }
+            }
+        });
     }
 
     this.selectMyGame = function () {
