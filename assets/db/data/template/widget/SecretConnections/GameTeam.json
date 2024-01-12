@@ -10,8 +10,6 @@
         "label": "Код для подключения к игре",
         "style": {
           "flutterType": "TextStyle",
-          "fontSize": 17,
-          "fontWeight": "bold",
           "color": "schema:secondary"
         }
       }
@@ -87,8 +85,6 @@
         "label": "Моё имя в игре",
         "style": {
           "flutterType": "TextStyle",
-          "fontSize": 17,
-          "fontWeight": "bold",
           "color": "schema:secondary"
         }
       }
@@ -179,8 +175,6 @@
               "label": "Участники игры",
               "style": {
                 "flutterType": "TextStyle",
-                "fontSize": 17,
-                "fontWeight": "bold",
                 "color": "schema:secondary"
               }
             }
