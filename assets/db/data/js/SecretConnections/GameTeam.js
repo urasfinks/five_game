@@ -34,20 +34,6 @@ if (bridge.args["switch"] === "randomize") {
     socketSave(data, bridge.pageArgs["socketUuid"]);
 }
 
-function groupFirstRealPerson(listPerson){
-    var listReal = [];
-    var listStatic = [];
-    for (var i = 0; i < listPerson.length; i++) {
-        var isStatic = listPerson[i]["static"] || false;
-        if (isStatic === true) {
-            listStatic.push(listPerson[i]);
-        }else{
-            listReal.push(listPerson[i]);
-        }
-    }
-    return listReal.concat(listStatic);
-}
-
 if (bridge.args["switch"] === "removePerson") {
     //TODO: сделать проверку что персона статичная
     var data = {};

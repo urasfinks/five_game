@@ -114,10 +114,18 @@
       },
       {
         "flutterType": "SelectSheet",
+        "onPopJs": "BattleOfMinds/GameTeam.js",
+        "onPopSwitch": "onPop",
         "extend": true,
         "children": [
           {
             "label": "Группа 1"
+          },
+          {
+            "label": "Группа 2"
+          },
+          {
+            "label": "Группа 3"
           }
         ],
         "childrenTemplate": {

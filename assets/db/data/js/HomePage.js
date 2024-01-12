@@ -18,35 +18,40 @@ function HomePageRouter() {
             }
         });
 
-        bridge.call("NavigatorPush", {
-            "type": "bottomSheet",
-            "height": 360,
-            "link": {
-                "template": "SelectSheetData.json",
-            },
-            "constructor": {
-                "jsInvoke": "SelectSheetData.js",
-                "args": {
-                    "includeAll": true,
-                    "switch": "constructor",
-                    "listItem": [
-                        {
-                            "label": "x1",
-                            "templateWidgetSrc": "IteratorButton"
-                        },
-                        {
-                            "label": "x2",
-                            "templateWidgetSrc": "IteratorButton"
-                        },
-                        {
-                            "label": "x3",
-                            "templateWidgetSrc": "IteratorButton"
-                        }
-                    ]
-                }
-            }
-        });
-    }
+        // bridge.call("NavigatorPush", {
+        //     "type": "bottomSheet",
+        //     "height": 360,
+        //     "link": {
+        //         "template": "SelectSheetData.json",
+        //     },
+        //     "onPop": {
+        //         "jsInvoke": "HomePage.js",
+        //         "args": {
+        //             "includeAll": true,
+        //             "switch": "onPop",
+        //         }
+        //     },
+        //     "constructor": {
+        //         "jsInvoke": "SelectSheetData.js",
+        //         "args": {
+        //             "includeAll": true,
+        //             "switch": "constructor",
+        //             "listItem": [
+        //                 {
+        //                     "label": "x1"
+        //                 },
+        //                 {
+        //                     "label": "x2"
+        //                 },
+        //                 {
+        //                     "label": "x3"
+        //
+        //                 }
+        //             ]
+        //         }
+        //     }
+        // });
+    };
 
     this.selectMyGame = function () {
         var countGameNotFinish = 0;
@@ -62,7 +67,7 @@ function HomePageRouter() {
                 }
             });
         }
-    }
+    };
 
     this.createGame = function () {
         var gameUuid = bridge.call("Util", {"case": "uuid"})["uuid"];
@@ -73,7 +78,7 @@ function HomePageRouter() {
         };
         gameDataExtend(gameData);
         newCreateGame(gameUuid, gameUuid, gameData);
-    }
+    };
 
     this.requestConfirmCode = function () {
         if (bridge.state["main"]["CodeValue"] == undefined || bridge.state["main"]["CodeValue"].trim() === "") {
@@ -93,7 +98,7 @@ function HomePageRouter() {
                 }
             });
         }
-    }
+    };
 
     this.onConfirmCodeResponse = function () {
         if (bridge.checkHttpResponse([{
@@ -104,7 +109,7 @@ function HomePageRouter() {
             var socketUuid = bridge.args["httpResponse"]["data"]["data"]["uuid"];
             checkAlreadyGame(socketUuid);
         }
-    }
+    };
 
     this.onGamePersist = function () {
         var socketUuid = bridge.args["socketUuid"];
@@ -119,7 +124,7 @@ function HomePageRouter() {
                 }
             }
         });
-    }
+    };
 
     this.onSelectGame = function () {
         bridge.call("Hide", {"case": "customLoader"});
@@ -134,7 +139,7 @@ function HomePageRouter() {
         } else {
             bridge.alert("Игра не найдена");
         }
-    }
+    };
 
     this.onSelectGameCheckAlready = function () {
         if (bridge.args["fetchDb"].length > 0) {
