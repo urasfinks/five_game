@@ -56,7 +56,6 @@
           "child": {
             "flutterType": "Button",
             "height": 44,
-            "backgroundColor": "schema:onPrimary",
             "onPressed": {
               "sysInvoke": "Util",
               "args": {
@@ -199,7 +198,6 @@
             "child": {
               "flutterType": "Button",
               "height": 44,
-              "backgroundColor": "schema:onPrimary",
               "onPressed": {
                 "sysInvoke": "Alert",
                 "args": {
