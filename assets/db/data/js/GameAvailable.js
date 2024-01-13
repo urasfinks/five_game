@@ -1,9 +1,5 @@
 if (bridge.args["switch"] === "constructor") {
     var state = [];
-    // state.push({
-    //     "templateCustom": "templateLabel",
-    //     "label": "Выбрать игру"
-    // });
     state.push({
         "templateCustom": "templateGameLine",
         "label1": "Тайные Связи",

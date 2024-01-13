@@ -114,9 +114,10 @@
       },
       {
         "flutterType": "SelectSheet",
-        "onPopJs": "BattleOfMinds/GameTeam.js",
-        "onPopSwitch": "onPop",
+        "state": "groupPerson",
+        "stateKey": "groupPerson",
         "extend": true,
+        "selectedIndex": 0,
         "children": [
           {
             "label": "Группа 1"
@@ -126,12 +127,29 @@
           },
           {
             "label": "Группа 3"
+          },
+          {
+            "label": "Группа 4"
+          },
+          {
+            "label": "Группа 5"
+          },
+          {
+            "label": "Группа 6"
+          },
+          {
+            "label": "Группа 7"
+          },
+          {
+            "label": "Группа 8"
+          },
+          {
+            "label": "Группа 9"
+          },
+          {
+            "label": "Группа 10"
           }
-        ],
-        "childrenTemplate": {
-          "flutterType": "Text",
-          "label": "${label}"
-        }
+        ]
       },
       {
         "flutterType": "SizedBox",
