@@ -52,7 +52,7 @@
                   "label": "${label1}",
                   "onTap": "${onTap1|jsonEncode()}",
                   "image": {
-                    "flutterType": "ImageBase64",
+                    "flutterType": "Image",
                     "height": 140,
                     "width": "infinity",
                     "fit": "cover",
@@ -91,7 +91,7 @@
                   "label": "${label2}",
                   "onTap": "${onTap2|jsonEncode()}",
                   "image": {
-                    "flutterType": "ImageBase64",
+                    "flutterType": "Image",
                     "height": 140,
                     "width": "infinity",
                     "fit": "cover",
