@@ -56,7 +56,7 @@
                           "args": {
                             "uuid": "GameAvailable.json",
                             "constructor": {
-                              "jsInvoke": "GameAvailable.js",
+                              "jsRouter": "GameAvailable.ai.js",
                               "args": {
                                 "includeAll": true,
                                 "switch": "constructor"
