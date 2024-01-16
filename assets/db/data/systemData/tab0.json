@@ -38,7 +38,7 @@
       }
     },
     "constructor": {
-      "jsInvoke": "HomePage.js",
+      "jsRouter": "HomePage.ai.js",
       "args": {
         "switch": "constructor"
       }

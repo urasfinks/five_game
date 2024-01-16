@@ -1,11 +1,11 @@
-function BattleOfMindsGameInitRouter() {
+function SecretConnectionsGameInitRouter() {
 
     this.constructor = function () {
         constructGame(
             route(this, this.genCodeUuidResponse),
             route(this, this.onCheckSetUser),
         );
-    }
+    };
 
     this.onCheckSetUser = function () {
         if (bridge.args["fetchDb"].length > 0) {
@@ -27,7 +27,7 @@ function BattleOfMindsGameInitRouter() {
                 socketSave(data, bridge.pageArgs["socketUuid"]);
             }
         }
-    }
+    };
 
     this.genCodeUuidResponse = function () {
         if (bridge.checkHttpResponse([])) {
@@ -36,30 +36,28 @@ function BattleOfMindsGameInitRouter() {
                 "timestampCodeGenerate": bridge.util("timestamp", {})
             }, bridge.pageArgs["socketUuid"]);
         }
-    }
+    };
 
     this.onChangeOrientation = function () {
         var socketData = bridge.state["main"]["originSocketData"];
         if (socketData != undefined && ["word", "run"].includes(socketData["gameState"])) {
             bridge.call("SetStateData", {
                 "map": {
-                    "gridWord": bridge.global.BattleOfMinds.getGridWord(socketData)
+                    "gridWord": bridge.global.SecretConnections.getGridWord(socketData)
                 }
             });
             controlBottomNavigationBar();
         }
-    }
+    };
 
     this.onRenderFloatingActionButton = function () {
         var socketData = bridge.state["main"]["originSocketData"];
         onRenderFloatingActionButton(socketData, bridge.pageArgs["socketUuid"]);
-    }
+    };
 
     this.destructor = function () {
         destructorGame();
-    }
+    };
 }
 
-var objBattleOfMindsGameInitRouter = new BattleOfMindsGameInitRouter();
-
-bridge.runRouter(objBattleOfMindsGameInitRouter);
+bridge.addRouter(new SecretConnectionsGameInitRouter());

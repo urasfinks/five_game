@@ -14,7 +14,7 @@
             "fillColor": "red",
             "padding": 10,
             "onPressed": {
-              "jsInvoke": "MyGame.js",
+              "jsRouter": "MyGame.ai.js",
               "args": {
                 "switch": "onRemove",
                 "id_data": "${id_data}",

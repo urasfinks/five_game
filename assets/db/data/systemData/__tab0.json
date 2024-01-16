@@ -24,34 +24,34 @@
     "socketUuid": "bdc67a1c-ec5e-4709-b96c-5b94a96e8c19",
     "subscribeOnChangeUuid": ["bdc67a1c-ec5e-4709-b96c-5b94a96e8c19"],
     "onChangeUuid": {
-      "jsInvoke": "SecretConnections/Game.js",
+      "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
         "switch": "onChange"
       }
     },
     "onChangeOrientation": {
-      "jsInvoke": "SecretConnections/Game.js",
+      "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
         "switch": "onChangeOrientation"
       }
     },
     "destructor": {
-      "jsInvoke": "SecretConnections/Game.js",
+      "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "switch": "destructor"
       }
     },
     "onActive": {
-      "jsInvoke": "SecretConnections/Game.js",
+      "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
         "switch": "onChangeOrientation"
       }
     },
     "constructor": {
-      "jsInvoke": "SecretConnections/Game.js",
+      "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
         "switch": "constructor"

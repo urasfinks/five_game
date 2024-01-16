@@ -81,7 +81,7 @@
         "flutterType": "Button",
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "HomePage.js",
+          "jsRouter": "HomePage.ai.js",
           "args": {
             "includeAll": true,
             "switch": "requestConfirmCode"

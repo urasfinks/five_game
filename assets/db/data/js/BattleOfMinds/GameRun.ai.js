@@ -1,4 +1,4 @@
-function SecretConnectionsGameRunRouter() {
+function BattleOfMindsGameRunRouter() {
 
     this.toNextTeam = function () {
         var socketData = bridge.state["main"]["originSocketData"];
@@ -56,4 +56,4 @@ function SecretConnectionsGameRunRouter() {
     };
 }
 
-bridge.addRouter(new SecretConnectionsGameRunRouter());
+bridge.addRouter(new BattleOfMindsGameRunRouter());

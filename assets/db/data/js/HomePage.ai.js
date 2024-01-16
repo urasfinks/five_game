@@ -2,55 +2,18 @@ function HomePageRouter() {
 
     this.constructor = function () {
         bridge.call("Hide", {"case": "customLoader"});
-        bridge.asyncImport("GameFunction.js", {});
-        bridge.asyncImport("SecretConnections/GameFunction.js", {});
-        bridge.asyncImport("BattleOfMinds/GameFunction.js", {});
 
         bridge.call("DbQuery", {
             "sql": "select * from data where key_data = ? and is_remove_data = 0 order by id_data desc",
             "args": ["Game"],
             "onFetch": {
-                "jsInvoke": "HomePage.js",
+                "jsRouter": "HomePage.ai.js",
                 "args": {
                     "includeAll": true,
                     "switch": route(this, this.selectMyGame)
                 }
             }
         });
-
-        // bridge.call("NavigatorPush", {
-        //     "type": "bottomSheet",
-        //     "height": 360,
-        //     "link": {
-        //         "template": "SelectSheetData.json",
-        //     },
-        //     "onPop": {
-        //         "jsInvoke": "HomePage.js",
-        //         "args": {
-        //             "includeAll": true,
-        //             "switch": "onPop",
-        //         }
-        //     },
-        //     "constructor": {
-        //         "jsInvoke": "SelectSheetData.js",
-        //         "args": {
-        //             "includeAll": true,
-        //             "switch": "constructor",
-        //             "listItem": [
-        //                 {
-        //                     "label": "x1"
-        //                 },
-        //                 {
-        //                     "label": "x2"
-        //                 },
-        //                 {
-        //                     "label": "x3"
-        //
-        //                 }
-        //             ]
-        //         }
-        //     }
-        // });
     };
 
     this.selectMyGame = function () {
@@ -90,7 +53,7 @@ function HomePageRouter() {
                     "code": bridge.state["main"]["CodeValue"] * 1,
                 },
                 "onResponse": {
-                    "jsInvoke": "HomePage.js",
+                    "jsRouter": "HomePage.ai.js",
                     "args": {
                         "includeAll": true,
                         "switch": route(this, this.onConfirmCodeResponse)
@@ -117,7 +80,7 @@ function HomePageRouter() {
             "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
             "args": [socketUuid, socketUuid],
             "onFetch": {
-                "jsInvoke": "HomePage.js",
+                "jsRouter": "HomePage.ai.js",
                 "args": {
                     "includeAll": true,
                     "switch": route(this, this.onSelectGame)
@@ -185,7 +148,7 @@ function newCreateGame(gameUuid, socketUuid, data) {
         "debugTransaction": true,
         "key": "Game",
         "onPersist": {
-            "jsInvoke": "HomePage.js",
+            "jsRouter": "HomePage.ai.js",
             "args": {
                 "includeAll": true,
                 "gameUuid": gameUuid,
@@ -201,7 +164,7 @@ function checkAlreadyGame(socketUuid) {
         "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
         "args": [socketUuid, socketUuid],
         "onFetch": {
-            "jsInvoke": "HomePage.js",
+            "jsRouter": "HomePage.ai.js",
             "args": {
                 "socketUuid": socketUuid,
                 "includeAll": true,
@@ -211,4 +174,4 @@ function checkAlreadyGame(socketUuid) {
     });
 }
 
-bridge.runRouter(objHomePageRouter);
+bridge.addRouter(objHomePageRouter);

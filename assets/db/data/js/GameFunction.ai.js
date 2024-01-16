@@ -1,5 +1,3 @@
-bridge.log("GameFunction.js included");
-
 function isMyGame(socketData) {
     return (socketData["gameState"] === "run" && socketData["runTeam"] === getMyTeam(socketData));
 }
@@ -79,41 +77,41 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
         "game": game,
         "subscribeOnChangeUuid": [gameUuid],
         "constructor": {
-            "jsInvoke": game + "/GameInit.js",
+            "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
                 "switch": "constructor"
             }
         },
         "onChangeUuid": {
-            "jsInvoke": game + "/Game.js",
+            "jsRouter": game + "/Game.ai.js",
             "args": {
                 "includeAll": true,
                 "switch": "onChange"
             }
         },
         "onChangeOrientation": {
-            "jsInvoke": game + "/GameInit.js",
+            "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
                 "switch": "onChangeOrientation"
             }
         },
         "destructor": {
-            "jsInvoke": game + "/GameInit.js",
+            "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "switch": "destructor"
             }
         },
         "onActive": {
-            "jsInvoke": game + "/GameInit.js",
+            "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
                 "switch": "onChangeOrientation"
             }
         },
         "onRenderFloatingActionButton": {
-            "jsInvoke": game + "/GameInit.js",
+            "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
                 "switch": "onRenderFloatingActionButton"
@@ -121,7 +119,7 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
         },
         "subscribeToRefresh": {
             "listUuid": [
-                game + "/GameFunction.js"
+                game + "/GameFunction.ai.js"
             ]
         }
     };
@@ -151,7 +149,7 @@ function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
             "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
             "args": [socketUuid, socketUuid],
             "onFetch": {
-                "jsInvoke": game + "/GameInit.js",
+                "jsRouter": game + "/GameInit.ai.js",
                 "args": {
                     "includeAll": true,
                     "switch": switchKeyOnCheckUserSetUser
@@ -165,7 +163,7 @@ function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
                 "uuid": socketUuid
             },
             "onResponse": {
-                "jsInvoke": game + "/GameInit.js",
+                "jsRouter": game + "/GameInit.ai.js",
                 "args": {
                     "includeAll": true,
                     // Не стоит использовать текущий файл для обработки события ответа
@@ -208,4 +206,26 @@ function groupFirstRealPerson(listPerson) {
         }
     }
     return listReal.concat(listStatic);
+}
+
+function translateGame(game) {
+    switch (game) {
+        case "SecretConnections":
+        case "AlternativeWord":
+            return "Тайные Связи";
+        case "BattleOfMinds":
+            return "Битва умов";
+        default:
+            return game;
+    }
+
+}
+
+function dateFormat(d) {
+    return ("0" + d.getDate()).slice(-2) +
+        "." + ("0" + (d.getMonth() + 1)).slice(-2) +
+        "." + d.getFullYear() +
+        " " +
+        ("0" + d.getHours()).slice(-2) +
+        ":" + ("0" + d.getMinutes()).slice(-2);
 }

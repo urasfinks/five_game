@@ -74,7 +74,7 @@
                             "type": "bottomSheet",
                             "height": 200,
                             "link": {
-                              "template": "SecretConnections/GameCode.json"
+                              "template": "GameCode.json"
                             }
                           }
                         }
@@ -108,7 +108,7 @@
                         "args": {
                           "uuid": "MyGame.json",
                           "constructor": {
-                            "jsInvoke": "MyGame.js",
+                            "jsRouter": "MyGame.ai.js",
                             "args": {
                               "includeAll": true,
                               "switch": "constructor"

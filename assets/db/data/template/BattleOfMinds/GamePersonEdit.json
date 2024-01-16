@@ -161,7 +161,7 @@
         "width": "infinity",
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "BattleOfMinds/GameTeam.js",
+          "jsRouter": "BattleOfMinds/GameTeam.ai.js",
           "args": {
             "includeAll": true,
             "switch": "savePerson"
@@ -194,7 +194,7 @@
               "confirmRemove": true,
               "backgroundColor": "schema:onBackground",
               "onPressed": {
-                "jsInvoke": "BattleOfMinds/GameTeam.js",
+                "jsRouter": "BattleOfMinds/GameTeam.ai.js",
                 "args": {
                   "includeAll": true,
                   "switch": "removePerson"

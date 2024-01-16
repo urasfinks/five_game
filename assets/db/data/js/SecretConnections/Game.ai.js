@@ -89,4 +89,4 @@ function SecretConnectionsGameRouter() {
 
 var objSecretConnectionsGameRouter = new SecretConnectionsGameRouter();
 
-bridge.runRouter(objSecretConnectionsGameRouter);
+bridge.addRouter(objSecretConnectionsGameRouter);

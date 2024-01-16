@@ -166,7 +166,7 @@
         "width": "infinity",
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "SecretConnections/GameTeam.js",
+          "jsRouter": "SecretConnections/GameTeam.ai.js",
           "args": {
             "includeAll": true,
             "switch": "savePerson"
@@ -199,7 +199,7 @@
               "confirmRemove": true,
               "backgroundColor": "schema:onBackground",
               "onPressed": {
-                "jsInvoke": "SecretConnections/GameTeam.js",
+                "jsRouter": "SecretConnections/GameTeam.ai.js",
                 "args": {
                   "includeAll": true,
                   "switch": "removePerson"

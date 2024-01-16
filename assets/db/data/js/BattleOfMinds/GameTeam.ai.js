@@ -77,5 +77,4 @@ function BattleOfMindsGameTeamRouter() {
     };
 }
 
-var battleOfMindsGameTeamRouter = new BattleOfMindsGameTeamRouter();
-bridge.runRouter(battleOfMindsGameTeamRouter);
+bridge.addRouter(new BattleOfMindsGameTeamRouter());

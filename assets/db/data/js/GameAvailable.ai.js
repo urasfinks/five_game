@@ -10,7 +10,7 @@ function GameAvailableRouter(){
             "childKey1": "" ,
             "childKey2": "",
             "onTap1": {
-                "jsInvoke": "HomePage.js",
+                "jsRouter": "HomePage.ai.js",
                 "args": {
                     "game": "SecretConnections",
                     "includeAll": true,
@@ -18,7 +18,7 @@ function GameAvailableRouter(){
                 }
             },
             "onTap2": {
-                "jsInvoke": "HomePage.js",
+                "jsRouter": "HomePage.ai.js",
                 "args": {
                     "game": "BattleOfMinds",
                     "includeAll": true,

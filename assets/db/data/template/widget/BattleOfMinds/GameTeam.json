@@ -70,7 +70,7 @@
               "style": {
                 "flutterType": "TextStyle",
                 "fontSize": 14,
-                "color": "schema:inversePrimary"
+                "color": "white"
               }
             }
           }
@@ -150,7 +150,7 @@
         }
       },
       "onSubmitted": {
-        "jsInvoke": "SecretConnections/GameTeam.js",
+        "jsRouter": "SecretConnections/GameTeam.ai.js",
         "args": {
           "includeAll": true,
           "switch": "setName"
@@ -200,7 +200,7 @@
                   "backgroundColor": "schema:onBackground",
                   "actionBackgroundColor": "blue",
                   "onPressed": {
-                    "jsInvoke": "SecretConnections/GameTeam.js",
+                    "jsRouter": "SecretConnections/GameTeam.ai.js",
                     "args": {
                       "includeAll": true,
                       "switch": "randomize"
@@ -214,7 +214,7 @@
                 "style": {
                   "flutterType": "TextStyle",
                   "fontSize": 14,
-                  "color": "schema:inversePrimary"
+                  "color": "white"
                 }
               }
             }
@@ -272,7 +272,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "SecretConnections/Game.js",
+          "jsRouter": "SecretConnections/Game.ai.js",
           "args": {
             "includeAll": true,
             "switch": "changeGameState",

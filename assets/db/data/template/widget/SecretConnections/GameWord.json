@@ -32,7 +32,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "SecretConnections/GameWord.js",
+          "jsRouter": "SecretConnections/GameWord.ai.js",
           "args": {
             "includeAll": true,
             "switch": "generateWord"
@@ -61,7 +61,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "SecretConnections/Game.js",
+          "jsRouter": "SecretConnections/Game.ai.js",
           "args": {
             "includeAll": true,
             "switch": "changeGameState",

@@ -82,7 +82,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "BattleOfMinds/GameTeam.js",
+          "jsRouter": "BattleOfMinds/GameTeam.ai.js",
           "args": {
             "includeAll": true,
             "switch": "addPerson"

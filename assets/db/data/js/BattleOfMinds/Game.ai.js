@@ -89,4 +89,4 @@ function BattleOfMindsGameRouter() {
 
 var objBattleOfMindsGameRouter = new BattleOfMindsGameRouter();
 
-bridge.runRouter(objBattleOfMindsGameRouter);
+bridge.addRouter(objBattleOfMindsGameRouter);
