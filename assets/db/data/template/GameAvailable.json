@@ -53,6 +53,7 @@
                   "onTap": "${onTap1|jsonEncode()}",
                   "image": {
                     "flutterType": "Image",
+                    "animation": true,
                     "height": 140,
                     "width": "infinity",
                     "fit": "cover",
@@ -92,6 +93,7 @@
                   "onTap": "${onTap2|jsonEncode()}",
                   "image": {
                     "flutterType": "Image",
+                    "animation": true,
                     "height": 140,
                     "width": "infinity",
                     "fit": "cover",
