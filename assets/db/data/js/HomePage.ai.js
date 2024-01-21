@@ -10,7 +10,7 @@ function HomePageRouter() {
                 "jsRouter": "HomePage.ai.js",
                 "args": {
                     "includeAll": true,
-                    "switch": route(this, this.selectMyGame)
+                    "method": route(this, this.selectMyGame)
                 }
             }
         });
@@ -56,7 +56,7 @@ function HomePageRouter() {
                     "jsRouter": "HomePage.ai.js",
                     "args": {
                         "includeAll": true,
-                        "switch": route(this, this.onConfirmCodeResponse)
+                        "method": route(this, this.onConfirmCodeResponse)
                     }
                 }
             });
@@ -83,7 +83,7 @@ function HomePageRouter() {
                 "jsRouter": "HomePage.ai.js",
                 "args": {
                     "includeAll": true,
-                    "switch": route(this, this.onSelectGame)
+                    "method": route(this, this.onSelectGame)
                 }
             }
         });
@@ -153,7 +153,7 @@ function newCreateGame(gameUuid, socketUuid, data) {
                 "includeAll": true,
                 "gameUuid": gameUuid,
                 "socketUuid": socketUuid,
-                "switch": route(objHomePageRouter, objHomePageRouter.onGamePersist)
+                "method": route(objHomePageRouter, objHomePageRouter.onGamePersist)
             }
         }
     });
@@ -168,7 +168,7 @@ function checkAlreadyGame(socketUuid) {
             "args": {
                 "socketUuid": socketUuid,
                 "includeAll": true,
-                "switch": route(objHomePageRouter, objHomePageRouter.onSelectGameCheckAlready)
+                "method": route(objHomePageRouter, objHomePageRouter.onSelectGameCheckAlready)
             }
         }
     });

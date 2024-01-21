@@ -140,7 +140,7 @@
                 "jsRouter": "SecretConnections/GameRun.ai.js",
                 "args": {
                   "includeAll": true,
-                  "switch": "toNextTeam"
+                  "method": "toNextTeam"
                 }
               }
             }

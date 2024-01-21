@@ -40,7 +40,7 @@
     "constructor": {
       "jsRouter": "HomePage.ai.js",
       "args": {
-        "switch": "constructor"
+        "method": "constructor"
       }
     }
   }

@@ -59,7 +59,7 @@
                               "jsRouter": "GameAvailable.ai.js",
                               "args": {
                                 "includeAll": true,
-                                "switch": "constructor"
+                                "method": "constructor"
                               }
                             }
                           }
@@ -111,7 +111,7 @@
                             "jsRouter": "MyGame.ai.js",
                             "args": {
                               "includeAll": true,
-                              "switch": "constructor"
+                              "method": "constructor"
                             }
                           }
                         }

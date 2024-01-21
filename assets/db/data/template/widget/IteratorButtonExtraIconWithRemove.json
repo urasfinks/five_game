@@ -16,7 +16,7 @@
             "onPressed": {
               "jsRouter": "MyGame.ai.js",
               "args": {
-                "switch": "onRemove",
+                "method": "onRemove",
                 "id_data": "${id_data}",
                 "currentRenderTemplateList": [
                   "id_data"

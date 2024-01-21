@@ -99,7 +99,6 @@ function SecretConnectionsGameWordRouter() {
             "Лагуна",
             "Купол",
             "Лазурь",
-            "Камбуз",
             "Панорама",
             "Визит",
             "Галерея",

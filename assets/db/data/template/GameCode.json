@@ -84,7 +84,7 @@
           "jsRouter": "HomePage.ai.js",
           "args": {
             "includeAll": true,
-            "switch": "requestConfirmCode"
+            "method": "requestConfirmCode"
           }
         },
         "child": {

@@ -3,18 +3,25 @@
   "crossAxisAlignment": "start",
   "children": [
     {
-      "flutterType": "Padding",
-      "padding": "6,0,6,20",
-      "child": {
-        "flutterType": "Text",
-        "label": "Генерация карточек",
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 17,
-          "fontWeight": "bold",
-          "color": "schema:secondary"
+      "flutterType": "SelectSheet",
+      "state": "groupWord",
+      "stateKey": "groupWord",
+      "selectedIndex": 0,
+      "children": [
+        {
+          "label": "Группа 1"
+        },
+        {
+          "label": "Группа 2"
+        },
+        {
+          "label": "Группа 3"
         }
-      }
+      ]
+    },
+    {
+      "flutterType": "SizedBox",
+      "height": 20
     },
     {
       "flutterType": "State",
@@ -35,7 +42,7 @@
           "jsRouter": "SecretConnections/GameWord.ai.js",
           "args": {
             "includeAll": true,
-            "switch": "generateWord"
+            "method": "generateWord"
           }
         },
         "child": {
@@ -64,7 +71,7 @@
           "jsRouter": "SecretConnections/Game.ai.js",
           "args": {
             "includeAll": true,
-            "switch": "changeGameState",
+            "method": "changeGameState",
             "gameState": "run"
           }
         },

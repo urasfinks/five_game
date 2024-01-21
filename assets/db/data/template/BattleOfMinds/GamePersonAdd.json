@@ -85,7 +85,7 @@
           "jsRouter": "BattleOfMinds/GameTeam.ai.js",
           "args": {
             "includeAll": true,
-            "switch": "addPerson"
+            "method": "addPerson"
           }
         },
         "child": {

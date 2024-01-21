@@ -39,14 +39,14 @@
       "jsInvoke": "Account.js",
       "args": {
         "includeAll": true,
-        "switch": "constructor"
+        "method": "constructor"
       }
     },
     "onActive": {
       "jsInvoke": "Account.js",
       "args": {
         "includeAll": true,
-        "switch": "onActive"
+        "method": "onActive"
       }
     }
   }

@@ -85,7 +85,7 @@
           "jsInvoke": "SecretConnections/GameTeam.js",
           "args": {
             "includeAll": true,
-            "switch": "addPerson"
+            "method": "addPerson"
           }
         },
         "child": {

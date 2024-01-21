@@ -14,7 +14,7 @@ function GameAvailableRouter(){
                 "args": {
                     "game": "SecretConnections",
                     "includeAll": true,
-                    "switch": "createGame"
+                    "method": "createGame"
                 }
             },
             "onTap2": {
@@ -22,7 +22,7 @@ function GameAvailableRouter(){
                 "args": {
                     "game": "BattleOfMinds",
                     "includeAll": true,
-                    "switch": "createGame"
+                    "method": "createGame"
                 }
             }
         });

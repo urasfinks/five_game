@@ -1,7 +1,7 @@
-if (bridge.args["switch"] === "switch") {
+if (bridge.args["method"] === "switch") {
     bridge.alert("Hello DeepLink key: " + bridge.args["key"]);
 }
 
-if (["SecretConnections", "BattleOfMinds"].includes(bridge.args["switch"])) {
+if (["SecretConnections", "BattleOfMinds"].includes(bridge.args["method"])) {
     checkAlreadyGame(bridge.args["socketUuid"]);
 }

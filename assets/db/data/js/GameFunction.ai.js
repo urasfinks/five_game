@@ -80,41 +80,41 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
-                "switch": "constructor"
+                "method": "constructor"
             }
         },
         "onChangeUuid": {
             "jsRouter": game + "/Game.ai.js",
             "args": {
                 "includeAll": true,
-                "switch": "onChange"
+                "method": "onChange"
             }
         },
         "onChangeOrientation": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
-                "switch": "onChangeOrientation"
+                "method": "onChangeOrientation"
             }
         },
         "destructor": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
-                "switch": "destructor"
+                "method": "destructor"
             }
         },
         "onActive": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
-                "switch": "onChangeOrientation"
+                "method": "onChangeOrientation"
             }
         },
         "onRenderFloatingActionButton": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
                 "includeAll": true,
-                "switch": "onRenderFloatingActionButton"
+                "method": "onRenderFloatingActionButton"
             }
         },
         "subscribeToRefresh": {
@@ -152,7 +152,7 @@ function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
                 "jsRouter": game + "/GameInit.ai.js",
                 "args": {
                     "includeAll": true,
-                    "switch": switchKeyOnCheckUserSetUser
+                    "method": switchKeyOnCheckUserSetUser
                 }
             }
         });
@@ -171,7 +171,7 @@ function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
                     // которые загружаются 1 раз в память
                     // если мы сюда приземлил обработчик, то кажый раз будеут переопределятся все функции
                     // Это будет замедлять работу приложения, и нам этого не надо
-                    "switch": switchKeyOnResponseCode
+                    "method": switchKeyOnResponseCode
                 }
             }
         });

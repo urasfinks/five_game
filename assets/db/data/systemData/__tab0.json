@@ -27,34 +27,34 @@
       "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
-        "switch": "onChange"
+        "method": "onChange"
       }
     },
     "onChangeOrientation": {
       "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
-        "switch": "onChangeOrientation"
+        "method": "onChangeOrientation"
       }
     },
     "destructor": {
       "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
-        "switch": "destructor"
+        "method": "destructor"
       }
     },
     "onActive": {
       "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
-        "switch": "onChangeOrientation"
+        "method": "onChangeOrientation"
       }
     },
     "constructor": {
       "jsRouter": "SecretConnections/Game.ai.js",
       "args": {
         "includeAll": true,
-        "switch": "constructor"
+        "method": "constructor"
       }
     }
   }

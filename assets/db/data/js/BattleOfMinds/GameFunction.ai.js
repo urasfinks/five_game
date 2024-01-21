@@ -59,7 +59,7 @@ bridge.global.BattleOfMinds = {
                     "jsRouter": "BattleOfMinds/GameRun.ai.js",
                     "args": {
                         "includeAll": true,
-                        "switch": "onCardTap",
+                        "method": "onCardTap",
                         "index": counter - 1
                     }
                 } : null;
@@ -76,7 +76,7 @@ bridge.global.BattleOfMinds = {
                             "args": {
                                 "includeAll": true,
                                 "indexCard": cardData["index"],
-                                "switch": "confirmSelect"
+                                "method": "confirmSelect"
                             }
                         }
                     }

@@ -164,7 +164,7 @@
           "jsRouter": "BattleOfMinds/GameTeam.ai.js",
           "args": {
             "includeAll": true,
-            "switch": "savePerson"
+            "method": "savePerson"
           }
         },
         "child": {
@@ -197,7 +197,7 @@
                 "jsRouter": "BattleOfMinds/GameTeam.ai.js",
                 "args": {
                   "includeAll": true,
-                  "switch": "removePerson"
+                  "method": "removePerson"
                 }
               }
             }

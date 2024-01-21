@@ -8,7 +8,7 @@ function MyGameRouter() {
                 "jsRouter": "MyGame.ai.js",
                 "args": {
                     "includeAll": true,
-                    "switch": "selectMyGame"
+                    "method": "selectMyGame"
                 }
             }
         });
@@ -22,7 +22,7 @@ function MyGameRouter() {
                 "jsRouter": "MyGame.ai.js",
                 "args": {
                     "includeAll": true,
-                    "switch": "onRemoved"
+                    "method": "onRemoved"
                 }
             }
         });
