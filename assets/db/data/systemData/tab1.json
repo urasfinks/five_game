@@ -36,14 +36,14 @@
       }
     },
     "constructor": {
-      "jsInvoke": "Account.js",
+      "jsRouter": "Account.ai.js",
       "args": {
         "includeAll": true,
         "method": "constructor"
       }
     },
     "onActive": {
-      "jsInvoke": "Account.js",
+      "jsRouter": "Account.ai.js",
       "args": {
         "includeAll": true,
         "method": "onActive"
