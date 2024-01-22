@@ -164,7 +164,7 @@ bridge.global.SecretConnections = {
                                             "child": {
                                                 "flutterType": "Text",
                                                 "textAlign": "center",
-                                                "label": cardData["label"].toUpperCase(),
+                                                "label": cardData["label"] != undefined ? cardData["label"].toUpperCase() : "???",
                                                 "style": {
                                                     "flutterType": "TextStyle",
                                                     "decoration": decoration,

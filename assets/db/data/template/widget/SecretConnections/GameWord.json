@@ -6,16 +6,15 @@
       "flutterType": "SelectSheet",
       "state": "groupWord",
       "stateKey": "groupWord",
+      "onStateDataUpdate": true,
+      "onStateDataUpdateKey": "groupWord",
       "selectedIndex": 0,
       "children": [
         {
-          "label": "Группа 1"
-        },
-        {
-          "label": "Группа 2"
-        },
-        {
-          "label": "Группа 3"
+          "ChildrenExtension": "Iterator",
+          "dataType": "state",
+          "state": "groupWord",
+          "key": "listOptions"
         }
       ]
     },

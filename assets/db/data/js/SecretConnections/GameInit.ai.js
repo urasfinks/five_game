@@ -5,6 +5,35 @@ function SecretConnectionsGameInitRouter() {
             route(this, this.genCodeUuidResponse),
             route(this, this.onCheckSetUser),
         );
+        bridge.call("DbQuery", {
+            "sql": "select * from data where key_data = ? order by meta_data asc",
+            "args": ["word"],
+            "onFetch": {
+                "jsRouter": "SecretConnections/GameInit.ai.js",
+                "args": {
+                    "method": route(this, this.onSelectWord)
+                }
+            }
+        });
+    };
+
+    this.onSelectWord = function () {
+        if (bridge.args["fetchDb"].length > 0) {
+            var list = [], fetchDb = bridge.args["fetchDb"];
+            for (var i = 0; i < fetchDb.length; i++) {
+                list.push({
+                    "label": fetchDb[i]["value_data"]["label"],
+                    "uuid": fetchDb[i]["uuid_data"]
+                });
+            }
+            //bridge.log("rr: "+JSON.stringify(list));
+            bridge.call("SetStateData", {
+                "state": "groupWord",
+                "map": {
+                    "listOptions": list
+                }
+            });
+        }
     };
 
     this.onCheckSetUser = function () {
