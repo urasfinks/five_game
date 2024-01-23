@@ -77,7 +77,7 @@ function HomePageRouter() {
     this.onGamePersist = function () {
         var socketUuid = bridge.args["socketUuid"];
         bridge.call("DbQuery", {
-            "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
+            "sql": "select * from data where (uuid_data = ? or parent_uuid_data = ?) and is_remove_data = 0 order by id_data desc",
             "args": [socketUuid, socketUuid],
             "onFetch": {
                 "jsRouter": "HomePage.ai.js",
@@ -161,7 +161,7 @@ function newCreateGame(gameUuid, socketUuid, data) {
 
 function checkAlreadyGame(socketUuid) {
     bridge.call("DbQuery", {
-        "sql": "select * from data where uuid_data = ? or parent_uuid_data = ? order by id_data desc",
+        "sql": "select * from data where (uuid_data = ? or parent_uuid_data = ?) and is_remove_data = 0 order by id_data desc",
         "args": [socketUuid, socketUuid],
         "onFetch": {
             "jsRouter": "HomePage.ai.js",

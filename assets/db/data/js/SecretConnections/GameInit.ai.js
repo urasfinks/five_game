@@ -6,7 +6,7 @@ function SecretConnectionsGameInitRouter() {
             route(this, this.onCheckSetUser),
         );
         bridge.call("DbQuery", {
-            "sql": "select * from data where key_data = ? order by meta_data asc",
+            "sql": "select * from data where key_data = ? and is_remove_data = 0 order by meta_data asc",
             "args": ["word"],
             "onFetch": {
                 "jsRouter": "SecretConnections/GameInit.ai.js",

@@ -2,7 +2,7 @@ function SecretConnectionsGameWordRouter() {
 
     this.generateWord = function () {
         bridge.call("DbQuery", {
-            "sql": "select * from data where uuid_data = ? and key_data = ? order by meta_data asc",
+            "sql": "select * from data where uuid_data = ? and key_data = ? and is_remove_data = 0 order by meta_data asc",
             "args": [bridge.state["groupWord"]["groupWord"]["uuid"], "word"],
             "onFetch": {
                 "jsRouter": "SecretConnections/GameWord.ai.js",
