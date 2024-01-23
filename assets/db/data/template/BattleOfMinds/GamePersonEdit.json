@@ -73,46 +73,6 @@
         "height": 20
       },
       {
-        "flutterType": "SegmentControl",
-        "onInitSetState": true,
-        "onChangedSetStateNotify": false,
-        "decoration": {
-          "flutterType": "BoxDecoration",
-          "color": "schema:onBackground",
-          "borderRadius": 10
-        },
-        "thumbDecoration": {
-          "flutterType": "BoxDecoration",
-          "color": "schema:onPrimary",
-          "borderRadius": 9
-        },
-        "height": 45,
-        "name": "Role",
-        "data": "${pageArgs(personValue.role)}",
-        "children": [
-          {
-            "case": "player",
-            "flutterType": "Container",
-            "child": {
-              "flutterType": "Text",
-              "label": "Участник"
-            }
-          },
-          {
-            "case": "captain",
-            "flutterType": "Container",
-            "child": {
-              "flutterType": "Text",
-              "label": "Капитан"
-            }
-          }
-        ]
-      },
-      {
-        "flutterType": "SizedBox",
-        "height": 20
-      },
-      {
         "flutterType": "SelectSheet",
         "state": "groupPerson",
         "stateKey": "groupPerson",
