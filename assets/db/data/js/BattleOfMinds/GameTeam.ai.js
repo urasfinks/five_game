@@ -21,8 +21,7 @@ function BattleOfMindsGameTeamRouter() {
             var data = {};
             bridge.overlay(bridge.pageArgs["personValue"], {
                 "name": bridge.state["main"]["Name"] || "Гость",
-                "role": bridge.state["main"]["Role"] || "player",
-                "team": bridge.state["main"]["Team"] || "undefined",
+                "team": bridge.selector(bridge.state, ["groupPerson", "groupPerson", "label"], "undefined"),
             });
             data["user" + bridge.pageArgs["personId"]] = bridge.pageArgs["personValue"];
             socketSave(data, bridge.pageArgs["socketUuid"]);

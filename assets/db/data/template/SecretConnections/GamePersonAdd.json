@@ -82,7 +82,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsInvoke": "SecretConnections/GameTeam.js",
+          "jsRouter": "SecretConnections/GameTeam.ai.js",
           "args": {
             "includeAll": true,
             "method": "addPerson"

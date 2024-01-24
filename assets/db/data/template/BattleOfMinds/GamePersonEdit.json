@@ -76,39 +76,19 @@
         "flutterType": "SelectSheet",
         "state": "groupPerson",
         "stateKey": "groupPerson",
+        "onStateDataUpdate": true,
         "extend": true,
-        "selectedIndex": 0,
-        "children": [
-          {
-            "label": "Группа 1"
-          },
-          {
-            "label": "Группа 2"
-          },
-          {
-            "label": "Группа 3"
-          },
-          {
-            "label": "Группа 4"
-          },
-          {
-            "label": "Группа 5"
-          },
-          {
-            "label": "Группа 6"
-          },
-          {
-            "label": "Группа 7"
-          },
-          {
-            "label": "Группа 8"
-          },
-          {
-            "label": "Группа 9"
-          },
-          {
-            "label": "Группа 10"
-          }
+        "selectedLabel": {
+          "$ref": "pageArgs",
+          "selector": "personValue.team"
+        },
+        "children": {
+          "$ref": "pageArgs",
+          "selector": "listOptions"
+        },
+        "replaceReferenceList": [
+          "children",
+          "selectedLabel"
         ]
       },
       {

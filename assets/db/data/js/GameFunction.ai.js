@@ -31,7 +31,7 @@ function onRenderFloatingActionButton(socketData, socketUuid) {
                         "type": "bottomSheet",
                         "height": 200,
                         "link": {
-                            "template": "SecretConnections/GamePersonAdd.json",
+                            "template": bridge.pageArgs["game"] + "/GamePersonAdd.json",
                         }
                     }
                 }

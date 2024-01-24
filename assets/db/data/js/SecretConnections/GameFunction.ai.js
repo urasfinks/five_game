@@ -293,7 +293,7 @@ bridge.global.SecretConnections = {
                         "type": "bottomSheet",
                         "height": 360,
                         "link": {
-                            "template": "BattleOfMinds/GamePersonEdit.json",
+                            "template": "SecretConnections/GamePersonEdit.json",
                         }
                     }
                 } : {};
