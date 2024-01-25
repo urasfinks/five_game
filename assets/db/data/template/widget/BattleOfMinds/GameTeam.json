@@ -230,7 +230,44 @@
       "ChildrenExtension": "Iterator",
       "dataType": "state",
       "key": "listPerson",
-      "theme": "ButtonGroup"
+      "groupName": {
+        "flutterType": "Padding",
+        "padding": "0,0,0,20",
+        "child": {
+          "flutterType": "Text",
+          "label": "${label}"
+        }
+      },
+      "user": {
+        "flutterType": "Padding",
+        "padding": "0,0,0,20",
+        "child": {
+          "flutterType": "Material",
+          "color": "${background,schema:onBackground}",
+          "shape": {
+            "flutterType": "RoundedRectangleBorder",
+            "borderRadius": "10,10,10,10"
+          },
+          "child": {
+            "flutterType": "InkWell",
+            "customBorder": {
+              "flutterType": "RoundedRectangleBorder",
+              "borderRadius": "10,10,10,10"
+            },
+            "onTap": "${onTap|jsonEncode()}",
+            "compileTemplateList": [
+              "onTap"
+            ],
+            "child": {
+              "flutterType": "Template",
+              "src": "${templateWidgetSrc}",
+              "compileTemplateList": [
+                "src"
+              ]
+            }
+          }
+        }
+      }
     },
     {
       "flutterType": "SizedBox",
