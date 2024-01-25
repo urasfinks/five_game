@@ -86,7 +86,7 @@
           "$ref": "pageArgs",
           "selector": "listOptions"
         },
-        "replaceReferenceList": [
+        "compileReferenceList": [
           "children",
           "selectedLabel"
         ]

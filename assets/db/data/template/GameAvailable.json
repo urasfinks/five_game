@@ -60,7 +60,7 @@
                     "src": "${src1}",
                     "controller": "${contextKey()}_1column"
                   },
-                  "currentRenderTemplateList": [
+                  "compileTemplateList": [
                     "image.controller"
                   ],
                   "templateLockScreen": {
@@ -100,7 +100,7 @@
                     "src": "${src2}",
                     "controller": "${contextKey()}_2column"
                   },
-                  "currentRenderTemplateList": [
+                  "compileTemplateList": [
                     "image.controller"
                   ],
                   "templateLockScreen": {

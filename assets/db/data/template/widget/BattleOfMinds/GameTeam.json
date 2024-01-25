@@ -28,7 +28,7 @@
               "args": {
                 "case": "copyClipboard",
                 "data": "${state(main,gameCode,123456)}",
-                "currentRenderTemplateList": [
+                "compileTemplateList": [
                   "data"
                 ]
               }
@@ -59,7 +59,7 @@
               "args": {
                 "case": "share",
                 "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/SecretConnections/socketUuid/${state(main,socketUuid,undefined)}",
-                "currentRenderTemplateList": [
+                "compileTemplateList": [
                   "data"
                 ]
               }
