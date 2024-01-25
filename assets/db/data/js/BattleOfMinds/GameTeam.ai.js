@@ -1,9 +1,5 @@
 function BattleOfMindsGameTeamRouter() {
 
-    this.onPop = function () {
-        bridge.log("ONPOP: " + JSON.stringify(bridge.args["selected"]));
-    };
-
     this.setName = function () {
         var data = {};
         var userBlock = {};
@@ -40,21 +36,7 @@ function BattleOfMindsGameTeamRouter() {
     };
 
     this.randomize = function(){
-        var socketData = bridge.state["main"]["originSocketData"];
-        var listPerson = groupFirstRealPerson(bridge.shuffle(getListPerson(socketData)));
-        var data = {};
-        var countCaptain = 0;
-        for (var i = 0; i < listPerson.length; i++) {
-            if (i === 0 || i === 1) {
-                listPerson[i]["role"] = "captain";
-                listPerson[i]["team"] = countCaptain++ === 0 ? "red" : "blue";
-            } else {
-                listPerson[i]["role"] = "player";
-                listPerson[i]["team"] = i % 2 == 0 ? "red" : "blue";
-            }
-            data["user" + listPerson[i]["id"]] = listPerson[i];
-        }
-        socketSave(data, bridge.pageArgs["socketUuid"]);
+
     };
 
     this.addPerson = function(){

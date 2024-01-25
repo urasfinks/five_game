@@ -41,11 +41,6 @@ function BattleOfMindsGameInitRouter() {
     this.onChangeOrientation = function () {
         var socketData = bridge.state["main"]["originSocketData"];
         if (socketData != undefined && ["word", "run"].includes(socketData["gameState"])) {
-            bridge.call("SetStateData", {
-                "map": {
-                    "gridWord": bridge.global.BattleOfMinds.getGridWord(socketData)
-                }
-            });
             controlBottomNavigationBar();
         }
     };

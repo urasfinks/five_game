@@ -33,11 +33,9 @@ function BattleOfMindsGameRouter() {
                 if (isOwner(socketData)) {
                     newStateData["visibleGenerateWord"] = "true";
                 }
-                newStateData["gridWord"] = bridge.global.BattleOfMinds.getGridWord(socketData);
             }
             if (["run", "finish"].includes(curGameState)) {
                 bridge.global.BattleOfMinds.calculateScore(socketData, newStateData, socketUuid);
-                newStateData["users"] = bridge.global.BattleOfMinds.getUsers(socketData);
             }
             if (lastGameState !== curGameState) {
                 onRenderFloatingActionButton(socketData, socketUuid);
@@ -49,10 +47,7 @@ function BattleOfMindsGameRouter() {
             bridge.overlay(newStateData, {
                 switchKey: curGameState,
                 originSocketData: socketData,
-                listPersonUndefined: bridge.global.BattleOfMinds.getListPersonGroup(socketData, "undefined", socketUuid),
-                listPersonRed: bridge.global.BattleOfMinds.getListPersonGroup(socketData, "red", socketUuid),
-                listPersonBlue: bridge.global.BattleOfMinds.getListPersonGroup(socketData, "blue", socketUuid),
-                toNextTeam: (isCaptain(socketData) && isMyGame(socketData)) ? "true" : "false",
+                listPerson: bridge.global.BattleOfMinds.getListPersonGroup(socketData, socketUuid),
                 socketUuid: socketUuid,
                 gameCode: socketData["gameCode"] || "...",
                 isOwner: isOwn,
@@ -87,6 +82,4 @@ function BattleOfMindsGameRouter() {
     }
 }
 
-var objBattleOfMindsGameRouter = new BattleOfMindsGameRouter();
-
-bridge.addRouter(objBattleOfMindsGameRouter);
+bridge.addRouter(new BattleOfMindsGameRouter());

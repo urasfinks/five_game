@@ -229,27 +229,7 @@
     {
       "ChildrenExtension": "Iterator",
       "dataType": "state",
-      "key": "listPersonUndefined",
-      "theme": "ButtonGroup"
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "ChildrenExtension": "Iterator",
-      "dataType": "state",
-      "key": "listPersonRed",
-      "theme": "ButtonGroup"
-    },
-    {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
-      "ChildrenExtension": "Iterator",
-      "dataType": "state",
-      "key": "listPersonBlue",
+      "key": "listPerson",
       "theme": "ButtonGroup"
     },
     {
