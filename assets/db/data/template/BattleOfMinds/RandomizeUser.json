@@ -1,0 +1,77 @@
+{
+  "flutterType": "Padding",
+  "padding": 20,
+  "child": {
+    "flutterType": "CustomScrollView",
+    "isOpacityBottomNavigationBar": false,
+    "onStateDataUpdate": true,
+    "children": [
+      {
+        "flutterType": "Text",
+        "label": "В эту игру можно играть командами, для этого создайте команды и нажмите \"Распределить\". Для игры в режиме \"Все против всех\" - удалите существующие команды и начинайте игру."
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
+      },
+      {
+        "ChildrenExtension": "Iterator",
+        "dataType": "state",
+        "key": "userTeam",
+        "extendDataElement": {
+          "template": {
+            "flutterType": "Margin",
+            "margin": "0,0,0,10",
+            "child": {
+              "flutterType": "Row",
+              "children": [
+                {
+                  "flutterType": "Expanded",
+                  "child": {
+                    "flutterType": "Template",
+                    "src": "Input",
+                    "context": {
+                      "key": "teamUser",
+                      "data": {
+                        "data": "${label}",
+                        "key": "field_${iteratorIndex}"
+                      }
+                    }
+                  }
+                },
+                {
+                  "flutterType": "SizedBox",
+                  "width": 20
+                },
+                {
+                  "flutterType": "RawMaterialButton",
+                  "fillColor": "red",
+                  "padding": 10,
+                  "onPressed": {
+                    "jsRouter": "BattleOfMinds/RandomizeUser.ai.js",
+                    "args": {
+                      "method": "onRemove",
+                      "removeIndex": "${iteratorIndex}"
+                    }
+                  },
+                  "child": {
+                    "flutterType": "Icon",
+                    "src": "delete_outline",
+                    "color": "white",
+                    "size": 20
+                  }
+                }
+              ]
+            }
+          },
+          "dataContext": true,
+          "compileTemplateList": [
+            "template.child.children.0.child.context.data.data",
+            "template.child.children.0.child.context.data.key",
+            "template.child.children.2.onPressed.args.removeIndex"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -9,11 +9,9 @@ bridge.global.BattleOfMinds = {
         // newStateData["allRed"] = allRed;
     },
 
-    getListPersonGroup: function (socketData, socketUuid) {
-        var result = [];
-        var isOwn = isOwner(socketData);
-        var listPerson = getListPerson(socketData);
+    getUserTeam: function(listPerson){
         var alreadyPersonGroup = [];
+        var result = [];
         for (var i = 0; i < listPerson.length; i++) {
             if (listPerson[i]["team"].trim() !== "") {
                 alreadyPersonGroup.push(listPerson[i]["team"]);
@@ -22,18 +20,28 @@ bridge.global.BattleOfMinds = {
             }
         }
         alreadyPersonGroup = bridge.arrayUnique(alreadyPersonGroup);
-        var resultTeam = [];
         for (var i = 0; i < alreadyPersonGroup.length; i++) {
-            resultTeam.push({
+            result.push({
                 "label": alreadyPersonGroup[i]
             });
         }
-        for (var i = 0; i < alreadyPersonGroup.length; i++) {
-            result.push({
-                "templateCustom": "groupName",
-                "label": alreadyPersonGroup[i]
-            });
-            this.userByGroup(listPerson, result, alreadyPersonGroup[i], isOwn, socketUuid, resultTeam);
+        return result;
+    },
+
+    getListPersonGroup: function (socketData, socketUuid) {
+        var result = [];
+        var isOwn = isOwner(socketData);
+        var listPerson = getListPerson(socketData);
+        var userTeam = this.getUserTeam(listPerson);
+
+        for (var i = 0; i < userTeam.length; i++) {
+            if (userTeam.length > 1) {
+                result.push({
+                    "templateCustom": "groupName",
+                    "label": userTeam[i].label
+                });
+            }
+            this.userByGroup(listPerson, result, userTeam[i].label, isOwn, socketUuid, userTeam);
         }
         return result;
     },

@@ -1,6 +1,5 @@
 {
   "flutterType": "Slidable",
-  "newContext": false,
   "children": [
     {
       "flutterType": "SizedBox",

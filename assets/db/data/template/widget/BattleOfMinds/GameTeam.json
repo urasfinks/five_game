@@ -193,19 +193,9 @@
               "flutterType": "Button",
               "height": 44,
               "onPressed": {
-                "sysInvoke": "Alert",
+                "jsRouter": "BattleOfMinds/GameTeam.ai.js",
                 "args": {
-                  "confirmAction": true,
-                  "actionLabel": "Распределить",
-                  "backgroundColor": "schema:onBackground",
-                  "actionBackgroundColor": "blue",
-                  "onPressed": {
-                    "jsRouter": "SecretConnections/GameTeam.ai.js",
-                    "args": {
-                      "includeAll": true,
-                      "method": "randomize"
-                    }
-                  }
+                  "method": "onPressRandomize"
                 }
               },
               "child": {

@@ -27,7 +27,7 @@ function BattleOfMindsGameTeamRouter() {
         }
     };
 
-    this.removePerson = function(){
+    this.removePerson = function () {
         //TODO: сделать проверку что персона статичная
         var data = {};
         data["user" + bridge.pageArgs["personId"]] = null;
@@ -35,11 +35,11 @@ function BattleOfMindsGameTeamRouter() {
         bridge.call("NavigatorPop", {});
     };
 
-    this.randomize = function(){
+    this.randomize = function () {
 
     };
 
-    this.addPerson = function(){
+    this.addPerson = function () {
         if (bridge.state["main"]["Name"] != undefined && bridge.state["main"]["Name"].trim() !== "") {
             var data = {};
             var uuidPerson = bridge.call("Util", {"case": "uuid"})["uuid"];
@@ -55,6 +55,28 @@ function BattleOfMindsGameTeamRouter() {
         } else {
             bridge.alert("Имя слишком пустое)");
         }
+    };
+
+    this.onPressRandomize = function () {
+        //var socketData = bridge.state["main"]["originSocketData"];
+        //var listPerson = getListPerson(socketData);
+        //var userTeam = bridge.global.BattleOfMinds.getUserTeam(listPerson);
+        //bridge.log(userTeam);
+        bridge.call("NavigatorPush", {
+            "socketUuid": bridge.pageArgs["socketUuid"],
+            "type": "bottomSheet",
+            "userTeam": [],
+            "height": 360,
+            "link": {
+                "template": "BattleOfMinds/RandomizeUser.json",
+            },
+            "constructor": {
+                "jsRouter": "BattleOfMinds/RandomizeUser.ai.js",
+                "args": {
+                    "method": "constructor"
+                }
+            }
+        });
     };
 }
 
