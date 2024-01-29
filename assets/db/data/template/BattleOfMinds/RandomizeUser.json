@@ -71,6 +71,58 @@
             "template.child.children.2.onPressed.args.removeIndex"
           ]
         }
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 10
+      },
+      {
+        "flutterType": "Row",
+        "children": [
+          {
+            "flutterType": "Expanded",
+            "child": {
+              "flutterType": "Button",
+              "height": 44,
+              "onPressed": {},
+              "child": {
+                "flutterType": "Text",
+                "label": "Распределить участников",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 14,
+                  "fontWeight": "bold",
+                  "color": "schema:inversePrimary"
+                }
+              }
+            }
+          },
+          {
+            "flutterType": "SizedBox",
+            "width": 20
+          },
+          {
+            "flutterType": "RawMaterialButton",
+            "padding": 10,
+            "fillColor": "blue",
+            "onPressed": {
+              "jsRouter": "BattleOfMinds/RandomizeUser.ai.js",
+              "args": {
+                "method": "addGroup"
+              }
+            },
+            "child": {
+              "flutterType": "Icon",
+              "src": "add",
+              "color": "white",
+              "size": 20
+            }
+          }
+        ]
+      },
+      {
+        "flutterType": "SizedBox",
+        "height": 20
       }
     ]
   }

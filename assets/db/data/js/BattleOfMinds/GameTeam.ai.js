@@ -66,7 +66,7 @@ function BattleOfMindsGameTeamRouter() {
             "socketUuid": bridge.pageArgs["socketUuid"],
             "type": "bottomSheet",
             "userTeam": [],
-            "height": 360,
+            "height": 460,
             "link": {
                 "template": "BattleOfMinds/RandomizeUser.json",
             },

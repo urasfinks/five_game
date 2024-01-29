@@ -12,7 +12,7 @@ function RandomizeUserRouter(){
                 }
             }
         });
-    }
+    };
 
     this.onSelectSocketData = function(){
         if (bridge.args["fetchDb"].length > 0) {
@@ -26,12 +26,29 @@ function RandomizeUserRouter(){
                 }
             });
         }
+    };
+
+    this.addGroup = function(){
+        var userTeam = bridge.state["main"]["userTeam"];
+        userTeam.push({
+            "label": ""
+        });
+        bridge.call("SetStateData", {
+            "map": {
+                "userTeam": userTeam
+            }
+        });
     }
 
     this.onRemove = function(){
         var userTeam = bridge.state["main"]["userTeam"];
-        bridge.log(bridge.args["removeIndex"]);
-    }
+        bridge.arrayRemove(userTeam, bridge.args["removeIndex"]*1);
+        bridge.call("SetStateData", {
+            "map": {
+                "userTeam": userTeam
+            }
+        });
+    };
 }
 
 bridge.addRouter(new RandomizeUserRouter());
