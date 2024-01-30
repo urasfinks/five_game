@@ -44,7 +44,11 @@ function SecretConnectionsGameWordRouter() {
             data["isGeneratedCard"] = true;
             socketSave(data, bridge.pageArgs["socketUuid"]);
         }
-    }
+    };
+
+    this.addNewGroupWord = function(){
+        bridge.log(bridge.args);
+    };
 }
 
 bridge.addRouter(new SecretConnectionsGameWordRouter());

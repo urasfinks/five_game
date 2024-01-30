@@ -17,7 +17,13 @@
           "state": "groupWord",
           "key": "listOptions"
         }
-      ]
+      ],
+      "onNew": {
+        "jsRouter": "SecretConnections/GameWord.ai.js",
+        "args": {
+          "method": "addNewGroupWord"
+        }
+      }
     },
     {
       "flutterType": "SizedBox",
