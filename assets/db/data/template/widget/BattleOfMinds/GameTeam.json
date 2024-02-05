@@ -58,7 +58,7 @@
               "sysInvoke": "Util",
               "args": {
                 "case": "share",
-                "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/SecretConnections/socketUuid/${state(main,socketUuid,undefined)}",
+                "data": "${globalSettings(host,)}/deeplink/${globalSettings(version,)}/BattleOfMinds/socketUuid/${state(main,socketUuid,undefined)}",
                 "compileTemplateList": [
                   "data"
                 ]
@@ -150,7 +150,7 @@
         }
       },
       "onSubmitted": {
-        "jsRouter": "SecretConnections/GameTeam.ai.js",
+        "jsRouter": "BattleOfMinds/GameTeam.ai.js",
         "args": {
           "includeAll": true,
           "method": "setName"
@@ -279,7 +279,7 @@
         "height": 44,
         "backgroundColor": "blue",
         "onPressed": {
-          "jsRouter": "SecretConnections/Game.ai.js",
+          "jsRouter": "BattleOfMinds/Game.ai.js",
           "args": {
             "includeAll": true,
             "method": "changeGameState",

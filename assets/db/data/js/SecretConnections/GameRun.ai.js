@@ -3,8 +3,8 @@ function SecretConnectionsGameRunRouter() {
     this.toNextTeam = function () {
         var socketData = bridge.state["main"]["originSocketData"];
         var newSocketUpdate = {};
-        bridge.global.BattleOfMinds.clearAllSelected(socketData, newSocketUpdate);
-        bridge.global.BattleOfMinds.toggleTeam(socketData, newSocketUpdate);
+        bridge.global.SecretConnections.clearAllSelected(socketData, newSocketUpdate);
+        bridge.global.SecretConnections.toggleTeam(socketData, newSocketUpdate);
         socketSave(newSocketUpdate, bridge.pageArgs["socketUuid"]);
         bridge.socketExtend({
             "action": "timestamp",
@@ -27,7 +27,7 @@ function SecretConnectionsGameRunRouter() {
         for (var key in socketData) {
             if (key.startsWith("tapCard_")) {
                 var curIndexCard = key.split("tapCard_")[1].split("_")[0];
-                if (indexCard == curIndexCard) {
+                if (indexCard * 1 === curIndexCard * 1) {
                     card["userPress"].push(key.split("_").pop());
                 }
             }
@@ -37,10 +37,10 @@ function SecretConnectionsGameRunRouter() {
             newSocketUpdate["finishDescription"] = "Выбрана чёрная карта." +
                 ". Выиграла " + (socketData["runTeam"] === "blue" ? "красная" : "синяя") +
                 " команда";
-            bridge.global.BattleOfMinds.clearAllSelected(socketData, newSocketUpdate);
+            bridge.global.SecretConnections.clearAllSelected(socketData, newSocketUpdate);
         } else if (card["team"] !== myTeam) {
-            bridge.global.BattleOfMinds.clearAllSelected(socketData, newSocketUpdate);
-            bridge.global.BattleOfMinds.toggleTeam(socketData, newSocketUpdate);
+            bridge.global.SecretConnections.clearAllSelected(socketData, newSocketUpdate);
+            bridge.global.SecretConnections.toggleTeam(socketData, newSocketUpdate);
         }
         card["selected"] = socketData["runTeam"];
         newSocketUpdate["card" + indexCard] = card;

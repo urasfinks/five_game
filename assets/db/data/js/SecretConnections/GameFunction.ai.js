@@ -1,5 +1,5 @@
 bridge.global.SecretConnections = {
-    getGridWord: function(socketData) {
+    getGridWord: function (socketData) {
         var listCard = [];
         for (var key in socketData) {
             if (key.startsWith("card")) {
@@ -56,7 +56,7 @@ bridge.global.SecretConnections = {
                 var curIndex = counter++;
                 var cardData = listCard[curIndex];
                 var onTap = (canBePressed && cardData["selected"] == null) ? {
-                    "jsRouter": "BattleOfMinds/GameRun.ai.js",
+                    "jsRouter": "SecretConnections/GameRun.ai.js",
                     "args": {
                         "includeAll": true,
                         "method": "onCardTap",
@@ -72,7 +72,7 @@ bridge.global.SecretConnections = {
                         "backgroundColor": "schema:onBackground",
                         "actionBackgroundColor": "blue",
                         "onPressed": {
-                            "jsRouter": "BattleOfMinds/GameRun.ai.js",
+                            "jsRouter": "SecretConnections/GameRun.ai.js",
                             "args": {
                                 "includeAll": true,
                                 "indexCard": cardData["index"],
@@ -190,7 +190,7 @@ bridge.global.SecretConnections = {
         }
         return column;
     },
-    getUsers: function(socketData) {
+    getUsers: function (socketData) {
         var reds = [], blues = [];
         for (var key in socketData) {
             if (key.startsWith("user") && socketData[key]["role"] === "captain") {
@@ -216,7 +216,7 @@ bridge.global.SecretConnections = {
         }
     },
 
-    calculateScore: function(socketData, newStateData, socketUuid) {
+    calculateScore: function (socketData, newStateData, socketUuid) {
         var blue = 0, red = 0, allBlue = 0, allRed = 0;
         for (var key in socketData) {
             if (key.startsWith("card")) {
@@ -260,7 +260,7 @@ bridge.global.SecretConnections = {
         newStateData["allRed"] = allRed;
     },
 
-    getListPersonGroup: function(socketData, team, socketUuid) {
+    getListPersonGroup: function (socketData, team, socketUuid) {
         var result = [];
         var isOwn = isOwner(socketData);
         var listPerson = getListPerson(socketData);
@@ -318,7 +318,7 @@ bridge.global.SecretConnections = {
         return result;
     },
 
-    getFlagToWordGameState: function(socketData, state) {
+    getFlagToWordGameState: function (socketData, state) {
         if (!isOwner(socketData)) {
             state["toWordGameState"] = "false";
             return;
@@ -352,5 +352,17 @@ bridge.global.SecretConnections = {
             state["error"] = "";
             state["toWordGameState"] = "true";
         }
+    },
+
+    clearAllSelected: function (socketData, newSocketUpdate) {
+        for (var key in socketData) {
+            if (key.startsWith("tapCard_")) {
+                newSocketUpdate[key] = null;
+            }
+        }
+    },
+
+    toggleTeam: function (socketData, newSocketUpdate) {
+        newSocketUpdate["runTeam"] = socketData["runTeam"] === "blue" ? "red" : "blue";
     }
 };
