@@ -21,9 +21,11 @@ function SecretConnectionsGameInitRouter() {
         if (bridge.args["fetchDb"].length > 0) {
             var list = [], fetchDb = bridge.args["fetchDb"];
             for (var i = 0; i < fetchDb.length; i++) {
+                var isMy = fetchDb[i]["type_data"] === "userDataRSync";
                 list.push({
                     "label": fetchDb[i]["value_data"]["label"],
-                    "uuid": fetchDb[i]["uuid_data"]
+                    "uuid": fetchDb[i]["uuid_data"],
+                    "isMy": isMy
                 });
             }
             //bridge.log("rr: "+JSON.stringify(list));

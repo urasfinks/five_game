@@ -46,9 +46,56 @@ function SecretConnectionsGameWordRouter() {
         }
     };
 
-    this.addNewGroupWord = function(){
-        bridge.log(bridge.args);
+    this.addNewGroupWord = function () {
+        //{"method":"addNewGroupWord","state":"groupWord","stateKey":"groupWord","selected":{"isNew":true,"label":"Ну","uuid":"new.json"}}
+        bridge.args["selected"]["uuid"] = bridge.util("uuid", {});
+        bridge.call("DataSourceSet", {
+            "uuid": bridge.args["selected"]["uuid"],
+            "value": {
+                "label": bridge.args["selected"]["label"],
+
+                "listWord": []
+            },
+            "type": "userDataRSync",
+            "key": "word",
+            "updateIfExist": false, //Если уже есть, мы ничего не будем делать
+            "onPersist": {
+                "jsRouter": "SecretConnections/GameWord.ai.js",
+                "args": {
+                    "state": bridge.args["state"],
+                    "stateKey": bridge.args["stateKey"],
+                    "selected": bridge.args["selected"],
+                    "method": route(this, this.onAddNewGroupWordPersist)
+                }
+            }
+        });
     };
+
+    this.onAddNewGroupWordPersist = function () {
+        bridge.log(bridge.args);
+        bridge.call("SetStateData", {
+            "state": bridge.args["state"],
+            "key": bridge.args["stateKey"],
+            "value": bridge.args["selected"]
+        });
+    };
+
+    this.onEdit = function () {
+        bridge.call("NavigatorPush", {
+            "type": "bottomSheet",
+            "selected": bridge.state["groupWord"]["groupWord"],
+            "height": 460,
+            "link": {
+                "template": "SecretConnections/EditUserWord.json",
+            },
+            "constructor": {
+                "jsRouter": "SecretConnections/EditUserWord.ai.js",
+                "args": {
+                    "method": "constructor"
+                }
+            }
+        });
+    }
 }
 
 bridge.addRouter(new SecretConnectionsGameWordRouter());

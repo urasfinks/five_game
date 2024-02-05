@@ -3,27 +3,60 @@
   "crossAxisAlignment": "start",
   "children": [
     {
-      "flutterType": "SelectSheet",
-      "state": "groupWord",
-      "stateKey": "groupWord",
-      "onStateDataUpdate": true,
-      "extend": true,
-      "onStateDataUpdateKey": "groupWord",
-      "selectedIndex": 0,
+      "flutterType": "Row",
       "children": [
         {
-          "ChildrenExtension": "Iterator",
-          "dataType": "state",
-          "state": "groupWord",
-          "key": "listOptions"
+          "flutterType": "Expanded",
+          "child": {
+            "flutterType": "SelectSheet",
+            "state": "groupWord",
+            "stateKey": "groupWord",
+            "onStateDataUpdate": true,
+            "extend": true,
+            "onStateDataUpdateKey": "groupWord",
+            "selectedIndex": 0,
+            "children": [
+              {
+                "ChildrenExtension": "Iterator",
+                "dataType": "state",
+                "state": "groupWord",
+                "key": "listOptions"
+              }
+            ],
+            "onNew": {
+              "jsRouter": "SecretConnections/GameWord.ai.js",
+              "args": {
+                "method": "addNewGroupWord"
+              }
+            }
+          }
+        },
+        {
+          "flutterType": "Visibility",
+          "visible": "${state(groupWord,groupWord.isMy,false)}",
+          "child": {
+            "flutterType": "Padding",
+            "padding": "10,0,0,0",
+            "child": {
+              "flutterType": "RawMaterialButton",
+              "fillColor": "schema:projectPrimary",
+              "padding": 10,
+              "onPressed": {
+                "jsRouter": "SecretConnections/GameWord.ai.js",
+                "args": {
+                  "method": "onEdit"
+                }
+              },
+              "child": {
+                "flutterType": "Icon",
+                "src": "edit",
+                "color": "white",
+                "size": 20
+              }
+            }
+          }
         }
-      ],
-      "onNew": {
-        "jsRouter": "SecretConnections/GameWord.ai.js",
-        "args": {
-          "method": "addNewGroupWord"
-        }
-      }
+      ]
     },
     {
       "flutterType": "SizedBox",
