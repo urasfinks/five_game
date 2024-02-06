@@ -1,25 +1,27 @@
 {
-  "name": "main",
+  "name": "user",
   "tab": {
     "flutterType": "BottomNavigationBarItem",
     "icon": {
       "flutterType": "Icon",
-      "src": "crop_5_4"
+      "src": "account_circle"
     },
     "label": "Home"
   },
   "content": {
     "flutterType": "Notify",
     "link": {
-      "template": "HomePage.json"
+      "template": "Account.json"
     },
+    "reloadBackground": true,
     "subscribeToRefresh": {
-      "listKey": [
-        "Game"
+      "listUuid": [
+        "Account.js",
+        "account"
       ]
     },
     "context": {
-      "key": "Tab1",
+      "key": "Tab2",
       "data": {
         "template": {
           "flutterType": "Scaffold",
@@ -27,16 +29,24 @@
             "flutterType": "AppBar",
             "title": {
               "flutterType": "Text",
-              "label": "FiveGame"
+              "label": "Аккаунт"
             }
           }
         }
       }
     },
     "constructor": {
-      "jsRouter": "HomePage.ai.js",
+      "jsRouter": "Account.ai.js",
       "args": {
+        "includeAll": true,
         "method": "constructor"
+      }
+    },
+    "onActive": {
+      "jsRouter": "Account.ai.js",
+      "args": {
+        "includeAll": true,
+        "method": "onActive"
       }
     }
   }

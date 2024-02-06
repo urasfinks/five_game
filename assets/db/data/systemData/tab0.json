@@ -9,32 +9,36 @@
     "label": "Home"
   },
   "content": {
-    "flutterType": "Notify",
-    "link": {
-      "template": "HomePage.json"
+    "data": {
+      "m": "dotcom",
+      "uuid": "fe631169-a194-4eb5-a9f0-499c9710863e"
     },
-    "subscribeToRefresh": {
-      "listKey": [
-        "Game"
-      ]
-    },
-    "context": {
-      "key": "Tab0",
-      "data": {
-        "template": {
-          "flutterType": "Scaffold",
-          "appBar": {
-            "flutterType": "AppBar",
-            "title": {
-              "flutterType": "Text",
-              "label": "FiveGame"
-            }
+    "flutterType": "Scaffold",
+    "body": {
+      "flutterType": "CustomScrollView",
+      "onStateDataUpdate": true,
+      "padding": "10,20,10,0",
+      "appBar": {
+        "flutterType": "SliverAppBar",
+        "title": {
+          "flutterType": "Text",
+          "label": "${state(main,title,)}",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 17
           }
         }
-      }
+      },
+      "children": [
+        {
+          "ChildrenExtension": "Iterator",
+          "dataType": "state",
+          "key": "listItem"
+        }
+      ]
     },
     "constructor": {
-      "jsRouter": "HomePage.ai.js",
+      "jsRouter": "ListItem.ai.js",
       "args": {
         "method": "constructor"
       }
