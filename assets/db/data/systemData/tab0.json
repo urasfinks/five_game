@@ -33,7 +33,11 @@
         {
           "ChildrenExtension": "Iterator",
           "dataType": "state",
-          "key": "listItem"
+          "key": "listItem",
+          "theme": "${state(main,theme,ListSimple)}",
+          "compileTemplateList": [
+            "theme"
+          ]
         }
       ]
     },
