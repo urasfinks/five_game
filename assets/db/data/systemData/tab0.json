@@ -10,7 +10,8 @@
   },
   "content": {
     "data": {
-      "uuid": "fe631169-a194-4eb5-a9f0-499c9710863e"
+      "uuid": "fe631169-a194-4eb5-a9f0-499c9710863e",
+      "type": "userDataRSync"
     },
     "flutterType": "Scaffold",
     "body": {
@@ -33,9 +34,22 @@
           "ChildrenExtension": "Iterator",
           "dataType": "state",
           "key": "listItem",
-          "theme": "${state(main,theme,ListSimple)}",
+          "theme": "ButtonGroup",
+          "extendDataElement": {
+            "templateWidgetSrc": "${state(main,theme,ListSimple)}",
+            "onTap": {
+              "sysInvoke": "NavigatorPush",
+              "args": {
+                "type": "bottomSheet",
+                "height": 200,
+                "link": {
+                  "template": "GameCode.json"
+                }
+              }
+            }
+          },
           "compileTemplateList": [
-            "theme"
+            "extendDataElement.templateWidgetSrc"
           ]
         }
       ]
