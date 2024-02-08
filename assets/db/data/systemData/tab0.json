@@ -10,7 +10,6 @@
   },
   "content": {
     "data": {
-      "m": "dotcom",
       "uuid": "fe631169-a194-4eb5-a9f0-499c9710863e"
     },
     "flutterType": "Scaffold",
@@ -42,6 +41,12 @@
       ]
     },
     "constructor": {
+      "jsRouter": "ListItem.ai.js",
+      "args": {
+        "method": "constructor"
+      }
+    },
+    "onActive": {
       "jsRouter": "ListItem.ai.js",
       "args": {
         "method": "constructor"
