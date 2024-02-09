@@ -11,7 +11,8 @@
   "content": {
     "data": {
       "uuid": "fe631169-a194-4eb5-a9f0-499c9710863e",
-      "type": "userDataRSync"
+      "type": "userDataRSync",
+      "bottomSheetHeight": 100
     },
     "flutterType": "Scaffold",
     "body": {
