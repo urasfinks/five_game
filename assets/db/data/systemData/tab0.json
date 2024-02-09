@@ -36,17 +36,7 @@
           "key": "listItem",
           "theme": "ButtonGroup",
           "extendDataElement": {
-            "templateWidgetSrc": "${state(main,theme,ListSimple)}",
-            "onTap": {
-              "sysInvoke": "NavigatorPush",
-              "args": {
-                "type": "bottomSheet",
-                "height": 200,
-                "link": {
-                  "template": "GameCode.json"
-                }
-              }
-            }
+            "templateWidgetSrc": "${state(main,theme,ListSimple)}"
           },
           "compileTemplateList": [
             "extendDataElement.templateWidgetSrc"
