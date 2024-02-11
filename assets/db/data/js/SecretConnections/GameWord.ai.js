@@ -15,7 +15,7 @@ function SecretConnectionsGameWordRouter() {
 
     this.onSelect = function () {
         if (bridge.args["fetchDb"].length > 0) {
-            var list = bridge.args["fetchDb"][0]["value_data"]["listWord"];
+            var list = bridge.args["fetchDb"][0]["value_data"]["list"];
             bridge.shuffle(list);
             var list2 = [];
             var all = 24;
@@ -29,8 +29,9 @@ function SecretConnectionsGameWordRouter() {
             var counter = 0;
             for (var key in mark) {
                 for (var i = 0; i < mark[key]; i++) {
+                    var curIndex = counter++;
                     list2.push({
-                        "label": list[counter++],
+                        "label": list[curIndex] != undefined ? list[curIndex]["label"] : "???",
                         "team": key, //red/blue/neutral/die
                         "selected": null //blue/red/null
                     });
@@ -53,8 +54,7 @@ function SecretConnectionsGameWordRouter() {
             "uuid": bridge.args["selected"]["uuid"],
             "value": {
                 "label": bridge.args["selected"]["label"],
-
-                "listWord": []
+                "list": []
             },
             "type": "userDataRSync",
             "key": "word",
@@ -81,20 +81,7 @@ function SecretConnectionsGameWordRouter() {
     };
 
     this.onEdit = function () {
-        bridge.call("NavigatorPush", {
-            "type": "bottomSheet",
-            "selected": bridge.state["groupWord"]["groupWord"],
-            "height": 460,
-            "link": {
-                "template": "SecretConnections/EditUserWord.json",
-            },
-            "constructor": {
-                "jsRouter": "SecretConnections/EditUserWord.ai.js",
-                "args": {
-                    "method": "constructor"
-                }
-            }
-        });
+        bridge.log("EDIT");
     }
 }
 
