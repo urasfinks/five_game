@@ -69,8 +69,49 @@ function SecretConnectionsGameWordRouter() {
             "type": "userDataRSync",
             "key": "word",
             "updateIfExist": false, //Если уже есть, мы ничего не будем делать
+            "onPersist": {
+                "jsRouter": "SecretConnections/GameWord.ai.js",
+                "args": {
+                    "method": route(this, this.fakeNotify)
+                }
+            }
         });
         socketSave({"groupWordLabel": bridge.args["selected"]["label"]}, bridge.pageArgs["socketUuid"]);
+    };
+
+    this.fakeNotify = function () {
+        bridge.log("fakeNotify");
+        bridge.call("SetStateData", {
+            "map": {
+                "_": true
+            }
+        });
+    };
+
+    this.removeGroupWord = function () {
+        //bridge.log("Remove: " + bridge.state["groupWord"]["groupWord"]["uuid"]);
+        bridge.call("DbQuery", {
+            "sql": "update data set is_remove_data = 1 where uuid_data = ?",
+            "args": [bridge.state["groupWord"]["groupWord"]["uuid"]],
+            "onFetch": {
+                "jsRouter": "SecretConnections/GameWord.ai.js",
+                "args": {
+                    "method": route(this, this.onRemovedGroupWord)
+                }
+            }
+        });
+    };
+
+    this.onRemovedGroupWord = function () {
+        bridge.call("SetStateData", {
+            "notify": false,
+            "map": {
+                "groupWordLabel": null
+            }
+        });
+        bridge.call("Util", {"case": "dynamicPageApi", "api": "resetState", "state": "groupWord"});
+        socketSave({"groupWordLabel": null}, bridge.pageArgs["socketUuid"]);
+        this._generateWord("word_main.json");
     };
 
     this.onEdit = function () {

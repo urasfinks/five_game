@@ -56,10 +56,13 @@ function SecretConnectionsGameRouter() {
                 socketUuid: socketUuid,
                 gameCode: socketData["gameCode"] || "...",
                 isOwner: isOwn,
-                toNextRun: toNextRun,
-                groupWordLabel: socketData["groupWordLabel"]
+                toNextRun: toNextRun
             });
+            if (socketData["groupWordLabel"] != undefined) {
+                newStateData["groupWordLabel"] = socketData["groupWordLabel"]
+            }
             bridge.call("SetStateData", {
+                "cause": "Game.ai.js::onChange",
                 "map": newStateData
             });
         }

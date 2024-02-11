@@ -19,7 +19,7 @@
               {
                 "ChildrenExtension": "Iterator",
                 "dataType": "state",
-                "state": "groupWord",
+                "state": "availableGroupWord",
                 "key": "listOptions"
               }
             ],

@@ -30,9 +30,16 @@ function SecretConnectionsGameInitRouter() {
             }
             //bridge.log("rr: "+JSON.stringify(list));
             bridge.call("SetStateData", {
-                "state": "groupWord",
+                "state": "availableGroupWord",
                 "map": {
                     "listOptions": list
+                }
+            });
+            //Дополнительно кинем фейковое событие, что бы перерисовался сам SelectSheet
+            bridge.call("SetStateData", {
+                //"state": "groupWord",
+                "map": {
+                    "_": true
                 }
             });
         }
