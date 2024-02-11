@@ -1,9 +1,13 @@
 function SecretConnectionsGameWordRouter() {
 
     this.generateWord = function () {
+        this._generateWord(bridge.state["groupWord"]["groupWord"]["uuid"]);
+    };
+
+    this._generateWord = function(uuid){
         bridge.call("DbQuery", {
             "sql": "select * from data where uuid_data = ? and key_data = ? and is_remove_data = 0 order by meta_data asc",
-            "args": [bridge.state["groupWord"]["groupWord"]["uuid"], "word"],
+            "args": [uuid, "word"],
             "onFetch": {
                 "jsRouter": "SecretConnections/GameWord.ai.js",
                 "args": {
@@ -46,6 +50,11 @@ function SecretConnectionsGameWordRouter() {
             socketSave(data, bridge.pageArgs["socketUuid"]);
         }
     };
+
+    this.onChangeGroupWord = function () {
+        //{"method":"onChangeGroupWord","state":"groupWord","stateKey":"groupWord","selected":{"label":"Привет","uuid":"fe631169-a194-4eb5-a9f0-499c9710863e","isMy":true,"iteratorIndex":0}}; pageUuid: 4088a05c-c40f-4245-a51c-f0f9c375a246;
+        this._generateWord(bridge.args["selected"]["uuid"]);
+    }
 
     this.addNewGroupWord = function () {
         //{"method":"addNewGroupWord","state":"groupWord","stateKey":"groupWord","selected":{"isNew":true,"label":"Ну","uuid":"new.json"}}

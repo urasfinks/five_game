@@ -29,6 +29,12 @@
                 "method": "addNewGroupWord"
               }
             },
+            "onChange": {
+              "jsRouter": "SecretConnections/GameWord.ai.js",
+              "args": {
+                "method": "onChangeGroupWord"
+              }
+            },
             "compileTemplateList": [
               "selectedLabel"
             ]
