@@ -14,7 +14,7 @@
             "onStateDataUpdate": true,
             "extend": true,
             "onStateDataUpdateKey": "groupWord",
-            "selectedIndex": 0,
+            "selectedLabel": "${state(main,selectedGroupWord,Стандартный набор)}",
             "children": [
               {
                 "ChildrenExtension": "Iterator",
@@ -28,7 +28,10 @@
               "args": {
                 "method": "addNewGroupWord"
               }
-            }
+            },
+            "compileTemplateList": [
+              "selectedLabel"
+            ]
           }
         },
         {
@@ -85,6 +88,12 @@
           }
         },
         "child": {
+          "flutterType": "Icon",
+          "color": "white",
+          "src": "sync",
+          "size": 22
+        },
+        "_child": {
           "flutterType": "Text",
           "label": "Сгенерировать карточки",
           "style": {
