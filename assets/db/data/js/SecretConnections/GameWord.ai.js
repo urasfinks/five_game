@@ -81,7 +81,32 @@ function SecretConnectionsGameWordRouter() {
     };
 
     this.onEdit = function () {
-        bridge.log("EDIT");
+        bridge.call("NavigatorPush", {
+            "flutterType": "Notify",
+            "link": {
+                "template": "ListControl.json"
+            },
+            "data": {
+                "uuid": bridge.state["groupWord"]["groupWord"]["uuid"],
+                "type": "userDataRSync",
+                "bottomSheetHeight": 184
+            },
+            "context": {
+                "key": "Tab0",
+                "data": {
+                    "template": {
+                        "flutterType": "Scaffold",
+                        "appBar": {
+                            "flutterType": "AppBar",
+                            "title": {
+                                "flutterType": "Text",
+                                "label": ""
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 }
 
