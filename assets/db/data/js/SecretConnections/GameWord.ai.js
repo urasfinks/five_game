@@ -84,7 +84,7 @@ function SecretConnectionsGameWordRouter() {
         bridge.call("NavigatorPush", {
             "flutterType": "Notify",
             "link": {
-                "template": "ListControl.json"
+                "template": "ListItem.json"
             },
             "data": {
                 "uuid": bridge.state["groupWord"]["groupWord"]["uuid"],
