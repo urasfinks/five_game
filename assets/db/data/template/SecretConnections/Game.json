@@ -13,7 +13,30 @@
           "flutterType": "TextStyle",
           "fontSize": 17
         }
-      }
+      },
+      "actions": [
+        {
+          "flutterType": "IconButton",
+          "padding": 0,
+          "icon": {
+            "flutterType": "Icon",
+            "src": "info_outline",
+            "size": 18
+          },
+          "onPressed": {
+            "sysInvoke": "NavigatorPush",
+            "args": {
+              "type": "dialog",
+              "blur": true,
+              "uuid": "PopupMessage.json",
+              "message": "Код для подключения к игре: ${state(main,gameCode,)}"
+            }
+          },
+          "compileTemplateList": [
+            "onPressed.args.message"
+          ]
+        }
+      ]
     },
     "children": [
       {

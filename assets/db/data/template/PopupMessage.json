@@ -1,0 +1,45 @@
+{
+  "flutterType": "Scaffold",
+  "backgroundColor": "transparent",
+  "body": {
+    "flutterType": "SizedBox",
+    "type": "expand",
+    "child": {
+      "flutterType": "Column",
+      "mainAxisAlignment": "center",
+      "children": [
+        {
+          "flutterType": "Text",
+          "label": "${pageArgs(message,)}"
+        },
+        {
+          "flutterType": "SizedBox",
+          "height": 30
+        },
+        {
+          "flutterType": "Button",
+          "backgroundColor": "schema:primaryContainer",
+          "height": 44,
+          "onPressed": {
+            "sysInvoke": "NavigatorPop",
+            "args": {}
+          },
+          "child": {
+            "flutterType": "Text",
+            "label": "Закрыть",
+            "textAlign": "center",
+            "style": {
+              "flutterType": "TextStyle",
+              "fontSize": 14,
+              "color": "schema:primary"
+            }
+          }
+        },
+        {
+          "flutterType": "SizedBox",
+          "height": 30
+        }
+      ]
+    }
+  }
+}
