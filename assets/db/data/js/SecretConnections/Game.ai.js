@@ -56,7 +56,8 @@ function SecretConnectionsGameRouter() {
                 socketUuid: socketUuid,
                 gameCode: socketData["gameCode"] || "...",
                 isOwner: isOwn,
-                toNextRun: toNextRun
+                toNextRun: toNextRun,
+                groupWordLabel: socketData["groupWordLabel"]
             });
             bridge.call("SetStateData", {
                 "map": newStateData

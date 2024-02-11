@@ -4,7 +4,7 @@ function SecretConnectionsGameWordRouter() {
         this._generateWord(bridge.state["groupWord"]["groupWord"]["uuid"]);
     };
 
-    this._generateWord = function(uuid){
+    this._generateWord = function (uuid) {
         bridge.call("DbQuery", {
             "sql": "select * from data where uuid_data = ? and key_data = ? and is_remove_data = 0 order by meta_data asc",
             "args": [uuid, "word"],
@@ -54,6 +54,7 @@ function SecretConnectionsGameWordRouter() {
     this.onChangeGroupWord = function () {
         //{"method":"onChangeGroupWord","state":"groupWord","stateKey":"groupWord","selected":{"label":"Привет","uuid":"fe631169-a194-4eb5-a9f0-499c9710863e","isMy":true,"iteratorIndex":0}}; pageUuid: 4088a05c-c40f-4245-a51c-f0f9c375a246;
         this._generateWord(bridge.args["selected"]["uuid"]);
+        socketSave({"groupWordLabel": bridge.args["selected"]["label"]}, bridge.pageArgs["socketUuid"]);
     }
 
     this.addNewGroupWord = function () {
@@ -68,25 +69,8 @@ function SecretConnectionsGameWordRouter() {
             "type": "userDataRSync",
             "key": "word",
             "updateIfExist": false, //Если уже есть, мы ничего не будем делать
-            "onPersist": {
-                "jsRouter": "SecretConnections/GameWord.ai.js",
-                "args": {
-                    "state": bridge.args["state"],
-                    "stateKey": bridge.args["stateKey"],
-                    "selected": bridge.args["selected"],
-                    "method": route(this, this.onAddNewGroupWordPersist)
-                }
-            }
         });
-    };
-
-    this.onAddNewGroupWordPersist = function () {
-        bridge.log(bridge.args);
-        bridge.call("SetStateData", {
-            "state": bridge.args["state"],
-            "key": bridge.args["stateKey"],
-            "value": bridge.args["selected"]
-        });
+        socketSave({"groupWordLabel": bridge.args["selected"]["label"]}, bridge.pageArgs["socketUuid"]);
     };
 
     this.onEdit = function () {

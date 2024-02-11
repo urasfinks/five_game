@@ -14,7 +14,7 @@
             "onStateDataUpdate": true,
             "extend": true,
             "onStateDataUpdateKey": "groupWord",
-            "selectedLabel": "${state(main,selectedGroupWord,Стандартный набор)}",
+            "selectedLabel": "${state(main,groupWordLabel,Стандартный набор)}",
             "children": [
               {
                 "ChildrenExtension": "Iterator",
@@ -47,21 +47,54 @@
             "flutterType": "Padding",
             "padding": "10,0,0,0",
             "child": {
-              "flutterType": "RawMaterialButton",
-              "fillColor": "schema:projectPrimary",
-              "padding": 10,
-              "onPressed": {
-                "jsRouter": "SecretConnections/GameWord.ai.js",
-                "args": {
-                  "method": "onEdit"
+              "flutterType": "Row",
+              "children": [
+                {
+                  "flutterType": "RawMaterialButton",
+                  "fillColor": "schema:projectPrimary",
+                  "padding": 10,
+                  "onPressed": {
+                    "jsRouter": "SecretConnections/GameWord.ai.js",
+                    "args": {
+                      "method": "onEdit"
+                    }
+                  },
+                  "child": {
+                    "flutterType": "Icon",
+                    "src": "edit",
+                    "color": "white",
+                    "size": 20
+                  }
+                },
+                {
+                  "flutterType": "SizedBox",
+                  "width": 7
+                },
+                {
+                  "flutterType": "RawMaterialButton",
+                  "fillColor": "red",
+                  "padding": 10,
+                  "onPressed": {
+                    "sysInvoke": "Alert",
+                    "args": {
+                      "confirmRemove": true,
+                      "backgroundColor": "schema:onBackground",
+                      "onPressed": {
+                        "jsRouter": "SecretConnections/GameWord.ai.js",
+                        "args": {
+                          "method": "removeGroupWord"
+                        }
+                      }
+                    }
+                  },
+                  "child": {
+                    "flutterType": "Icon",
+                    "src": "delete_outline",
+                    "color": "white",
+                    "size": 20
+                  }
                 }
-              },
-              "child": {
-                "flutterType": "Icon",
-                "src": "edit",
-                "color": "white",
-                "size": 20
-              }
+              ]
             }
           }
         }
