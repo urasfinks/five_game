@@ -152,14 +152,13 @@
       "onSubmitted": {
         "jsRouter": "BattleOfMinds/GameTeam.ai.js",
         "args": {
-          "includeAll": true,
           "method": "setName"
         }
       }
     },
     {
       "flutterType": "SizedBox",
-      "height": 20
+      "height": 30
     },
     {
       "flutterType": "Row",
@@ -168,14 +167,25 @@
         {
           "flutterType": "Expanded",
           "child": {
-            "flutterType": "Padding",
-            "padding": "6,0,6,20",
+            "flutterType": "Visibility",
+            "visible": "${state(main,isOwner, false)}",
             "child": {
-              "flutterType": "Text",
-              "label": "Участники игры",
-              "style": {
-                "flutterType": "TextStyle",
-                "color": "schema:secondary"
+              "flutterType": "Button",
+              "height": 44,
+              "onPressed": {
+                "jsRouter": "BattleOfMinds/GameTeam.ai.js",
+                "args": {
+                  "method": "onPressRandomize"
+                }
+              },
+              "child": {
+                "flutterType": "Text",
+                "label": "Группы",
+                "style": {
+                  "flutterType": "TextStyle",
+                  "fontSize": 14,
+                  "color": "white"
+                }
               }
             }
           }

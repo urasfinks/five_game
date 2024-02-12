@@ -1,7 +1,5 @@
 bridge.global.BattleOfMinds = {
 
-    undefinedGroup: "Не в группе",
-
     calculateScore: function (socketData, newStateData, socketUuid) {
         // newStateData["scoreRed"] = red;
         // newStateData["scoreBlue"] = blue;
@@ -9,15 +7,11 @@ bridge.global.BattleOfMinds = {
         // newStateData["allRed"] = allRed;
     },
 
-    getUserTeam: function(listPerson){
+    getUserTeam: function (listPerson) {
         var alreadyPersonGroup = [];
         var result = [];
         for (var i = 0; i < listPerson.length; i++) {
-            if (listPerson[i]["team"].trim() !== "") {
-                alreadyPersonGroup.push(listPerson[i]["team"]);
-            } else {
-                alreadyPersonGroup.push(this.undefinedGroup);
-            }
+            alreadyPersonGroup.push(listPerson[i]["team"].trim());
         }
         alreadyPersonGroup = bridge.arrayUnique(alreadyPersonGroup);
         for (var i = 0; i < alreadyPersonGroup.length; i++) {
@@ -33,25 +27,30 @@ bridge.global.BattleOfMinds = {
         var isOwn = isOwner(socketData);
         var listPerson = getListPerson(socketData);
         var userTeam = this.getUserTeam(listPerson);
-
+        var filterUserTeam = this.filterUserTeam(userTeam);
         for (var i = 0; i < userTeam.length; i++) {
-            if (userTeam.length > 1) {
-                result.push({
-                    "templateCustom": "groupName",
-                    "label": userTeam[i].label
-                });
+            result.push({
+                "templateCustom": "groupName",
+                "label": userTeam[i].label === "" ? "Не в группе" : userTeam[i].label
+            });
+            this.userByGroup(listPerson, result, userTeam[i].label, isOwn, socketUuid, filterUserTeam);
+        }
+        return result;
+    },
+
+    filterUserTeam: function (userTeam) {
+        var result = [];
+        for (var i = 0; i < userTeam.length; i++) {
+            if (userTeam[i].label !== "") {
+                result.push(userTeam[i]);
             }
-            this.userByGroup(listPerson, result, userTeam[i].label, isOwn, socketUuid, userTeam);
         }
         return result;
     },
 
     userByGroup: function (listPerson, result, curTeam, isOwn, socketUuid, resultTeam) {
         for (var i = 0; i < listPerson.length; i++) {
-            if (
-                listPerson[i]["team"] === curTeam
-                || (listPerson[i]["team"].trim() === "" && this.undefinedGroup === curTeam)
-            ) {
+            if (listPerson[i]["team"].trim() === curTeam) {
                 var ami = listPerson[i]["id"] === bridge.unique ? "Я " : "";
 
                 var onTap = isOwn ? {

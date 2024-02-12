@@ -15,110 +15,23 @@
         "height": 20
       },
       {
-        "ChildrenExtension": "Iterator",
-        "dataType": "state",
-        "key": "userTeam",
-        "extendDataElement": {
-          "template": {
-            "flutterType": "Margin",
-            "margin": "0,0,0,10",
-            "child": {
-              "flutterType": "Row",
-              "children": [
-                {
-                  "flutterType": "Expanded",
-                  "child": {
-                    "flutterType": "Template",
-                    "src": "Input",
-                    "context": {
-                      "key": "teamUser",
-                      "data": {
-                        "data": "${label}",
-                        "key": "field_${iteratorIndex}"
-                      }
-                    }
-                  }
-                },
-                {
-                  "flutterType": "SizedBox",
-                  "width": 20
-                },
-                {
-                  "flutterType": "RawMaterialButton",
-                  "fillColor": "red",
-                  "padding": 10,
-                  "onPressed": {
-                    "jsRouter": "BattleOfMinds/RandomizeUser.ai.js",
-                    "args": {
-                      "method": "onRemove",
-                      "removeIndex": "${iteratorIndex}"
-                    }
-                  },
-                  "child": {
-                    "flutterType": "Icon",
-                    "src": "delete_outline",
-                    "color": "white",
-                    "size": 20
-                  }
-                }
-              ]
-            }
-          },
-          "dataContext": true,
-          "compileTemplateList": [
-            "template.child.children.0.child.context.data.data",
-            "template.child.children.0.child.context.data.key",
-            "template.child.children.2.onPressed.args.removeIndex"
-          ]
-        }
-      },
-      {
         "flutterType": "SizedBox",
         "height": 10
       },
       {
-        "flutterType": "Row",
-        "children": [
-          {
-            "flutterType": "Expanded",
-            "child": {
-              "flutterType": "Button",
-              "height": 44,
-              "onPressed": {},
-              "child": {
-                "flutterType": "Text",
-                "label": "Распределить участников",
-                "style": {
-                  "flutterType": "TextStyle",
-                  "fontSize": 14,
-                  "fontWeight": "bold",
-                  "color": "schema:inversePrimary"
-                }
-              }
-            }
-          },
-          {
-            "flutterType": "SizedBox",
-            "width": 20
-          },
-          {
-            "flutterType": "RawMaterialButton",
-            "padding": 10,
-            "fillColor": "blue",
-            "onPressed": {
-              "jsRouter": "BattleOfMinds/RandomizeUser.ai.js",
-              "args": {
-                "method": "addGroup"
-              }
-            },
-            "child": {
-              "flutterType": "Icon",
-              "src": "add",
-              "color": "white",
-              "size": 20
-            }
+        "flutterType": "Button",
+        "height": 44,
+        "onPressed": {},
+        "child": {
+          "flutterType": "Text",
+          "label": "Распределить участников по группам",
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 14,
+            "fontWeight": "bold",
+            "color": "schema:inversePrimary"
           }
-        ]
+        }
       },
       {
         "flutterType": "SizedBox",

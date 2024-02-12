@@ -77,7 +77,7 @@
         "state": "groupPerson",
         "stateKey": "groupPerson",
         "onStateDataUpdate": true,
-        "extend": true,
+        "extend": false,
         "selectedLabel": {
           "$ref": "pageArgs",
           "selector": "personValue.team"
