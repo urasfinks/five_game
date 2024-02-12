@@ -13,7 +13,6 @@ function GameAvailableRouter(){
                 "jsRouter": "HomePage.ai.js",
                 "args": {
                     "game": "SecretConnections",
-                    "includeAll": true,
                     "method": "createGame"
                 }
             },
@@ -21,7 +20,6 @@ function GameAvailableRouter(){
                 "jsRouter": "HomePage.ai.js",
                 "args": {
                     "game": "BattleOfMinds",
-                    "includeAll": true,
                     "method": "createGame"
                 }
             }

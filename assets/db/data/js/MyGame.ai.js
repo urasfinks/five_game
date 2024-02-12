@@ -7,7 +7,6 @@ function MyGameRouter() {
             "onFetch": {
                 "jsRouter": "MyGame.ai.js",
                 "args": {
-                    "includeAll": true,
                     "method": "selectMyGame"
                 }
             }
@@ -21,7 +20,6 @@ function MyGameRouter() {
             "onFetch": {
                 "jsRouter": "MyGame.ai.js",
                 "args": {
-                    "includeAll": true,
                     "method": "onRemoved"
                 }
             }

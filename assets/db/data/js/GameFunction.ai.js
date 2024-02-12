@@ -79,21 +79,18 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
         "constructor": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
-                "includeAll": true,
                 "method": "constructor"
             }
         },
         "onChangeUuid": {
             "jsRouter": game + "/Game.ai.js",
             "args": {
-                "includeAll": true,
                 "method": "onChange"
             }
         },
         "onChangeOrientation": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
-                "includeAll": true,
                 "method": "onChangeOrientation"
             }
         },
@@ -106,14 +103,12 @@ function getNavigatorPushGameArgs(gameUuid, socketUuid, game) {
         "onActive": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
-                "includeAll": true,
                 "method": "onChangeOrientation"
             }
         },
         "onRenderFloatingActionButton": {
             "jsRouter": game + "/GameInit.ai.js",
             "args": {
-                "includeAll": true,
                 "method": "onRenderFloatingActionButton"
             }
         },
@@ -151,7 +146,6 @@ function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
             "onFetch": {
                 "jsRouter": game + "/GameInit.ai.js",
                 "args": {
-                    "includeAll": true,
                     "method": switchKeyOnCheckUserSetUser
                 }
             }
@@ -165,7 +159,6 @@ function constructGame(switchKeyOnResponseCode, switchKeyOnCheckUserSetUser) {
             "onResponse": {
                 "jsRouter": game + "/GameInit.ai.js",
                 "args": {
-                    "includeAll": true,
                     // Не стоит использовать текущий файл для обработки события ответа
                     // так как это функциональный файл, в нём должны находится статичные функции
                     // которые загружаются 1 раз в память

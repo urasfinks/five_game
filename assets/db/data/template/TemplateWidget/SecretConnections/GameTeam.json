@@ -152,7 +152,6 @@
       "onSubmitted": {
         "jsRouter": "SecretConnections/GameTeam.ai.js",
         "args": {
-          "includeAll": true,
           "method": "setName"
         }
       }
@@ -202,7 +201,6 @@
                   "onPressed": {
                     "jsRouter": "SecretConnections/GameTeam.ai.js",
                     "args": {
-                      "includeAll": true,
                       "method": "randomize"
                     }
                   }
@@ -274,7 +272,6 @@
         "onPressed": {
           "jsRouter": "SecretConnections/Game.ai.js",
           "args": {
-            "includeAll": true,
             "method": "changeGameState",
             "gameState": "word"
           }

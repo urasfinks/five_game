@@ -139,7 +139,6 @@
               "onPressed": {
                 "jsRouter": "SecretConnections/GameRun.ai.js",
                 "args": {
-                  "includeAll": true,
                   "method": "toNextTeam"
                 }
               }

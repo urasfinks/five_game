@@ -103,7 +103,6 @@
         "onPressed": {
           "jsRouter": "BattleOfMinds/GameTeam.ai.js",
           "args": {
-            "includeAll": true,
             "method": "savePerson"
           }
         },
@@ -136,7 +135,6 @@
               "onPressed": {
                 "jsRouter": "BattleOfMinds/GameTeam.ai.js",
                 "args": {
-                  "includeAll": true,
                   "method": "removePerson"
                 }
               }

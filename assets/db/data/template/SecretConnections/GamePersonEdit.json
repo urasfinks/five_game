@@ -168,7 +168,6 @@
         "onPressed": {
           "jsRouter": "SecretConnections/GameTeam.ai.js",
           "args": {
-            "includeAll": true,
             "method": "savePerson"
           }
         },
@@ -201,7 +200,6 @@
               "onPressed": {
                 "jsRouter": "SecretConnections/GameTeam.ai.js",
                 "args": {
-                  "includeAll": true,
                   "method": "removePerson"
                 }
               }

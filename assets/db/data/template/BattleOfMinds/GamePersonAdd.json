@@ -84,7 +84,6 @@
         "onPressed": {
           "jsRouter": "BattleOfMinds/GameTeam.ai.js",
           "args": {
-            "includeAll": true,
             "method": "addPerson"
           }
         },

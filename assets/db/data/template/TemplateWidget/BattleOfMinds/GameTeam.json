@@ -291,7 +291,6 @@
         "onPressed": {
           "jsRouter": "BattleOfMinds/Game.ai.js",
           "args": {
-            "includeAll": true,
             "method": "changeGameState",
             "gameState": "word"
           }

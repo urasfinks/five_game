@@ -83,7 +83,6 @@
         "onPressed": {
           "jsRouter": "HomePage.ai.js",
           "args": {
-            "includeAll": true,
             "method": "requestConfirmCode"
           }
         },

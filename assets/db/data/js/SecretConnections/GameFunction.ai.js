@@ -62,7 +62,6 @@ bridge.global.SecretConnections = {
                 var onTap = (canBePressed && cardData["selected"] == null) ? {
                     "jsRouter": "SecretConnections/GameRun.ai.js",
                     "args": {
-                        "includeAll": true,
                         "method": "onCardTap",
                         "index": counter - 1
                     }
@@ -78,7 +77,6 @@ bridge.global.SecretConnections = {
                         "onPressed": {
                             "jsRouter": "SecretConnections/GameRun.ai.js",
                             "args": {
-                                "includeAll": true,
                                 "indexCard": cardData["index"],
                                 "method": "confirmSelect"
                             }
@@ -142,7 +140,7 @@ bridge.global.SecretConnections = {
                         if (cardData["selected"] !== cardData["team"]) {
                             decoration = "lineThrough";
                         }
-                        if (cardData["team"] == "die") {
+                        if (cardData["team"] === "die") {
                             curColorText = "red";
                         }
                     }

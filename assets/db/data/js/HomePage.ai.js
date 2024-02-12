@@ -9,7 +9,6 @@ function HomePageRouter() {
             "onFetch": {
                 "jsRouter": "HomePage.ai.js",
                 "args": {
-                    "includeAll": true,
                     "method": route(this, this.selectMyGame)
                 }
             }
@@ -55,7 +54,6 @@ function HomePageRouter() {
                 "onResponse": {
                     "jsRouter": "HomePage.ai.js",
                     "args": {
-                        "includeAll": true,
                         "method": route(this, this.onConfirmCodeResponse)
                     }
                 }
@@ -82,7 +80,6 @@ function HomePageRouter() {
             "onFetch": {
                 "jsRouter": "HomePage.ai.js",
                 "args": {
-                    "includeAll": true,
                     "method": route(this, this.onSelectGame)
                 }
             }
@@ -150,7 +147,6 @@ function newCreateGame(gameUuid, socketUuid, data) {
         "onPersist": {
             "jsRouter": "HomePage.ai.js",
             "args": {
-                "includeAll": true,
                 "gameUuid": gameUuid,
                 "socketUuid": socketUuid,
                 "method": route(objHomePageRouter, objHomePageRouter.onGamePersist)
@@ -167,7 +163,6 @@ function checkAlreadyGame(socketUuid) {
             "jsRouter": "HomePage.ai.js",
             "args": {
                 "socketUuid": socketUuid,
-                "includeAll": true,
                 "method": route(objHomePageRouter, objHomePageRouter.onSelectGameCheckAlready)
             }
         }

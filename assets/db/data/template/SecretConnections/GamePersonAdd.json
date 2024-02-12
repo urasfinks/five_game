@@ -84,7 +84,6 @@
         "onPressed": {
           "jsRouter": "SecretConnections/GameTeam.ai.js",
           "args": {
-            "includeAll": true,
             "method": "addPerson"
           }
         },

@@ -7,7 +7,6 @@ function RandomizeUserRouter(){
             "onFetch": {
                 "jsRouter": "BattleOfMinds/RandomizeUser.ai.js",
                 "args": {
-                    "includeAll": true,
                     "method": route(this, this.onSelectSocketData)
                 }
             }

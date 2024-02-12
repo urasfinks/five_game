@@ -38,14 +38,12 @@
     "constructor": {
       "jsRouter": "Account.ai.js",
       "args": {
-        "includeAll": true,
         "method": "constructor"
       }
     },
     "onActive": {
       "jsRouter": "Account.ai.js",
       "args": {
-        "includeAll": true,
         "method": "onActive"
       }
     }
