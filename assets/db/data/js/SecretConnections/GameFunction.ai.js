@@ -10,6 +10,10 @@ bridge.global.SecretConnections = {
         var canBePressed = isMyGame(socketData);
         var isCapt = isCaptain(socketData);
 
+        if (listCard.length == 0) {
+            bridge.getRouter("SecretConnections/GameWord.ai.js")._generateWord("word_main.json");
+        }
+
         listCard.sort(function (a, b) {
             return a["index"] - b["index"];
         });
