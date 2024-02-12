@@ -4,6 +4,8 @@
   "children": [
     {
       "flutterType": "Row",
+      "state": "groupWord",
+      "onStateDataUpdate": true,
       "children": [
         {
           "flutterType": "Expanded",
@@ -11,7 +13,6 @@
             "flutterType": "SelectSheet",
             "state": "groupWord",
             "stateKey": "groupWord",
-            "onStateDataUpdate": true,
             "extend": true,
             "onStateDataUpdateKey": "groupWord",
             "selectedLabel": "${state(main,groupWordLabel,Стандартный набор)}",
