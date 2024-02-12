@@ -115,15 +115,7 @@ function SecretConnectionsGameWordRouter() {
         bridge.call("Util", {"case": "dynamicPageApi", "api": "resetState", "state": "groupWord"});
         socketSave({"groupWordLabel": null}, bridge.pageArgs["socketUuid"]);
         this._generateWord("word_main.json");
-        bridge.call("Util", {
-            "case": "dynamicInvoke",
-            "invokeArgs": {
-                "jsRouter": "SecretConnections/GameInit.ai.js",
-                "args": {
-                    "method": "updateAvailableWord"
-                }
-            }
-        });
+        bridge.getRouter("SecretConnections/GameInit.ai.js").updateAvailableWord();
     };
 
     this.onEdit = function () {
