@@ -89,7 +89,6 @@
             "padding": "23,0,23,0",
             "child": {
               "flutterType": "Column",
-              "color": "blue",
               "height": 100,
               "width": "infinity",
               "children": [

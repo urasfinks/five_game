@@ -79,7 +79,7 @@
       },
       {
         "flutterType": "Button",
-        "backgroundColor": "blue",
+        "backgroundColor": "schema:projectPrimary",
         "onPressed": {
           "jsRouter": "HomePage.ai.js",
           "args": {
@@ -93,7 +93,7 @@
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,
-            "color": "white"
+            "color": "schema:projectPrimaryText"
           }
         }
       }

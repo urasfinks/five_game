@@ -10,7 +10,7 @@ bridge.global.SecretConnections = {
         var canBePressed = isMyGame(socketData);
         var isCapt = isCaptain(socketData);
 
-        if (listCard.length == 0) {
+        if (listCard.length === 0) {
             bridge.getRouter("SecretConnections/GameWord.ai.js")._generateWord("word_main.json");
         }
 
@@ -73,7 +73,7 @@ bridge.global.SecretConnections = {
                         "label": "Подтвердите выбор слова, если это промах, ход автоматически перейдёт к другой команде",
                         "actionLabel": "Принять",
                         "backgroundColor": "schema:onBackground",
-                        "actionBackgroundColor": "blue",
+                        "actionBackgroundColor": "schema:projectPrimary",
                         "onPressed": {
                             "jsRouter": "SecretConnections/GameRun.ai.js",
                             "args": {

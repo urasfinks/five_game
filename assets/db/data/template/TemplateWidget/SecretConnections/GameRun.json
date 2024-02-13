@@ -91,7 +91,7 @@
             "padding": "10,5,10,5",
             "decoration": {
               "flutterType": "BoxDecoration",
-              "color": "blue",
+              "color": "schema:projectPrimary",
               "borderRadius": 9
             },
             "child": {
@@ -101,7 +101,7 @@
                 "flutterType": "TextStyle",
                 "fontSize": 12,
                 "fontWeight": "bold",
-                "color": "white"
+                "color": "schema:projectPrimaryText"
               }
             }
           }

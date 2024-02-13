@@ -164,7 +164,7 @@
         "flutterType": "Button",
         "height": 44,
         "width": "infinity",
-        "backgroundColor": "blue",
+        "backgroundColor": "schema:projectPrimary",
         "onPressed": {
           "jsRouter": "SecretConnections/GameTeam.ai.js",
           "args": {
@@ -177,7 +177,7 @@
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,
-            "color": "white"
+            "color": "schema:projectPrimaryText"
           }
         }
       },

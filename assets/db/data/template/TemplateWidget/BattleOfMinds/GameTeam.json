@@ -287,7 +287,7 @@
       "child": {
         "flutterType": "Button",
         "height": 44,
-        "backgroundColor": "blue",
+        "backgroundColor": "schema:projectPrimary",
         "onPressed": {
           "jsRouter": "BattleOfMinds/Game.ai.js",
           "args": {
@@ -301,7 +301,7 @@
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,
-            "color": "white"
+            "color": "schema:projectPrimaryText"
           }
         }
       }
