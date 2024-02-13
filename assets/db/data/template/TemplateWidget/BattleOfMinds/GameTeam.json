@@ -175,7 +175,7 @@
               "onPressed": {
                 "jsRouter": "BattleOfMinds/GameTeam.ai.js",
                 "args": {
-                  "method": "onPressRandomize"
+                  "method": "changeGroup"
                 }
               },
               "child": {
@@ -205,7 +205,7 @@
               "onPressed": {
                 "jsRouter": "BattleOfMinds/GameTeam.ai.js",
                 "args": {
-                  "method": "onPressRandomize"
+                  "method": "randomizeUserGroup"
                 }
               },
               "child": {

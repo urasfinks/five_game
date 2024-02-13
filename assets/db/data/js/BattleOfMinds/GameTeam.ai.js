@@ -27,6 +27,44 @@ function BattleOfMindsGameTeamRouter() {
         }
     };
 
+    this.changeGroup = function () {
+        var socketData = bridge.state["main"]["originSocketData"];
+        var listPerson = getListPerson(socketData);
+        var userTeam = bridge.global.BattleOfMinds.filterUserTeam(bridge.global.BattleOfMinds.getUserTeam(listPerson));
+        bridge.call("NavigatorPush", {
+            "flutterType": "Notify",
+            "link": {
+                "template": "ListItem.json"
+            },
+            "data": {
+                "bottomSheetHeight": 184,
+                "title": "Группы",
+                "theme": "ListSimple",
+                "listItem": userTeam
+            },
+            "_onSave": {},
+            "context": {
+                "key": "changeGroup",
+                "data": {
+                    "template": {
+                        "flutterType": "Scaffold",
+                        "appBar": {
+                            "flutterType": "AppBar",
+                            "title": {
+                                "flutterType": "Text",
+                                "label": ""
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    };
+
+    this.onSaveGroup = function () {
+        bridge.log(bridge.args);
+    };
+
     this.removePerson = function () {
         //TODO: сделать проверку что персона статичная
         var data = {};
@@ -57,26 +95,8 @@ function BattleOfMindsGameTeamRouter() {
         }
     };
 
-    this.onPressRandomize = function () {
-        //var socketData = bridge.state["main"]["originSocketData"];
-        //var listPerson = getListPerson(socketData);
-        //var userTeam = bridge.global.BattleOfMinds.getUserTeam(listPerson);
-        //bridge.log(userTeam);
-        bridge.call("NavigatorPush", {
-            "socketUuid": bridge.pageArgs["socketUuid"],
-            "type": "bottomSheet",
-            "userTeam": [],
-            "height": 460,
-            "link": {
-                "template": "BattleOfMinds/RandomizeUser.json",
-            },
-            "constructor": {
-                "jsRouter": "BattleOfMinds/RandomizeUser.ai.js",
-                "args": {
-                    "method": "constructor"
-                }
-            }
-        });
+    this.randomizeUserGroup = function () {
+
     };
 }
 
