@@ -37,7 +37,6 @@ function BattleOfMindsGameTeamRouter() {
                 "template": "ListItem.json"
             },
             "data": {
-                "bottomSheetHeight": 184,
                 "title": "Группы",
                 "theme": "ListSimple",
                 "listItem": userTeam
