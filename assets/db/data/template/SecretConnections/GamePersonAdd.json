@@ -1,86 +1,81 @@
 {
-  "flutterType": "Container",
-  "padding": 20,
+  "flutterType": "Padding",
+  "padding": 15,
   "child": {
-    "flutterType": "Column",
+    "flutterType": "Row",
     "children": [
       {
-        "flutterType": "Text",
-        "label": "Новый участник:"
-      },
-      {
-        "flutterType": "SizedBox",
-        "height": 20
-      },
-      {
-        "flutterType": "TextField",
-        "keyboardType": "text",
-        "autofocus": true,
-        "onChangedSetStateNotify": false,
-        "style": {
-          "flutterType": "TextStyle",
-          "fontSize": 17
-        },
-        "name": "Name",
-        "decoration": {
-          "flutterType": "InputDecoration",
-          "hintText": "Имя",
-          "contentPadding": "15,0,15,0",
-          "filled": true,
-          "fillColor": "schema:onBackground",
-          "border": {
-            "flutterType": "OutlineInputBorder"
+        "flutterType": "Expanded",
+        "child": {
+          "flutterType": "TextField",
+          "keyboardType": "text",
+          "autofocus": true,
+          "onChangedSetStateNotify": false,
+          "style": {
+            "flutterType": "TextStyle",
+            "fontSize": 17
           },
-          "suffixIconConstraints": {
-            "flutterType": "BoxConstraints",
-            "minHeight": 44,
-            "maxHeight": 44
-          },
-          "suffixIcon": {
-            "flutterType": "IconButton",
-            "padding": 0,
-            "icon": {
-              "flutterType": "Icon",
-              "color": "grey",
-              "src": "clear",
-              "size": 18
+          "name": "Name",
+          "decoration": {
+            "flutterType": "InputDecoration",
+            "hintText": "Имя нового участника",
+            "contentPadding": "15,0,15,0",
+            "filled": true,
+            "fillColor": "schema:onBackground",
+            "border": {
+              "flutterType": "OutlineInputBorder"
             },
-            "onPressed": {
-              "sysInvoke": "Controller",
-              "args": {
-                "controller": "Name",
-                "case": "reset"
+            "suffixIconConstraints": {
+              "flutterType": "BoxConstraints",
+              "minHeight": 44,
+              "maxHeight": 44
+            },
+            "suffixIcon": {
+              "flutterType": "IconButton",
+              "padding": 0,
+              "icon": {
+                "flutterType": "Icon",
+                "color": "grey",
+                "src": "clear",
+                "size": 18
+              },
+              "onPressed": {
+                "sysInvoke": "Controller",
+                "args": {
+                  "controller": "Name",
+                  "case": "reset"
+                }
               }
-            }
-          },
-          "enabledBorder": {
-            "flutterType": "OutlineInputBorder",
-            "borderRadius": 10,
-            "borderSide": {
-              "flutterType": "BorderSide",
-              "color": "transparent",
-              "width": 0
-            }
-          },
-          "focusedBorder": {
-            "flutterType": "OutlineInputBorder",
-            "borderRadius": 10,
-            "borderSide": {
-              "flutterType": "BorderSide",
-              "color": "transparent",
-              "width": 0
+            },
+            "enabledBorder": {
+              "flutterType": "OutlineInputBorder",
+              "borderRadius": 10,
+              "borderSide": {
+                "flutterType": "BorderSide",
+                "color": "transparent",
+                "width": 0
+              }
+            },
+            "focusedBorder": {
+              "flutterType": "OutlineInputBorder",
+              "borderRadius": 10,
+              "borderSide": {
+                "flutterType": "BorderSide",
+                "color": "transparent",
+                "width": 0
+              }
             }
           }
         }
       },
       {
         "flutterType": "SizedBox",
-        "height": 20
+        "width": 15
       },
       {
-        "flutterType": "Button",
-        "height": 44,
-        "backgroundColor": "schema:projectPrimary",
+        "flutterType": "RawMaterialButton",
+        "fillColor": "schema:projectPrimary",
+        "padding": 10,
         "onPressed": {
           "jsRouter": "SecretConnections/GameTeam.ai.js",
           "args": {
@@ -88,13 +83,10 @@
           }
         },
         "child": {
-          "flutterType": "Text",
-          "label": "Добавить",
-          "style": {
-            "flutterType": "TextStyle",
-            "fontSize": 14,
-            "color": "schema:projectPrimaryText"
-          }
+          "flutterType": "Icon",
+          "src": "arrow_upward",
+          "color": "schema:projectPrimaryText",
+          "size": 20
         }
       }
     ]

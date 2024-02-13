@@ -61,7 +61,7 @@ bridge.global.BattleOfMinds = {
                         "personValue": listPerson[i],
                         "listOptions": resultTeam,
                         "type": "bottomSheet",
-                        "height": 360,
+                        "heightDynamic": true,
                         "link": {
                             "template": "BattleOfMinds/GamePersonEdit.json",
                         }

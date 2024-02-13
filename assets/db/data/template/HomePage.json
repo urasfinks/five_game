@@ -71,7 +71,7 @@
                           "sysInvoke": "NavigatorPush",
                           "args": {
                             "type": "bottomSheet",
-                            "height": 200,
+                            "heightDynamic": true,
                             "link": {
                               "template": "GameCode.json"
                             }

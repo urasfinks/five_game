@@ -126,7 +126,8 @@ function SecretConnectionsGameWordRouter() {
             },
             "data": {
                 "uuid": bridge.state["groupWord"]["groupWord"]["uuid"],
-                "type": "userDataRSync"
+                "type": "userDataRSync",
+                "placeholder": "Название новой карточки"
             },
             "context": {
                 "key": "Tab0",

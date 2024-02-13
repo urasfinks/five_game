@@ -29,7 +29,7 @@ function onRenderFloatingActionButton(socketData, socketUuid) {
                     "args": {
                         "socketUuid": socketUuid,
                         "type": "bottomSheet",
-                        "height": 200,
+                        "heightDynamic": true,
                         "link": {
                             "template": bridge.pageArgs["game"] + "/GamePersonAdd.json",
                         }

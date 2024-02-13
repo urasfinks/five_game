@@ -39,7 +39,8 @@ function BattleOfMindsGameTeamRouter() {
             "data": {
                 "title": "Группы",
                 "theme": "ListSimple",
-                "listItem": userTeam
+                "listItem": userTeam,
+                "placeholder": "Название новой группы"
             },
             "_onSave": {},
             "context": {

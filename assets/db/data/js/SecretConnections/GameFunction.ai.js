@@ -293,7 +293,7 @@ bridge.global.SecretConnections = {
                         "personId": listPerson[i]["id"],
                         "personValue": listPerson[i],
                         "type": "bottomSheet",
-                        "height": 360,
+                        "heightDynamic": true,
                         "link": {
                             "template": "SecretConnections/GamePersonEdit.json",
                         }
