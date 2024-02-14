@@ -27,13 +27,13 @@ bridge.global.BattleOfMinds = {
         var isOwn = isOwner(socketData);
         var listPerson = getListPerson(socketData);
         var userTeam = this.getUserTeam(listPerson);
-        var filterUserTeam = this.filterUserTeam(userTeam);
+        //var filterUserTeam = this.filterUserTeam(userTeam);
         for (var i = 0; i < userTeam.length; i++) {
             result.push({
                 "templateCustom": "groupName",
                 "label": userTeam[i].label === "" ? "Не в группе" : userTeam[i].label
             });
-            this.userByGroup(listPerson, result, userTeam[i].label, isOwn, socketUuid, filterUserTeam);
+            this.userByGroup(listPerson, result, userTeam[i].label, isOwn, socketUuid, socketData["availableGroup"] || []);
         }
         return result;
     },

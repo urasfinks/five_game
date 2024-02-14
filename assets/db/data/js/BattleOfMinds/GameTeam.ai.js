@@ -30,7 +30,7 @@ function BattleOfMindsGameTeamRouter() {
     this.changeGroup = function () {
         var socketData = bridge.state["main"]["originSocketData"];
         var listPerson = getListPerson(socketData);
-        var userTeam = bridge.global.BattleOfMinds.filterUserTeam(bridge.global.BattleOfMinds.getUserTeam(listPerson));
+        //var userTeam = bridge.global.BattleOfMinds.filterUserTeam(bridge.global.BattleOfMinds.getUserTeam(listPerson));
         bridge.call("NavigatorPush", {
             "flutterType": "Notify",
             "link": {
@@ -39,10 +39,16 @@ function BattleOfMindsGameTeamRouter() {
             "data": {
                 "title": "Группы",
                 "theme": "ListSimple",
-                "listItem": userTeam,
+                "listItem": socketData["availableGroup"] || [],
                 "placeholder": "Название новой группы"
             },
-            "_onSave": {},
+            "onSave": {
+                "jsRouter": "BattleOfMinds/GameTeam.ai.js",
+                "args": {
+                    "changeContext": bridge.pageUuid,
+                    "method": "onSaveGroup"
+                }
+            },
             "context": {
                 "key": "changeGroup",
                 "data": {
@@ -62,7 +68,11 @@ function BattleOfMindsGameTeamRouter() {
     };
 
     this.onSaveGroup = function () {
-        bridge.log(bridge.args);
+        //bridge.log(bridge.args);
+        //{"changeContext":"24760aa7-0901-4133-81ba-b28b4d60ad77","method":"onSaveGroup","list":[{"label":"Новый 1"},{"label":"Прии"}]}
+        socketSave({
+            "availableGroup": bridge.args["list"]
+        }, bridge.pageArgs["socketUuid"]);
     };
 
     this.removePerson = function () {
@@ -74,7 +84,15 @@ function BattleOfMindsGameTeamRouter() {
     };
 
     this.randomize = function () {
-
+        var socketData = bridge.state["main"]["originSocketData"];
+        var group = socketData["availableGroup"];
+        var listPerson = bridge.shuffle(getListPerson(socketData));
+        var data = {};
+        for (var i = 0; i < listPerson.length; i++) {
+            listPerson[i]["team"] = group[i%group.length].label;
+            data["user" + listPerson[i]["id"]] = listPerson[i];
+        }
+        socketSave(data, bridge.pageArgs["socketUuid"]);
     };
 
     this.addPerson = function () {
@@ -82,8 +100,8 @@ function BattleOfMindsGameTeamRouter() {
             var data = {};
             var uuidPerson = bridge.call("Util", {"case": "uuid"})["uuid"];
             data["user" + uuidPerson] = {
-                name: bridge.state["main"]["Name"],
-                id: uuidPerson,
+                "name": bridge.state["main"]["Name"],
+                "id": uuidPerson,
                 "static": true,
                 "team": "",
                 "role": "player"

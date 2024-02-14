@@ -57,7 +57,7 @@ function BattleOfMindsGameRouter() {
                 "map": newStateData
             });
         }
-    }
+    };
 
     this.changeGameState = function () {//team/word/run/finish
         var curGameState = bridge.args["gameState"];
@@ -79,7 +79,7 @@ function BattleOfMindsGameRouter() {
                 }
             }, socketUuid);
         }
-    }
+    };
 }
 
 bridge.addRouter(new BattleOfMindsGameRouter());
