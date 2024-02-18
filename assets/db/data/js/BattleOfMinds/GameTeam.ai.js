@@ -29,8 +29,6 @@ function BattleOfMindsGameTeamRouter() {
 
     this.changeGroup = function () {
         var socketData = bridge.state["main"]["originSocketData"];
-        var listPerson = getListPerson(socketData);
-        //var userTeam = bridge.global.BattleOfMinds.filterUserTeam(bridge.global.BattleOfMinds.getUserTeam(listPerson));
         bridge.call("NavigatorPush", {
             "flutterType": "Notify",
             "link": {
@@ -75,6 +73,10 @@ function BattleOfMindsGameTeamRouter() {
         }, bridge.pageArgs["socketUuid"]);
     };
 
+    this.onChangeThemeGame = function () {
+        socketSave({"themeGameLabel": bridge.args["selected"]["label"]}, bridge.pageArgs["socketUuid"]);
+    };
+
     this.removePerson = function () {
         //TODO: сделать проверку что персона статичная
         var data = {};
@@ -83,14 +85,40 @@ function BattleOfMindsGameTeamRouter() {
         bridge.call("NavigatorPop", {});
     };
 
+    this.getListPersonByType = function (listPerson, isStatic) {
+        var result = [];
+        for (var i = 0; i < listPerson.length; i++) {
+            if (isStatic === true) {
+                if (listPerson[i]["static"] === true) {
+                    result.push(listPerson[i]);
+                }
+            } else {
+                if (listPerson[i]["static"] == undefined || listPerson[i]["static"] === false) {
+                    result.push(listPerson[i]);
+                }
+            }
+
+        }
+        return result;
+    };
+
     this.randomize = function () {
         var socketData = bridge.state["main"]["originSocketData"];
         var group = socketData["availableGroup"];
         var listPerson = bridge.shuffle(getListPerson(socketData));
         var data = {};
         for (var i = 0; i < listPerson.length; i++) {
-            listPerson[i]["team"] = group[i%group.length].label;
+            listPerson[i]["team"] = "";
             data["user" + listPerson[i]["id"]] = listPerson[i];
+        }
+        if (group.length > 0) {
+            var listPersonStatic = this.getListPersonByType(listPerson, true);
+            var listPersonReal = this.getListPersonByType(listPerson, false);
+            listPersonReal = listPersonReal.concat(listPersonStatic);
+            for (var i = 0; i < listPersonReal.length; i++) {
+                listPersonReal[i]["team"] = group[i % group.length].label;
+                data["user" + listPersonReal[i]["id"]] = listPersonReal[i];
+            }
         }
         socketSave(data, bridge.pageArgs["socketUuid"]);
     };
@@ -111,10 +139,6 @@ function BattleOfMindsGameTeamRouter() {
         } else {
             bridge.alert("Имя слишком пустое)");
         }
-    };
-
-    this.randomizeUserGroup = function () {
-
     };
 }
 

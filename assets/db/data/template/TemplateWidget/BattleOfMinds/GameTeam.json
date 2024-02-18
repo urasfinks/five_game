@@ -157,6 +157,44 @@
       }
     },
     {
+      "flutterType": "Padding",
+      "padding": "6,20,6,20",
+      "child": {
+        "flutterType": "Text",
+        "label": "Тема игры",
+        "style": {
+          "flutterType": "TextStyle",
+          "color": "schema:secondary"
+        }
+      }
+    },
+    {
+      "flutterType": "SelectSheet",
+      "state": "themeGame",
+      "stateKey": "themeGame",
+      "onStateDataUpdate": true,
+      "extend": false,
+      "onStateDataUpdateKey": "themeGame",
+      "selectedLabel": "${state(main,themeGameLabel,Обучение)}",
+      "children": [
+        {
+          "ChildrenExtension": "Iterator",
+          "dataType": "state",
+          "state": "availableThemeGame",
+          "key": "listOptions"
+        }
+      ],
+      "onChange": {
+        "jsRouter": "BattleOfMinds/GameTeam.ai.js",
+        "args": {
+          "method": "onChangeThemeGame"
+        }
+      },
+      "compileTemplateList": [
+        "selectedLabel"
+      ]
+    },
+    {
       "flutterType": "SizedBox",
       "height": 30
     },
@@ -283,16 +321,16 @@
       "height": 20
     },
     {
-      "flutterType": "SizedBox",
-      "height": 20
-    },
-    {
       "flutterType": "Text",
       "label": "${state(main,error,)}"
     },
     {
+      "flutterType": "SizedBox",
+      "height": 20
+    },
+    {
       "flutterType": "Visibility",
-      "visible": "${state(main,toWordGameState, false)}",
+      "visible": "${state(main,isReadyStartGame, false)}",
       "child": {
         "flutterType": "Button",
         "height": 44,
@@ -301,12 +339,12 @@
           "jsRouter": "BattleOfMinds/Game.ai.js",
           "args": {
             "method": "changeGameState",
-            "gameState": "word"
+            "gameState": "run"
           }
         },
         "child": {
           "flutterType": "Text",
-          "label": "Продолжить",
+          "label": "Начать игру",
           "style": {
             "flutterType": "TextStyle",
             "fontSize": 14,

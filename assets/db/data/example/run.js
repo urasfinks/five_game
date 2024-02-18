@@ -1,12 +1,9 @@
-bridge.global.BattleOfMinds = {
-
-    calculateScore: function (socketData, newStateData, socketUuid) {
-        // newStateData["scoreRed"] = red;
-        // newStateData["scoreBlue"] = blue;
-        // newStateData["allBlue"] = allBlue;
-        // newStateData["allRed"] = allRed;
+var x = {
+    arrayUnique: function (ar) {
+        return ar.filter(function (value, index, array) {
+            return array.indexOf(value) === index;
+        });
     },
-
     getUserTeam: function (listPerson, useUserNameIfTeamEmpty) {
         var alreadyPersonGroup = [];
         var result = [];
@@ -17,78 +14,26 @@ bridge.global.BattleOfMinds = {
             }
             alreadyPersonGroup.push(team);
         }
-        alreadyPersonGroup = bridge.arrayUnique(alreadyPersonGroup);
+        alreadyPersonGroup = this.arrayUnique(alreadyPersonGroup);
         for (var i = 0; i < alreadyPersonGroup.length; i++) {
             result.push({
-                "label": alreadyPersonGroup[i]
+                label: alreadyPersonGroup[i],
             });
         }
         return result;
     },
-
-    getListPersonByGroup: function (socketData, socketUuid) {
-        var result = [];
-        var isOwn = isOwner(socketData);
-        var listPerson = getListPerson(socketData);
-        var userTeam = this.getUserTeam(listPerson, false);
-        var availableGroup = socketData["availableGroup"] || [];
-        for (var i = 0; i < userTeam.length; i++) {
-            if (availableGroup.length > 0) {
-                result.push({
-                    "templateCustom": "groupName",
-                    "label": userTeam[i].label === "" ? "Без группы" : userTeam[i].label
-                });
-            }
-            this.userByGroup(listPerson, result, userTeam[i].label, isOwn, socketUuid, availableGroup);
-        }
-        return result;
-    },
-
-    userByGroup: function (listPerson, result, curTeam, isOwn, socketUuid, resultTeam) {
-        for (var i = 0; i < listPerson.length; i++) {
-            if (listPerson[i]["team"].trim() === curTeam) {
-                var ami = listPerson[i]["id"] === bridge.unique ? "Я " : "";
-
-                var onTap = isOwn ? {
-                    "sysInvoke": "NavigatorPush",
-                    "args": {
-                        "socketUuid": socketUuid,
-                        "personId": listPerson[i]["id"],
-                        "personValue": listPerson[i],
-                        "listOptions": resultTeam,
-                        "type": "bottomSheet",
-                        "heightDynamic": true,
-                        "link": {
-                            "template": "BattleOfMinds/GamePersonEdit.json",
-                        }
-                    }
-                } : {};
-                var iconPerson = "person_outline";
-                var name = listPerson[i]["name"];
-                if (listPerson[i]["static"] != undefined && listPerson[i]["static"] === true) {
-                    name = "[" + name + "]";
-                    iconPerson = "android";
-                }
-                var iconSrc = isOwn ? "edit" : iconPerson;
-                result.push({
-                    "label": ami + name,
-                    "templateCustom": "user",
-                    "templateWidgetSrc": "IteratorButtonIcon",
-                    "iconSrc": iconSrc,
-                    "iconColor": "#999999",
-                    "onTap": onTap
-                });
+    getListPerson: function (socketData) {
+        var listPerson = [];
+        for (var key in socketData) {
+            if (key.startsWith("user")) {
+                socketData[key]["id"] = key.substring(4);
+                listPerson.push(socketData[key]);
             }
         }
+        return listPerson;
     },
-
     checkGameCondition: function (socketData, state) {
-        if (!isOwner(socketData)) {
-            state["isReadyStartGame"] = "false";
-            return;
-        }
-        var listPerson = getListPerson(socketData);
-
+        var listPerson = this.getListPerson(socketData);
         var isStatus = true;
         if (listPerson.length < 2) {
             state["error"] = "Участников должно быть больше одного";
@@ -149,7 +94,53 @@ bridge.global.BattleOfMinds = {
             state["error"] = "";
             state["isReadyStartGame"] = "true";
         }
-
-    }
-
+    },
 };
+var state = {};
+x.checkGameCondition(
+    {
+        "game": "BattleOfMinds",
+        "gameUuid": "61a3639e-5ec4-47a9-ae9b-e5df7d77abb8",
+        "owner": "9f5601ee-5a2e-4470-abc5-3527537bb218",
+        "runTeam": "red",
+        "gameState": "team",
+        "user9f5601ee-5a2e-4470-abc5-3527537bb218": {
+            "name": "Supports",
+            "id": "9f5601ee-5a2e-4470-abc5-3527537bb218",
+            "static": false,
+            "team": "Итии",
+            "role": "player"
+        },
+        "gameCode": 865834,
+        "timestampCodeGenerate": 1708278962,
+        "user71066b00-a6af-4974-b98d-bdabf1ebae66": {
+            "name": "Василий",
+            "id": "71066b00-a6af-4974-b98d-bdabf1ebae66",
+            "static": true,
+            "team": "Новый 1",
+            "role": "player"
+        },
+        "userc00b1a51-9d4a-4064-b60d-829b659b81ef": {
+            "name": "Ха",
+            "id": "c00b1a51-9d4a-4064-b60d-829b659b81ef",
+            "static": true,
+            "team": "Итии",
+            "role": "player"
+        },
+        "user9dac2fe3-c800-40e9-b37b-f2db3c095e0a": {
+            "name": "Ррот",
+            "id": "9dac2fe3-c800-40e9-b37b-f2db3c095e0a",
+            "static": true,
+            "team": "Итии",
+            "role": "player"
+        },
+        "availableGroup": [{
+            "label": "Новый 1"
+        }, {
+            "label": "Итии"
+        }],
+        "themeGameLabel": "Гарри Поттер"
+    },
+    state
+);
+console.log(state);

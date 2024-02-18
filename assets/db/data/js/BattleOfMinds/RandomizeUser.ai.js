@@ -17,7 +17,7 @@ function RandomizeUserRouter(){
         if (bridge.args["fetchDb"].length > 0) {
             var socketData = bridge.args["fetchDb"][0]["value_data"];
             var listPerson = getListPerson(socketData);
-            var userTeam = bridge.global.BattleOfMinds.getUserTeam(listPerson);
+            var userTeam = bridge.global.BattleOfMinds.getUserTeam(listPerson, false);
             bridge.log(userTeam);
             /*bridge.call("SetStateData", {
                 "map": {

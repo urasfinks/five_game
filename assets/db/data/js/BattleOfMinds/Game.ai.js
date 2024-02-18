@@ -25,7 +25,7 @@ function BattleOfMindsGameRouter() {
                 newStateData["deviceName"] = "Укажите своё имя";
             }
             if (["team"].includes(curGameState)) {
-                bridge.global.BattleOfMinds.getFlagToWordGameState(socketData, newStateData);
+                bridge.global.BattleOfMinds.checkGameCondition(socketData, newStateData);
             } else {
                 bridge.call("Util", {"case": "dynamicPageApi", "api": "stopReloadEach"});
             }
@@ -47,12 +47,15 @@ function BattleOfMindsGameRouter() {
             bridge.overlay(newStateData, {
                 switchKey: curGameState,
                 originSocketData: socketData,
-                listPerson: bridge.global.BattleOfMinds.getListPersonGroup(socketData, socketUuid),
+                listPerson: bridge.global.BattleOfMinds.getListPersonByGroup(socketData, socketUuid),
                 socketUuid: socketUuid,
                 gameCode: socketData["gameCode"] || "...",
                 isOwner: isOwn,
                 toNextRun: toNextRun
             });
+            if (socketData["themeGameLabel"] != undefined) {
+                newStateData["themeGameLabel"] = socketData["themeGameLabel"]
+            }
             bridge.call("SetStateData", {
                 "map": newStateData
             });

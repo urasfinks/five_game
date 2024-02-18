@@ -5,6 +5,45 @@ function BattleOfMindsGameInitRouter() {
             route(this, this.genCodeUuidResponse),
             route(this, this.onCheckSetUser),
         );
+        this.updateAvailableThemeGame();
+    };
+
+    this.updateAvailableThemeGame = function () {
+        bridge.call("DbQuery", {
+            "sql": "select * from data where key_data = ? and is_remove_data = 0 order by meta_data asc",
+            "args": ["BattleOfMindsThemeGame"],
+            "onFetch": {
+                "jsRouter": "BattleOfMinds/GameInit.ai.js",
+                "args": {
+                    "method": route(this, this.onSelectThemeGame)
+                }
+            }
+        });
+    };
+
+    this.onSelectThemeGame = function () {
+        if (bridge.args["fetchDb"].length > 0) {
+            var list = [], fetchDb = bridge.args["fetchDb"];
+            for (var i = 0; i < fetchDb.length; i++) {
+                list.push({
+                    "label": fetchDb[i]["value_data"]["label"],
+                    "uuid": fetchDb[i]["uuid_data"]
+                });
+            }
+            bridge.call("SetStateData", {
+                "state": "availableThemeGame",
+                "map": {
+                    "listOptions": list
+                }
+            });
+            //Дополнительно кинем фейковое событие, что бы перерисовался сам SelectSheet
+            bridge.call("SetStateData", {
+                //"state": "groupWord",
+                "map": {
+                    "_": bridge.util("uuid", {})
+                }
+            });
+        }
     };
 
     this.onCheckSetUser = function () {
